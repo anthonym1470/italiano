@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Italiano">
+<title>🇮🇹 Italiano</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='33' height='100' fill='%23009246'/><rect x='33' width='34' height='100' fill='white'/><rect x='67' width='33' height='100' fill='%23CE2B37'/></svg>">
+<style>
+:root{
+  --bg:#000;--surf:rgba(255,255,255,.06);--surf2:rgba(255,255,255,.09);--surf3:rgba(255,255,255,.13);
+  --text:#fff;--muted:rgba(255,255,255,.45);--brd:rgba(255,255,255,.12);
+  --acc:#CE2B37;--acc2:#0A84FF;--acc3:#30D158;--acc4:#FFD60A;--danger:#FF453A;
+  --radius:12px;--radius-lg:16px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:-apple-system,'SF Pro Text','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overscroll-behavior:none;}
+.app{display:flex;flex-direction:column;height:100vh;height:100dvh;background:var(--bg);overflow:hidden;}
+.topbar{padding:calc(var(--safe-top) + 8px) 20px 10px;background:rgba(0,0,0,0.85);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border-bottom:0.5px solid var(--brd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.brand{font-size:17px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;}
+.xp-badge{background:var(--surf2);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--acc4);}
+.content{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.page{display:none;padding:16px;padding-bottom:calc(var(--safe-bot) + 84px);}
+.page.on{display:block;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* BOTTOM NAV */
+.bottomnav{flex-shrink:0;display:flex;background:rgba(28,28,30,0.95);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:0.5px solid var(--brd);padding-bottom:calc(var(--safe-bot) + 2px);z-index:100;position:relative;}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 1px 5px;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:inherit;transition:color .2s,transform .1s;min-width:0;}
+.bnav-item:active{transform:scale(.92);}
+.bnav-item.on{color:var(--acc2);}
+.bnav-ico{font-size:20px;margin-bottom:2px;line-height:1;display:block;}
+.bnav-lbl{font-size:8px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.bnav-dot{width:3px;height:3px;border-radius:50%;background:var(--acc2);margin:1px auto 0;opacity:0;}
+.bnav-item.on .bnav-dot{opacity:1;}
+/* HERO */
+.hero{background:linear-gradient(135deg,rgba(206,43,55,.25),rgba(0,146,70,.15));border:0.5px solid rgba(206,43,55,.3);border-radius:var(--radius-lg);padding:18px;margin-bottom:12px;}
+.hero-top{display:flex;align-items:flex-start;gap:12px;}
+.hero-flag{font-size:32px;line-height:1;}
+.hero-info{flex:1;}
+.hero-info h2{font-size:16px;font-weight:700;margin-bottom:2px;}
+.hero-info p{font-size:12px;color:var(--muted);}
+.hero-kc{text-align:right;font-size:11px;color:var(--muted);}
+.hero-kc strong{display:block;font-size:24px;font-weight:800;color:var(--acc4);}
+.pbar{height:4px;background:var(--surf3);border-radius:2px;overflow:hidden;}
+.pfill{height:100%;background:var(--acc);border-radius:2px;transition:width .5s;}
+/* STATS */
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.scard{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius);padding:12px;text-align:center;}
+.snum{font-size:22px;font-weight:800;color:var(--acc4);}
+.slbl{font-size:10px;color:var(--muted);margin-top:2px;}
+/* MODULE CARDS */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mcard{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius-lg);padding:14px;cursor:pointer;transition:background .15s,transform .1s;}
+.mcard:active{transform:scale(.97);background:var(--surf2);}
+.mcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.mcard-ico{font-size:24px;}
+.mcard-badge{font-size:10px;font-weight:600;background:var(--surf2);border-radius:8px;padding:3px 7px;color:var(--muted);}
+.mcard-ttl{font-size:14px;font-weight:700;margin-bottom:2px;}
+.mcard-sub{font-size:11px;color:var(--muted);}
+/* SECTION TITLE */
+.section-title{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;margin:16px 0 8px;}
+/* PILLS */
+.pills{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:8px;scrollbar-width:none;}
+.pills::-webkit-scrollbar{display:none;}
+.pill{flex-shrink:0;padding:6px 14px;border-radius:20px;border:0.5px solid var(--brd);background:transparent;color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;}
+.pill.on{background:var(--acc2);border-color:var(--acc2);color:#fff;}
+/* VOCAB CARDS */
+.hrow{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;}
+.hrow-title{font-size:22px;font-weight:800;}
+.hrow-sub{font-size:12px;color:var(--muted);}
+#vgrid{display:flex;flex-direction:column;gap:8px;}
+.wcard{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius-lg);padding:14px;display:flex;align-items:flex-start;gap:12px;transition:border-color .2s,background .2s;}
+.wcard.known{border-color:rgba(48,209,88,.4);background:rgba(48,209,88,.04);}
+.wleft{flex:1;cursor:pointer;min-width:0;}
+.tag{font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:6px;text-transform:uppercase;}
+.tag-a1{background:rgba(48,209,88,.2);color:#30D158;}
+.tag-a2{background:rgba(10,132,255,.2);color:#0A84FF;}
+.tag-b1{background:rgba(255,159,10,.2);color:#FF9F0A;}
+.tag-b2{background:rgba(206,43,55,.2);color:#CE2B37;}
+.wua{font-size:17px;font-weight:700;color:var(--text);}
+.wtr{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:4px;}
+.wfr{font-size:13px;color:var(--muted);}
+.wchk{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--surf3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#30D158;cursor:pointer;transition:all .2s;flex-shrink:0;}
+.wcard.known .wchk{background:#30D158;border-color:#30D158;color:#000;}
+.speak-btn{width:28px;height:28px;border-radius:50%;border:0.5px solid var(--brd);background:var(--surf2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* FLASHCARDS */
+.flash-wrap{perspective:1000px;margin:16px 0;}
+.flash-card{min-height:200px;border-radius:var(--radius-lg);border:0.5px solid var(--brd);background:var(--surf);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:box-shadow .2s;text-align:center;}
+.flash-card:active{box-shadow:0 0 0 2px var(--acc2);}
+.flash-front-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.flash-word{font-size:28px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.flash-tr{font-size:14px;color:var(--acc4);font-style:italic;}
+.flash-tap{font-size:12px;color:var(--muted);margin-top:16px;}
+.flash-back{background:rgba(10,132,255,.06);border-color:rgba(10,132,255,.3);}
+.flash-answer{font-size:22px;font-weight:700;color:var(--acc2);margin-bottom:6px;}
+.flash-note{font-size:12px;color:var(--muted);}
+.anki-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
+.anki-btn{padding:10px 4px;border-radius:var(--radius);border:0.5px solid var(--brd);background:var(--surf);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--text);transition:all .15s;text-align:center;}
+.anki-btn:active{transform:scale(.96);}
+.anki-btn.again{border-color:rgba(255,69,58,.4);color:#FF453A;}
+.anki-btn.hard{border-color:rgba(255,159,10,.4);color:#FF9F0A;}
+.anki-btn.good{border-color:rgba(10,132,255,.4);color:#0A84FF;}
+.anki-btn.easy{border-color:rgba(48,209,88,.4);color:#30D158;}
+.anki-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ast{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius);padding:10px;text-align:center;}
+.astn{font-size:20px;font-weight:800;color:var(--acc4);}
+.astl{font-size:10px;color:var(--muted);margin-top:2px;}
+/* QUIZ */
+.quiz-q{font-size:18px;font-weight:700;text-align:center;padding:20px;background:var(--surf);border-radius:var(--radius-lg);margin-bottom:16px;}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{padding:14px;border-radius:var(--radius);border:0.5px solid var(--brd);background:var(--surf);font-size:15px;cursor:pointer;font-family:inherit;color:var(--text);text-align:left;transition:all .15s;}
+.quiz-opt:active{transform:scale(.98);}
+.quiz-opt.correct{background:rgba(48,209,88,.15);border-color:#30D158;color:#30D158;}
+.quiz-opt.wrong{background:rgba(255,69,58,.15);border-color:#FF453A;color:#FF453A;}
+.quiz-score{text-align:center;padding:32px;font-size:48px;font-weight:800;color:var(--acc4);}
+/* ANKI */
+.anki-card{min-height:220px;border-radius:var(--radius-lg);border:0.5px solid var(--brd);background:var(--surf);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;text-align:center;margin-bottom:12px;}
+/* PHRASES */
+.phrase-card{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius-lg);padding:14px;margin-bottom:8px;}
+.phrase-cat{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--acc);margin-bottom:6px;}
+.phrase-it{font-size:16px;font-weight:700;margin-bottom:4px;}
+.phrase-tr{font-size:12px;color:var(--acc4);font-style:italic;margin-bottom:4px;}
+.phrase-fr{font-size:13px;color:var(--muted);}
+/* CONJUGAISON */
+.vbtn{padding:7px 14px;border-radius:20px;border:0.5px solid var(--brd);background:transparent;color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;margin:3px;}
+.vbtn.on{background:var(--acc);border-color:var(--acc);color:#fff;}
+#verb-sel{display:flex;flex-wrap:wrap;margin-bottom:14px;}
+.conj-table{width:100%;border-collapse:collapse;margin-bottom:20px;}
+.conj-table td,.conj-table th{padding:9px 10px;border-bottom:0.5px solid var(--brd);font-size:13px;}
+.conj-table th{font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;}
+.conj-table td:last-child{font-weight:700;color:var(--acc2);}
+.tense-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.tense-tab{padding:6px 14px;border-radius:20px;border:0.5px solid var(--brd);background:transparent;color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s;}
+.tense-tab.on{background:var(--acc);border-color:var(--acc);color:#fff;}
+/* GRAMMAIRE */
+.gram-card{background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius-lg);margin-bottom:8px;overflow:hidden;}
+.gram-head{display:flex;align-items:center;gap:10px;padding:14px;cursor:pointer;}
+.gram-ico{font-size:20px;}
+.gram-title{flex:1;font-size:14px;font-weight:600;}
+.gram-lvl{font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;text-transform:uppercase;}
+.gram-arrow{font-size:12px;color:var(--muted);transition:transform .2s;}
+.gram-card.open .gram-arrow{transform:rotate(90deg);}
+.gram-body{display:none;padding:0 14px 14px;}
+.gram-card.open .gram-body{display:block;}
+.gram-rule{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.gram-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:var(--radius);}
+.gram-table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
+.gram-table th{background:rgba(206,43,55,.1);padding:8px 10px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--acc);text-align:left;border-bottom:0.5px solid var(--brd);}
+.gram-table td{padding:8px 10px;border-bottom:0.5px solid var(--brd);}
+.gram-table tr:last-child td{border-bottom:none;}
+.gram-tip{background:rgba(10,132,255,.08);border:0.5px solid rgba(10,132,255,.2);border-radius:10px;padding:10px;font-size:12px;color:var(--acc2);margin-top:10px;}
+.gram-ex{margin-top:10px;}
+.gram-ex-item{padding:8px 0;border-bottom:0.5px solid var(--brd);}
+.gram-ex-item:last-child{border-bottom:none;}
+.gram-ex-it{font-size:14px;font-weight:600;color:var(--text);}
+.gram-ex-tr{font-size:11px;color:var(--acc4);font-style:italic;}
+.gram-ex-fr{font-size:12px;color:var(--muted);}
+/* TRADUCTION */
+textarea{color:var(--text);}
+/* RESPONSIVE */
+@media(max-width:350px){.anki-btn{font-size:10px;padding:8px 2px;}.flash-word{font-size:22px;}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="topbar">
+  <div class="brand"><span>🇮🇹</span> Italia</div>
+  <div class="xp-badge" id="xp-lbl">0 XP</div>
+</div>
+<div class="content">
+
+  <!-- HOME -->
+  <div class="page on" id="page-home">
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-flag">🇮🇹</div>
+        <div class="hero-info">
+          <h2>Niveau A1 → Objectif B2</h2>
+          <p>Progression globale</p>
+          <div class="pbar" style="margin-top:6px"><div class="pfill" id="gp" style="width:5%"></div></div>
+        </div>
+        <div class="hero-kc"><strong id="kc">0</strong>mots appris</div>
+      </div>
+    </div>
+    <div class="stats3" style="margin-bottom:20px">
+      <div class="scard"><div class="snum" id="s1">0</div><div class="slbl">Mots appris</div></div>
+      <div class="scard"><div class="snum" id="s2">0</div><div class="slbl">Anki faits</div></div>
+      <div class="scard"><div class="snum" id="s3">0</div><div class="slbl">XP total</div></div>
+    </div>
+    <div class="section-title">Modules</div>
+    <div class="mgrid">
+      <div class="mcard" onclick="go('vocab')">
+        <div class="mcard-top"><div class="mcard-ico">📚</div><div class="mcard-badge">500+ mots</div></div>
+        <div class="mcard-ttl">Vocabulaire</div><div class="mcard-sub">A1 → B2 par thème</div>
+      </div>
+      <div class="mcard" onclick="go('flash')">
+        <div class="mcard-top"><div class="mcard-ico">🃏</div><div class="mcard-badge">FR → IT</div></div>
+        <div class="mcard-ttl">Flashcards</div><div class="mcard-sub">Français → Italien</div>
+      </div>
+      <div class="mcard" onclick="go('quiz')">
+        <div class="mcard-top"><div class="mcard-ico">⚡</div><div class="mcard-badge">Pratique</div></div>
+        <div class="mcard-ttl">Quiz</div><div class="mcard-sub">10 questions</div>
+      </div>
+      <div class="mcard" onclick="go('anki')">
+        <div class="mcard-top"><div class="mcard-ico">🔄</div><div class="mcard-badge">SRS</div></div>
+        <div class="mcard-ttl">Révision</div><div class="mcard-sub">Méthode Anki</div>
+      </div>
+      <div class="mcard" onclick="go('trad')">
+        <div class="mcard-top"><div class="mcard-ico">🌐</div><div class="mcard-badge">IA</div></div>
+        <div class="mcard-ttl">Traduction</div><div class="mcard-sub">FR → IT personnalisé</div>
+      </div>
+      <div class="mcard" onclick="go('phrases')">
+        <div class="mcard-top"><div class="mcard-ico">💬</div><div class="mcard-badge">80+ phrases</div></div>
+        <div class="mcard-ttl">Phrases</div><div class="mcard-sub">Situations réelles</div>
+      </div>
+      <div class="mcard" onclick="go('conj')">
+        <div class="mcard-top"><div class="mcard-ico">📝</div><div class="mcard-badge">40 verbes</div></div>
+        <div class="mcard-ttl">Conjugaison</div><div class="mcard-sub">Présent · Passé · Futur</div>
+      </div>
+      <div class="mcard" onclick="go('gram')">
+        <div class="mcard-top"><div class="mcard-ico">📖</div><div class="mcard-badge">12 règles</div></div>
+        <div class="mcard-ttl">Grammaire</div><div class="mcard-sub">Articles · Genre · Cas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="page" id="page-vocab">
+    <div class="hrow"><div class="hrow-title">Vocabulaire</div><div class="hrow-sub"><span id="vkc">0</span>/<span id="vtot">0</span></div></div>
+    <div class="pills" id="vpills"></div>
+    <div id="vgrid"></div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="page" id="page-flash">
+    <div class="hrow"><div class="hrow-title">Flashcards</div></div>
+    <div class="pills" id="flash-mode-pills" style="margin-bottom:10px">
+      <button class="pill on" id="fpill-vocab" onclick="setFlashMode('vocab')">Vocabulaire</button>
+      <button class="pill" id="fpill-phrases" onclick="setFlashMode('phrases')">Phrases</button>
+      <button class="pill" id="fpill-verbs" onclick="setFlashMode('verbs')">Verbes</button>
+      <button class="pill" id="fpill-trad" onclick="setFlashMode('trad')">Mes traductions</button>
+    </div>
+    <div class="pills" id="flash-cat-pills"></div>
+    <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px;gap:8px">
+      <span style="font-size:12px;color:var(--muted)">Non appris seulement</span>
+      <div id="flash-filter-toggle" onclick="toggleFlashFilter()" style="width:44px;height:26px;border-radius:13px;background:var(--surf3);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0">
+        <div id="flash-filter-knob" style="width:20px;height:20px;border-radius:50%;background:white;position:absolute;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div>
+      </div>
+    </div>
+    <div class="anki-stats" style="margin-bottom:14px">
+      <div class="ast"><div class="astn" id="fl-rem">0</div><div class="astl">Restantes</div></div>
+      <div class="ast"><div class="astn" id="fl-ok">0</div><div class="astl">Correctes</div></div>
+      <div class="ast"><div class="astn" id="fl-tot">0</div><div class="astl">Total</div></div>
+    </div>
+    <div class="flash-wrap">
+      <div class="flash-card" id="flash-card" onclick="flipFlash()">
+        <div class="flash-front-lbl" id="flash-lbl">FRANÇAIS</div>
+        <div class="flash-word" id="flash-word">—</div>
+        <div class="flash-tr" id="flash-tr-disp"></div>
+        <div class="flash-tap" id="flash-tap">Appuyez pour révéler la réponse</div>
+      </div>
+    </div>
+    <div class="anki-btns" id="flash-btns" style="display:none">
+      <button class="anki-btn again" onclick="rateFlash(0)">Encore<br><span style="font-size:10px;opacity:.6">À revoir</span></button>
+      <button class="anki-btn hard" onclick="rateFlash(1)">Difficile<br><span style="font-size:10px;opacity:.6">Presque</span></button>
+      <button class="anki-btn good" onclick="rateFlash(2)">Bien<br><span style="font-size:10px;opacity:.6">Correct</span></button>
+      <button class="anki-btn easy" onclick="rateFlash(3)">Facile<br><span style="font-size:10px;opacity:.6">Parfait</span></button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="page" id="page-quiz">
+    <div class="hrow"><div class="hrow-title">Quiz</div><div class="hrow-sub" id="quiz-prog">0/10</div></div>
+    <div id="quiz-area"></div>
+  </div>
+
+  <!-- ANKI -->
+  <div class="page" id="page-anki">
+    <div class="hrow"><div class="hrow-title">Révision Anki</div></div>
+    <div class="anki-stats" style="margin-bottom:14px">
+      <div class="ast"><div class="astn" id="ak-rem">0</div><div class="astl">À revoir</div></div>
+      <div class="ast"><div class="astn" id="ak-done">0</div><div class="astl">Faits</div></div>
+      <div class="ast"><div class="astn" id="ak-lvl">1</div><div class="astl">Niveau moy.</div></div>
+    </div>
+    <div class="anki-card" id="anki-card" onclick="flipAnki()">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px" id="anki-lbl">FRANÇAIS</div>
+      <div style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:8px" id="anki-word">—</div>
+      <div style="font-size:13px;color:var(--acc4);font-style:italic" id="anki-tr"></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:14px" id="anki-tap">Appuyez pour révéler</div>
+    </div>
+    <div class="anki-btns" id="anki-btns" style="display:none">
+      <button class="anki-btn again" onclick="rateAnki(0)">Encore</button>
+      <button class="anki-btn hard" onclick="rateAnki(1)">Difficile</button>
+      <button class="anki-btn good" onclick="rateAnki(2)">Bien</button>
+      <button class="anki-btn easy" onclick="rateAnki(3)">Facile</button>
+    </div>
+  </div>
+
+  <!-- PHRASES -->
+  <div class="page" id="page-phrases">
+    <div class="hrow"><div class="hrow-title">Phrases</div></div>
+    <div class="pills" id="phr-cats"></div>
+    <div id="phr-list"></div>
+  </div>
+
+  <!-- CONJUGAISON -->
+  <div class="page" id="page-conj">
+    <div class="hrow"><div class="hrow-title">Conjugaison</div></div>
+    <div id="verb-sel"></div>
+    <div class="tense-tabs">
+      <button class="tense-tab on" onclick="setTenseTab('pres',this)">Présent</button>
+      <button class="tense-tab" onclick="setTenseTab('past',this)">Passé composé</button>
+      <button class="tense-tab" onclick="setTenseTab('imperf',this)">Imparfait</button>
+      <button class="tense-tab" onclick="setTenseTab('fut',this)">Futur</button>
+    </div>
+    <div id="conj-table"></div>
+  </div>
+
+  <!-- GRAMMAIRE -->
+  <div class="page" id="page-gram">
+    <div class="hrow"><div class="hrow-title">Grammaire</div></div>
+    <div class="pills" id="gram-cats"></div>
+    <div id="gram-list"></div>
+  </div>
+
+  <!-- TRADUCTION -->
+  <div class="page" id="page-trad">
+    <div class="hrow"><div class="hrow-title">Traduction</div><div class="hrow-sub" id="trad-count">0 sauvegardé</div></div>
+    <div style="background:var(--surf);border:0.5px solid var(--brd);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Entrez un mot ou une phrase en français</div>
+      <div style="display:flex;gap:8px;align-items:flex-start">
+        <textarea id="trad-input" placeholder="Ex: Je suis content de te voir" style="flex:1;background:var(--surf2);border:0.5px solid var(--brd);border-radius:10px;padding:10px 12px;color:var(--text);font-size:15px;font-family:inherit;resize:none;height:70px;outline:none;-webkit-appearance:none"></textarea>
+        <button onclick="translateInput()" style="padding:10px 14px;border-radius:10px;border:none;background:var(--acc2);color:#fff;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;flex-shrink:0">Traduire</button>
+      </div>
+    </div>
+    <div id="trad-result" style="display:none;background:var(--surf);border:0.5px solid rgba(10,132,255,.3);border-radius:var(--radius-lg);padding:16px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--acc2);text-transform:uppercase;margin-bottom:10px">Traduction italienne</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+        <div style="flex:1">
+          <div style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px" id="trad-it"></div>
+          <div style="font-size:13px;color:var(--acc4);font-style:italic;margin-bottom:4px" id="trad-note2"></div>
+        </div>
+        <button class="speak-btn" onclick="speak(document.getElementById('trad-it').textContent,event)">🔊</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button onclick="saveTrad()" style="flex:1;padding:11px;border-radius:var(--radius-lg);border:none;background:var(--acc3);color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">✓ Sauvegarder</button>
+        <button onclick="document.getElementById('trad-result').style.display='none'" style="padding:11px 14px;border-radius:var(--radius-lg);border:0.5px solid var(--brd);background:transparent;color:var(--muted);font-family:inherit;font-size:13px;cursor:pointer">Annuler</button>
+      </div>
+    </div>
+    <div id="trad-loading" style="display:none;text-align:center;padding:20px;color:var(--muted);font-size:13px"><div style="font-size:24px;margin-bottom:8px">⏳</div>Traduction en cours...</div>
+    <div id="trad-error" style="display:none;background:rgba(255,69,58,.1);border:0.5px solid var(--danger);border-radius:var(--radius-lg);padding:14px;margin-bottom:12px;font-size:13px;color:var(--danger)"></div>
+    <div class="section-title">Mes traductions sauvegardées</div>
+    <div id="trad-list" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div id="trad-empty" style="text-align:center;padding:32px 16px;color:var(--muted);font-size:13px">Aucune traduction sauvegardée.<br>Traduisez un mot ou une phrase ci-dessus !</div>
+  </div>
+
+</div>
+
+<nav class="bottomnav">
+  <button class="bnav-item on" id="bnav-home" onclick="go('home')"><div class="bnav-ico">🏠</div><div class="bnav-lbl">Accueil</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-vocab" onclick="go('vocab')"><div class="bnav-ico">📚</div><div class="bnav-lbl">Vocab</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-flash" onclick="go('flash')"><div class="bnav-ico">🃏</div><div class="bnav-lbl">Cartes</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-quiz" onclick="go('quiz')"><div class="bnav-ico">⚡</div><div class="bnav-lbl">Quiz</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-anki" onclick="go('anki')"><div class="bnav-ico">🔄</div><div class="bnav-lbl">Révision</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-trad" onclick="go('trad')"><div class="bnav-ico">🌐</div><div class="bnav-lbl">Traduction</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-phrases" onclick="go('phrases')"><div class="bnav-ico">💬</div><div class="bnav-lbl">Phrases</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-conj" onclick="go('conj')"><div class="bnav-ico">📝</div><div class="bnav-lbl">Verbes</div><div class="bnav-dot"></div></button>
+  <button class="bnav-item" id="bnav-gram" onclick="go('gram')"><div class="bnav-ico">📖</div><div class="bnav-lbl">Gramm.</div><div class="bnav-dot"></div></button>
+</nav>
+</div>
+<script>
+// ── VOCABULAIRE ITALIEN ────────────────────────────────
+const VOCAB=[
+  // Salutations
+  {it:'ciao',tr:'tchao',fr:'salut / au revoir',cat:'Salutations',lvl:'a1',ex:'Ciao! Come stai? (Salut ! Comment tu vas ?)'},
+  {it:'buongiorno',tr:'buondiorino',fr:'bonjour (matin)',cat:'Salutations',lvl:'a1',ex:'Buongiorno! Tutto bene? (Bonjour ! Tout va bien ?)'},
+  {it:'buonasera',tr:'buonasera',fr:'bonsoir',cat:'Salutations',lvl:'a1',ex:'Buonasera a tutti! (Bonsoir à tous !)'},
+  {it:'buonanotte',tr:'bouonanoté',fr:'bonne nuit',cat:'Salutations',lvl:'a1',ex:'Buonanotte, a domani! (Bonne nuit, à demain !)'},
+  {it:'arrivederci',tr:'arrivéderchi',fr:'au revoir (formel)',cat:'Salutations',lvl:'a1',ex:'Arrivederci, signore! (Au revoir, monsieur !)'},
+  {it:'grazie',tr:'gratsié',fr:'merci',cat:'Salutations',lvl:'a1',ex:'Grazie mille! (Merci mille fois !)'},
+  {it:'prego',tr:'prégo',fr:'de rien / je vous en prie',cat:'Salutations',lvl:'a1',ex:'Prego, figurati! (De rien, pas de problème !)'},
+  {it:'per favore',tr:'per favoré',fr:'s\'il vous plaît',cat:'Salutations',lvl:'a1',ex:'Per favore, mi aiuti! (S\'il vous plaît, aidez-moi !)'},
+  {it:'scusi / scusa',tr:'skouzi / skousa',fr:'excusez-moi / excuse-moi',cat:'Salutations',lvl:'a1',ex:'Scusi, dov\'è la stazione? (Excusez-moi, où est la gare ?)'},
+  {it:'mi dispiace',tr:'mi disPIAtché',fr:'je suis désolé(e)',cat:'Salutations',lvl:'a1',ex:'Mi dispiace molto! (Je suis vraiment désolé !)'},
+  {it:'come stai?',tr:'komé staï',fr:'comment tu vas ?',cat:'Salutations',lvl:'a1',ex:'Come stai? Bene, grazie! (Comment tu vas ? Bien, merci !)'},
+  {it:'bene',tr:'béné',fr:'bien',cat:'Salutations',lvl:'a1',ex:'Sto bene, grazie. (Je vais bien, merci.)'},
+  {it:'così così',tr:'kozi kozi',fr:'comme ci comme ça',cat:'Salutations',lvl:'a1',ex:'Così così, non benissimo. (Comme ci comme ça, pas super bien.)'},
+  {it:'benvenuto',tr:'benvenouto',fr:'bienvenu(e)',cat:'Salutations',lvl:'a1',ex:'Benvenuto in Italia! (Bienvenu en Italie !)'},
+  {it:'a presto',tr:'a presto',fr:'à bientôt',cat:'Salutations',lvl:'a1',ex:'A presto! Ci vediamo. (À bientôt ! On se voit.)'},
+  {it:'salve',tr:'salvé',fr:'bonjour (neutre)',cat:'Salutations',lvl:'a1',ex:'Salve, come posso aiutarla? (Bonjour, comment puis-je vous aider ?)'},
+  // Pronoms
+  {it:'io',tr:'io',fr:'je',cat:'Pronoms',lvl:'a1',ex:'Io parlo italiano. (Je parle italien.)'},
+  {it:'tu',tr:'tou',fr:'tu',cat:'Pronoms',lvl:'a1',ex:'Tu sei italiano? (Tu es italien ?)'},
+  {it:'lui / lei',tr:'louï / léï',fr:'il / elle',cat:'Pronoms',lvl:'a1',ex:'Lei è professoressa. (Elle est professeure.)'},
+  {it:'Lei',tr:'léï',fr:'vous (formel)',cat:'Pronoms',lvl:'a1',ex:'Lei parla italiano? (Parlez-vous italien ? — formel)'},
+  {it:'noi',tr:'noï',fr:'nous',cat:'Pronoms',lvl:'a1',ex:'Noi andiamo al cinema. (Nous allons au cinéma.)'},
+  {it:'voi',tr:'voï',fr:'vous',cat:'Pronoms',lvl:'a1',ex:'Voi siete pronti? (Vous êtes prêts ?)'},
+  {it:'loro',tr:'loro',fr:'ils / elles',cat:'Pronoms',lvl:'a1',ex:'Loro abitano a Roma. (Ils habitent à Rome.)'},
+  {it:'mio / mia',tr:'mio / mia',fr:'mon / ma',cat:'Pronoms',lvl:'a1',ex:'Il mio gatto è bianco. (Mon chat est blanc.)'},
+  {it:'tuo / tua',tr:'touo / toua',fr:'ton / ta',cat:'Pronoms',lvl:'a1',ex:'La tua borsa è bella. (Ton sac est beau.)'},
+  {it:'suo / sua',tr:'souo / soua',fr:'son / sa',cat:'Pronoms',lvl:'a1',ex:'La sua macchina è rossa. (Sa voiture est rouge.)'},
+  {it:'nostro / nostra',tr:'nostro / nostra',fr:'notre',cat:'Pronoms',lvl:'a2',ex:'La nostra casa è grande. (Notre maison est grande.)'},
+  {it:'vostro / vostra',tr:'vostro / vostra',fr:'votre',cat:'Pronoms',lvl:'a2',ex:'Il vostro progetto è ottimo. (Votre projet est excellent.)'},
+  {it:'loro',tr:'loro',fr:'leur / leurs',cat:'Pronoms',lvl:'a2',ex:'La loro figlia studia medicina. (Leur fille étudie la médecine.)'},
+  {it:'questo / questa',tr:'kouesto / kouesta',fr:'ce / cette (proche)',cat:'Pronoms',lvl:'a2',ex:'Questo libro è interessante. (Ce livre est intéressant.)'},
+  {it:'quello / quella',tr:'kouélo / kouéla',fr:'ce / cette (éloigné)',cat:'Pronoms',lvl:'a2',ex:'Quella ragazza è simpatica. (Cette fille est sympa.)'},
+  {it:'qualcuno',tr:'koualkouno',fr:'quelqu\'un',cat:'Pronoms',lvl:'a2',ex:'C\'è qualcuno? (Il y a quelqu\'un ?)'},
+  {it:'qualcosa',tr:'koualcosa',fr:'quelque chose',cat:'Pronoms',lvl:'a2',ex:'Voglio qualcosa da mangiare. (Je veux quelque chose à manger.)'},
+  {it:'nessuno',tr:'nessouno',fr:'personne',cat:'Pronoms',lvl:'a2',ex:'Non c\'è nessuno. (Il n\'y a personne.)'},
+  {it:'niente / nulla',tr:'niénté / noula',fr:'rien',cat:'Pronoms',lvl:'a2',ex:'Non ho niente. (Je n\'ai rien.)'},
+  {it:'tutti / tutto',tr:'toutti / toutto',fr:'tous / tout',cat:'Pronoms',lvl:'a2',ex:'Tutti sono pronti! (Tout le monde est prêt !)'},
+  {it:'ogni',tr:'oni',fr:'chaque / tout',cat:'Pronoms',lvl:'a2',ex:'Ogni giorno imparo qualcosa. (Chaque jour j\'apprends quelque chose.)'},
+  // Chiffres
+  {it:'zero',tr:'dzéro',fr:'zéro',cat:'Chiffres',lvl:'a1',ex:'Ho zero errori! (J\'ai zéro erreur !)'},
+  {it:'uno',tr:'ouno',fr:'un',cat:'Chiffres',lvl:'a1',ex:'Un caffè, per favore. (Un café, s\'il vous plaît.)'},
+  {it:'due',tr:'doué',fr:'deux',cat:'Chiffres',lvl:'a1',ex:'Due biglietti, grazie. (Deux billets, merci.)'},
+  {it:'tre',tr:'tré',fr:'trois',cat:'Chiffres',lvl:'a1',ex:'Ho tre fratelli. (J\'ai trois frères.)'},
+  {it:'quattro',tr:'kouattro',fr:'quatre',cat:'Chiffres',lvl:'a1',ex:'Quattro stagioni. (Quatre saisons.)'},
+  {it:'cinque',tr:'tchiinkoué',fr:'cinq',cat:'Chiffres',lvl:'a1',ex:'Cinque minuti ancora. (Encore cinq minutes.)'},
+  {it:'sei',tr:'séï',fr:'six',cat:'Chiffres',lvl:'a1',ex:'Il negozio chiude alle sei. (Le magasin ferme à six heures.)'},
+  {it:'sette',tr:'sétte',fr:'sept',cat:'Chiffres',lvl:'a1',ex:'Sette giorni in una settimana. (Sept jours dans une semaine.)'},
+  {it:'otto',tr:'otto',fr:'huit',cat:'Chiffres',lvl:'a1',ex:'Ci vediamo alle otto. (On se retrouve à huit heures.)'},
+  {it:'nove',tr:'novè',fr:'neuf',cat:'Chiffres',lvl:'a1',ex:'Nove mesi di gravidanza. (Neuf mois de grossesse.)'},
+  {it:'dieci',tr:'diétchi',fr:'dix',cat:'Chiffres',lvl:'a1',ex:'Dieci minuti a piedi. (Dix minutes à pied.)'},
+  {it:'undici',tr:'ounditchi',fr:'onze',cat:'Chiffres',lvl:'a1',ex:'Undici giocatori in squadra. (Onze joueurs dans l\'équipe.)'},
+  {it:'dodici',tr:'doditchi',fr:'douze',cat:'Chiffres',lvl:'a1',ex:'Dodici mesi in un anno. (Douze mois dans une année.)'},
+  {it:'tredici',tr:'tréditchi',fr:'treize',cat:'Chiffres',lvl:'a1',ex:'Tredici — numero sfortunato? (Treize — chiffre malchanceux ?)'},
+  {it:'quattordici',tr:'kouattorditchi',fr:'quatorze',cat:'Chiffres',lvl:'a1',ex:'Quattordici giorni — due settimane. (Quatorze jours — deux semaines.)'},
+  {it:'quindici',tr:'kouïnditchi',fr:'quinze',cat:'Chiffres',lvl:'a1',ex:'Quindici minuti di attesa. (Quinze minutes d\'attente.)'},
+  {it:'sedici',tr:'séditchi',fr:'seize',cat:'Chiffres',lvl:'a1',ex:'A sedici anni si prende la patente. (À seize ans on prend le permis.)'},
+  {it:'diciassette',tr:'ditchassétte',fr:'dix-sept',cat:'Chiffres',lvl:'a1',ex:'Diciassette righe di testo. (Dix-sept lignes de texte.)'},
+  {it:'diciotto',tr:'ditchotto',fr:'dix-huit',cat:'Chiffres',lvl:'a1',ex:'A diciotto anni — maggiorenne! (À dix-huit ans — majeur !)'},
+  {it:'diciannove',tr:'ditchannovè',fr:'dix-neuf',cat:'Chiffres',lvl:'a1',ex:'Il diciannovesimo secolo. (Le dix-neuvième siècle.)'},
+  {it:'venti',tr:'venti',fr:'vingt',cat:'Chiffres',lvl:'a1',ex:'Ho vent\'anni. (J\'ai vingt ans.)'},
+  {it:'trenta',tr:'trenta',fr:'trente',cat:'Chiffres',lvl:'a2',ex:'Trenta giorni a settembre. (Trente jours en septembre.)'},
+  {it:'quaranta',tr:'kouaranta',fr:'quarante',cat:'Chiffres',lvl:'a2',ex:'Quaranta minuti di viaggio. (Quarante minutes de voyage.)'},
+  {it:'cinquanta',tr:'tchiinkoouanta',fr:'cinquante',cat:'Chiffres',lvl:'a2',ex:'Cinquanta per cento di sconto. (Cinquante pour cent de réduction.)'},
+  {it:'sessanta',tr:'sessanta',fr:'soixante',cat:'Chiffres',lvl:'a2',ex:'Sessanta secondi in un minuto. (Soixante secondes dans une minute.)'},
+  {it:'settanta',tr:'settanta',fr:'soixante-dix',cat:'Chiffres',lvl:'a2',ex:'Ha settant\'anni ed è in forma. (Il a soixante-dix ans et il est en forme.)'},
+  {it:'ottanta',tr:'ottanta',fr:'quatre-vingts',cat:'Chiffres',lvl:'a2',ex:'Ottanta chilometri all\'ora. (Quatre-vingts kilomètres à l\'heure.)'},
+  {it:'novanta',tr:'novanta',fr:'quatre-vingt-dix',cat:'Chiffres',lvl:'a2',ex:'Novanta per cento di successo. (Quatre-vingt-dix pour cent de réussite.)'},
+  {it:'cento',tr:'tchento',fr:'cent',cat:'Chiffres',lvl:'a1',ex:'Cento parole al giorno. (Cent mots par jour.)'},
+  {it:'mille',tr:'millé',fr:'mille',cat:'Chiffres',lvl:'a2',ex:'Mille grazie! (Mille mercis !)'},
+  {it:'un milione',tr:'oun milioné',fr:'un million',cat:'Chiffres',lvl:'b1',ex:'Un milione di motivi per essere felici. (Un million de raisons d\'être heureux.)'},
+  {it:'primo / prima',tr:'primo / prima',fr:'premier / première',cat:'Chiffres',lvl:'a2',ex:'Sono arrivato primo. (Je suis arrivé le premier.)'},
+  {it:'secondo / seconda',tr:'sékondo / sékonda',fr:'deuxième',cat:'Chiffres',lvl:'a2',ex:'Il secondo piano a sinistra. (Le deuxième étage à gauche.)'},
+  // Alimentation
+  {it:'l\'acqua',tr:'lakkoua',fr:'l\'eau',cat:'Alimentation',lvl:'a1',ex:'Un bicchiere d\'acqua, per favore. (Un verre d\'eau, s\'il vous plaît.)'},
+  {it:'il pane',tr:'il pané',fr:'le pain',cat:'Alimentation',lvl:'a1',ex:'Compra il pane al forno. (Achète le pain à la boulangerie.)'},
+  {it:'il caffè',tr:'il kaffé',fr:'le café',cat:'Alimentation',lvl:'a1',ex:'Prendo un caffè al bar. (Je prends un café au bar.)'},
+  {it:'il tè',tr:'il té',fr:'le thé',cat:'Alimentation',lvl:'a1',ex:'Un tè con latte, grazie. (Un thé au lait, merci.)'},
+  {it:'il latte',tr:'il latté',fr:'le lait',cat:'Alimentation',lvl:'a1',ex:'Il latte fa bene alle ossa. (Le lait est bon pour les os.)'},
+  {it:'la carne',tr:'la karné',fr:'la viande',cat:'Alimentation',lvl:'a1',ex:'La carne alla griglia è deliziosa. (La viande grillée est délicieuse.)'},
+  {it:'il pesce',tr:'il péshé',fr:'le poisson',cat:'Alimentation',lvl:'a1',ex:'Il pesce fa bene al cervello. (Le poisson est bon pour le cerveau.)'},
+  {it:'l\'uovo',tr:'lwoovo',fr:'l\'œuf',cat:'Alimentation',lvl:'a1',ex:'Un uovo alla coque per colazione. (Un œuf à la coque pour le petit-déjeuner.)'},
+  {it:'il formaggio',tr:'il formadjio',fr:'le fromage',cat:'Alimentation',lvl:'a1',ex:'Il parmigiano è il re dei formaggi. (Le parmesan est le roi des fromages.)'},
+  {it:'il burro',tr:'il bourro',fr:'le beurre',cat:'Alimentation',lvl:'a1',ex:'Spalma il burro sul pane. (Tartine le beurre sur le pain.)'},
+  {it:'lo zucchero',tr:'lo dzoukkéro',fr:'le sucre',cat:'Alimentation',lvl:'a1',ex:'Senza zucchero, per favore. (Sans sucre, s\'il vous plaît.)'},
+  {it:'il sale',tr:'il salé',fr:'le sel',cat:'Alimentation',lvl:'a1',ex:'Aggiungi un po\' di sale. (Ajoute un peu de sel.)'},
+  {it:'il riso',tr:'il rizo',fr:'le riz',cat:'Alimentation',lvl:'a1',ex:'Il risotto è un piatto tipico. (Le risotto est un plat typique.)'},
+  {it:'la pasta',tr:'la pasta',fr:'les pâtes',cat:'Alimentation',lvl:'a1',ex:'La pasta al pomodoro è perfetta. (Les pâtes à la tomate sont parfaites.)'},
+  {it:'la pizza',tr:'la pittsa',fr:'la pizza',cat:'Alimentation',lvl:'a1',ex:'Una pizza margherita, per favore! (Une pizza margherita, s\'il vous plaît !)'},
+  {it:'il gelato',tr:'il djélato',fr:'la glace',cat:'Alimentation',lvl:'a1',ex:'Un gelato al cioccolato. (Une glace au chocolat.)'},
+  {it:'il vino',tr:'il vino',fr:'le vin',cat:'Alimentation',lvl:'a1',ex:'Un bicchiere di vino rosso. (Un verre de vin rouge.)'},
+  {it:'la birra',tr:'la birra',fr:'la bière',cat:'Alimentation',lvl:'a1',ex:'Una birra ghiacciata in estate. (Une bière fraîche en été.)'},
+  {it:'il succo',tr:'il soukkoh',fr:'le jus',cat:'Alimentation',lvl:'a1',ex:'Un succo d\'arancia a colazione. (Un jus d\'orange au petit-déjeuner.)'},
+  {it:'la mela',tr:'la méla',fr:'la pomme',cat:'Alimentation',lvl:'a1',ex:'Una mela al giorno toglie il medico. (Une pomme par jour éloigne le médecin.)'},
+  {it:'il pomodoro',tr:'il pomodoro',fr:'la tomate',cat:'Alimentation',lvl:'a1',ex:'Il pomodoro fresco è ottimo. (La tomate fraîche est excellente.)'},
+  {it:'la verdura',tr:'la verdoura',fr:'les légumes',cat:'Alimentation',lvl:'a1',ex:'Mangia più verdura! (Mange plus de légumes !)'},
+  {it:'la frutta',tr:'la froutta',fr:'les fruits',cat:'Alimentation',lvl:'a1',ex:'La frutta è ricca di vitamine. (Les fruits sont riches en vitamines.)'},
+  {it:'il dolce',tr:'il dolché',fr:'le dessert / le gâteau',cat:'Alimentation',lvl:'a1',ex:'Un dolce per festeggiare! (Un gâteau pour fêter !)'},
+  {it:'il tiramisu',tr:'il tiramizou',fr:'le tiramisu',cat:'Alimentation',lvl:'a1',ex:'Il tiramisu è il mio dolce preferito. (Le tiramisu est mon dessert préféré.)'},
+  {it:'la colazione',tr:'la kolatsioné',fr:'le petit-déjeuner',cat:'Alimentation',lvl:'a1',ex:'La colazione è il pasto più importante. (Le petit-déjeuner est le repas le plus important.)'},
+  {it:'il pranzo',tr:'il prantsoh',fr:'le déjeuner',cat:'Alimentation',lvl:'a1',ex:'Il pranzo alle tredici. (Le déjeuner à treize heures.)'},
+  {it:'la cena',tr:'la tchéna',fr:'le dîner',cat:'Alimentation',lvl:'a1',ex:'Ceniamo insieme stasera? (On dîne ensemble ce soir ?)'},
+  {it:'il ristorante',tr:'il ristorante',fr:'le restaurant',cat:'Alimentation',lvl:'a1',ex:'Prenotiamo un tavolo al ristorante. (Réservons une table au restaurant.)'},
+  {it:'il menu',tr:'il ménou',fr:'le menu',cat:'Alimentation',lvl:'a1',ex:'Ci porta il menu, per favore? (Vous nous apportez le menu, s\'il vous plaît ?)'},
+  {it:'il conto',tr:'il konto',fr:'l\'addition',cat:'Alimentation',lvl:'a1',ex:'Il conto, per favore! (L\'addition, s\'il vous plaît !)'},
+  // Corps
+  {it:'la testa',tr:'la testa',fr:'la tête',cat:'Corps',lvl:'a1',ex:'Ho mal di testa. (J\'ai mal à la tête.)'},
+  {it:'il viso',tr:'il vizo',fr:'le visage',cat:'Corps',lvl:'a1',ex:'Ha un bel viso. (Elle a un beau visage.)'},
+  {it:'gli occhi',tr:'li okki',fr:'les yeux',cat:'Corps',lvl:'a1',ex:'Ha gli occhi azzurri. (Il a les yeux bleus.)'},
+  {it:'il naso',tr:'il nazo',fr:'le nez',cat:'Corps',lvl:'a1',ex:'Ho il naso che cola. (J\'ai le nez qui coule.)'},
+  {it:'la bocca',tr:'la bokka',fr:'la bouche',cat:'Corps',lvl:'a1',ex:'Apri la bocca, per favore. (Ouvre la bouche, s\'il te plaît.)'},
+  {it:'l\'orecchio',tr:'lorékkio',fr:'l\'oreille',cat:'Corps',lvl:'a1',ex:'Ho mal all\'orecchio. (J\'ai mal à l\'oreille.)'},
+  {it:'i denti',tr:'i denti',fr:'les dents',cat:'Corps',lvl:'a1',ex:'Mi fa male un dente. (J\'ai mal à une dent.)'},
+  {it:'il collo',tr:'il kollo',fr:'le cou',cat:'Corps',lvl:'a1',ex:'Ho mal di collo. (J\'ai mal au cou.)'},
+  {it:'la spalla',tr:'la spalla',fr:'l\'épaule',cat:'Corps',lvl:'a1',ex:'Mi fa male la spalla. (J\'ai mal à l\'épaule.)'},
+  {it:'il braccio',tr:'il brattcho',fr:'le bras',cat:'Corps',lvl:'a1',ex:'Mi sono rotto il braccio. (Je me suis cassé le bras.)'},
+  {it:'la mano',tr:'la mano',fr:'la main',cat:'Corps',lvl:'a1',ex:'Mi porgi la mano? (Tu me tends la main ?)'},
+  {it:'il dito',tr:'il dito',fr:'le doigt',cat:'Corps',lvl:'a1',ex:'Mi sono tagliato un dito. (Je me suis coupé un doigt.)'},
+  {it:'la gamba',tr:'la gamma',fr:'la jambe',cat:'Corps',lvl:'a1',ex:'Mi fa male la gamba. (J\'ai mal à la jambe.)'},
+  {it:'il piede',tr:'il pié dé',fr:'le pied',cat:'Corps',lvl:'a1',ex:'Ho il piede a terra. (J\'ai le pied à terre.)'},
+  {it:'il ginocchio',tr:'il djinokkio',fr:'le genou',cat:'Corps',lvl:'a1',ex:'Ho mal al ginocchio dopo la corsa. (J\'ai mal au genou après la course.)'},
+  {it:'la schiena',tr:'la skiéna',fr:'le dos',cat:'Corps',lvl:'a1',ex:'Ho mal di schiena. (J\'ai mal au dos.)'},
+  {it:'la pancia',tr:'la pantcha',fr:'le ventre',cat:'Corps',lvl:'a1',ex:'Ho mal di pancia. (J\'ai mal au ventre.)'},
+  {it:'il cuore',tr:'il kouoré',fr:'le cœur',cat:'Corps',lvl:'a1',ex:'Il mio cuore batte forte. (Mon cœur bat fort.)'},
+  {it:'i polmoni',tr:'i polmoni',fr:'les poumons',cat:'Corps',lvl:'a2',ex:'Fumare fa male ai polmoni. (Fumer fait du mal aux poumons.)'},
+  {it:'il sangue',tr:'il sangué',fr:'le sang',cat:'Corps',lvl:'a2',ex:'Vede il sangue e sviene. (Il voit du sang et s\'évanouit.)'},
+  {it:'la pelle',tr:'la pelle',fr:'la peau',cat:'Corps',lvl:'a2',ex:'La pelle è secca d\'inverno. (La peau est sèche en hiver.)'},
+  // Lieux
+  {it:'la casa',tr:'la kasa',fr:'la maison',cat:'Lieux',lvl:'a1',ex:'Resto a casa oggi. (Je reste à la maison aujourd\'hui.)'},
+  {it:'l\'appartamento',tr:'lappartamento',fr:'l\'appartement',cat:'Lieux',lvl:'a1',ex:'Il mio appartamento è al quinto piano. (Mon appartement est au cinquième étage.)'},
+  {it:'la città',tr:'la tchitta',fr:'la ville',cat:'Lieux',lvl:'a1',ex:'Roma è una città bellissima. (Rome est une très belle ville.)'},
+  {it:'il paese',tr:'il paèzé',fr:'le village / le pays',cat:'Lieux',lvl:'a1',ex:'Il mio paese è piccolo ma bello. (Mon village est petit mais beau.)'},
+  {it:'la strada',tr:'la strada',fr:'la rue',cat:'Lieux',lvl:'a1',ex:'Che bella strada! (Quelle belle rue !)'},
+  {it:'la piazza',tr:'la piattsa',fr:'la place',cat:'Lieux',lvl:'a1',ex:'Ci vediamo in piazza. (On se retrouve sur la place.)'},
+  {it:'il parco',tr:'il parko',fr:'le parc',cat:'Lieux',lvl:'a1',ex:'Facciamo una passeggiata nel parco. (On fait une promenade dans le parc.)'},
+  {it:'la scuola',tr:'la skouola',fr:'l\'école',cat:'Lieux',lvl:'a1',ex:'I bambini vanno a scuola. (Les enfants vont à l\'école.)'},
+  {it:'l\'università',tr:'louniversita',fr:'l\'université',cat:'Lieux',lvl:'a1',ex:'Studio all\'università. (J\'étudie à l\'université.)'},
+  {it:'l\'ospedale',tr:'lospedale',fr:'l\'hôpital',cat:'Lieux',lvl:'a1',ex:'Portami all\'ospedale! (Emmène-moi à l\'hôpital !)'},
+  {it:'la farmacia',tr:'la farmatchia',fr:'la pharmacie',cat:'Lieux',lvl:'a1',ex:'Dov\'è la farmacia più vicina? (Où est la pharmacie la plus proche ?)'},
+  {it:'il negozio',tr:'il négodtsio',fr:'le magasin',cat:'Lieux',lvl:'a1',ex:'Il negozio è aperto fino alle nove. (Le magasin est ouvert jusqu\'à neuf heures.)'},
+  {it:'il mercato',tr:'il merkato',fr:'le marché',cat:'Lieux',lvl:'a1',ex:'Al mercato si trova frutta fresca. (Au marché on trouve des fruits frais.)'},
+  {it:'la banca',tr:'la banka',fr:'la banque',cat:'Lieux',lvl:'a1',ex:'Devo andare in banca. (Je dois aller à la banque.)'},
+  {it:'la stazione',tr:'la statsioné',fr:'la gare',cat:'Lieux',lvl:'a1',ex:'Il treno parte dalla stazione. (Le train part de la gare.)'},
+  {it:'l\'aeroporto',tr:'laéroporto',fr:'l\'aéroport',cat:'Lieux',lvl:'a1',ex:'Vienimi a prendere all\'aeroporto. (Viens me chercher à l\'aéroport.)'},
+  {it:'l\'albergo',tr:'lalbergo',fr:'l\'hôtel',cat:'Lieux',lvl:'a1',ex:'Sono in albergo vicino al centro. (Je suis à l\'hôtel près du centre.)'},
+  {it:'il museo',tr:'il mouzeoh',fr:'le musée',cat:'Lieux',lvl:'a1',ex:'Il museo è aperto il martedì. (Le musée est ouvert le mardi.)'},
+  {it:'la chiesa',tr:'la kiéza',fr:'l\'église',cat:'Lieux',lvl:'a1',ex:'La chiesa è in centro. (L\'église est au centre.)'},
+  {it:'la spiaggia',tr:'la spiaddja',fr:'la plage',cat:'Lieux',lvl:'a1',ex:'D\'estate andiamo in spiaggia. (En été nous allons à la plage.)'},
+  // Transport
+  {it:'l\'autobus',tr:'lautobouss',fr:'le bus',cat:'Transport',lvl:'a1',ex:'L\'autobus numero sette va al centro. (Le bus numéro sept va au centre.)'},
+  {it:'il treno',tr:'il tréno',fr:'le train',cat:'Transport',lvl:'a1',ex:'Il treno parte alle otto. (Le train part à huit heures.)'},
+  {it:'la metro',tr:'la métro',fr:'le métro',cat:'Transport',lvl:'a1',ex:'La metro è più veloce del bus. (Le métro est plus rapide que le bus.)'},
+  {it:'il taxi',tr:'il taksi',fr:'le taxi',cat:'Transport',lvl:'a1',ex:'Chiami un taxi, per favore. (Appelez un taxi, s\'il vous plaît.)'},
+  {it:'l\'aereo',tr:'laéreo',fr:'l\'avion',cat:'Transport',lvl:'a1',ex:'Andiamo in aereo. (Nous prenons l\'avion.)'},
+  {it:'la macchina',tr:'la makkina',fr:'la voiture',cat:'Transport',lvl:'a1',ex:'La sua macchina è nuova e rossa. (Sa voiture est neuve et rouge.)'},
+  {it:'la bicicletta',tr:'la bitchikletta',fr:'le vélo',cat:'Transport',lvl:'a1',ex:'Vado in bicicletta ogni giorno. (Je vais à vélo chaque jour.)'},
+  {it:'il biglietto',tr:'il billétto',fr:'le billet',cat:'Transport',lvl:'a1',ex:'Compra il biglietto in anticipo. (Achète le billet à l\'avance.)'},
+  {it:'la fermata',tr:'la fermata',fr:'l\'arrêt',cat:'Transport',lvl:'a1',ex:'La prossima fermata — centro. (Prochain arrêt — centre.)'},
+  {it:'il traghetto',tr:'il tragétto',fr:'le ferry',cat:'Transport',lvl:'a2',ex:'Il traghetto per la Sardegna. (Le ferry pour la Sardaigne.)'},
+  // Temps
+  {it:'oggi',tr:'odji',fr:'aujourd\'hui',cat:'Temps',lvl:'a1',ex:'Cosa fai oggi? (Qu\'est-ce que tu fais aujourd\'hui ?)'},
+  {it:'domani',tr:'domani',fr:'demain',cat:'Temps',lvl:'a1',ex:'Ci vediamo domani! (À demain !)'},
+  {it:'ieri',tr:'iéri',fr:'hier',cat:'Temps',lvl:'a1',ex:'Ieri ho visto un film. (Hier j\'ai vu un film.)'},
+  {it:'adesso / ora',tr:'adésso / ora',fr:'maintenant',cat:'Temps',lvl:'a1',ex:'Adesso sono occupato. (Je suis occupé maintenant.)'},
+  {it:'dopo',tr:'dopo',fr:'après / ensuite',cat:'Temps',lvl:'a1',ex:'Ne parliamo dopo. (On en parlera après.)'},
+  {it:'prima',tr:'prima',fr:'avant / d\'abord',cat:'Temps',lvl:'a1',ex:'Prima di tutto — ciao! (Avant tout — bonjour !)'},
+  {it:'sempre',tr:'sempre',fr:'toujours',cat:'Temps',lvl:'a1',ex:'Mi sveglio sempre presto. (Je me réveille toujours tôt.)'},
+  {it:'mai',tr:'maï',fr:'jamais',cat:'Temps',lvl:'a1',ex:'Non ho mai mangiato il sushi. (Je n\'ai jamais mangé de sushi.)'},
+  {it:'a volte',tr:'a volte',fr:'parfois',cat:'Temps',lvl:'a2',ex:'A volte cucino a casa. (Parfois je cuisine à la maison.)'},
+  {it:'spesso',tr:'spésso',fr:'souvent',cat:'Temps',lvl:'a2',ex:'Lui fa tardi spesso. (Il est souvent en retard.)'},
+  {it:'raramente',tr:'raramente',fr:'rarement',cat:'Temps',lvl:'a2',ex:'Guardo raramente la televisione. (Je regarde rarement la télévision.)'},
+  {it:'il minuto',tr:'il minouto',fr:'la minute',cat:'Temps',lvl:'a1',ex:'Un minuto, per favore! (Une minute, s\'il vous plaît !)'},
+  {it:'l\'ora',tr:'lora',fr:'l\'heure',cat:'Temps',lvl:'a1',ex:'Tra un\'ora ci vediamo. (Dans une heure, on se retrouve.)'},
+  {it:'il giorno',tr:'il djorno',fr:'le jour',cat:'Temps',lvl:'a1',ex:'Buona giornata! (Bonne journée !)'},
+  {it:'la settimana',tr:'la settimana',fr:'la semaine',cat:'Temps',lvl:'a1',ex:'La settimana prossima — vacanze. (La semaine prochaine — vacances.)'},
+  {it:'il mese',tr:'il méze',fr:'le mois',cat:'Temps',lvl:'a1',ex:'Studio italiano da tre mesi. (J\'étudie l\'italien depuis trois mois.)'},
+  {it:'l\'anno',tr:'lanno',fr:'l\'année',cat:'Temps',lvl:'a1',ex:'Buon Anno Nuovo! (Bonne Année !)'},
+  {it:'lunedì',tr:'louné dì',fr:'lundi',cat:'Temps',lvl:'a2',ex:'Il lunedì è sempre difficile. (Le lundi c\'est toujours difficile.)'},
+  {it:'martedì',tr:'marté dì',fr:'mardi',cat:'Temps',lvl:'a2',ex:'Martedì ho una riunione. (Mardi j\'ai une réunion.)'},
+  {it:'mercoledì',tr:'merkolé dì',fr:'mercredi',cat:'Temps',lvl:'a2',ex:'Mercoledì — metà settimana. (Mercredi — milieu de semaine.)'},
+  {it:'giovedì',tr:'djouvé dì',fr:'jeudi',cat:'Temps',lvl:'a2',ex:'Giovedì vado in palestra. (Jeudi je vais à la salle de sport.)'},
+  {it:'venerdì',tr:'véner dì',fr:'vendredi',cat:'Temps',lvl:'a2',ex:'Venerdì — il giorno migliore! (Vendredi — le meilleur jour !)'},
+  {it:'sabato',tr:'sabato',fr:'samedi',cat:'Temps',lvl:'a2',ex:'Sabato si riposa. (Samedi on se repose.)'},
+  {it:'domenica',tr:'doménika',fr:'dimanche',cat:'Temps',lvl:'a2',ex:'Domenica — giorno di famiglia. (Dimanche — jour de famille.)'},
+  {it:'la primavera',tr:'la primavéra',fr:'le printemps',cat:'Temps',lvl:'a2',ex:'In primavera fioriscono i fiori. (Au printemps les fleurs fleurissent.)'},
+  {it:'l\'estate',tr:'léstate',fr:'l\'été',cat:'Temps',lvl:'a2',ex:'D\'estate andiamo al mare. (En été nous allons à la mer.)'},
+  {it:'l\'autunno',tr:'lautouno',fr:'l\'automne',cat:'Temps',lvl:'a2',ex:'In autunno le foglie sono rosse. (En automne les feuilles sont rouges.)'},
+  {it:'l\'inverno',tr:'linverno',fr:'l\'hiver',cat:'Temps',lvl:'a2',ex:'D\'inverno fa freddo. (En hiver il fait froid.)'},
+  // Famille
+  {it:'la madre / la mamma',tr:'la madre / la mamma',fr:'la mère / maman',cat:'Famille',lvl:'a1',ex:'La mia mamma cucina benissimo. (Ma maman cuisine très bien.)'},
+  {it:'il padre / il papà',tr:'il padré / il papa',fr:'le père / papa',cat:'Famille',lvl:'a1',ex:'Il mio papà lavora in banca. (Mon papa travaille à la banque.)'},
+  {it:'il fratello',tr:'il fratéllo',fr:'le frère',cat:'Famille',lvl:'a1',ex:'Mio fratello vive a Milano. (Mon frère habite à Milan.)'},
+  {it:'la sorella',tr:'la sorélla',fr:'la sœur',cat:'Famille',lvl:'a1',ex:'Mia sorella è medico. (Ma sœur est médecin.)'},
+  {it:'il figlio',tr:'il fillio',fr:'le fils',cat:'Famille',lvl:'a1',ex:'Mio figlio studia a scuola. (Mon fils est à l\'école.)'},
+  {it:'la figlia',tr:'la fillia',fr:'la fille',cat:'Famille',lvl:'a1',ex:'Mia figlia ama disegnare. (Ma fille aime dessiner.)'},
+  {it:'il nonno',tr:'il nonno',fr:'le grand-père',cat:'Famille',lvl:'a1',ex:'Il nonno racconta storie interessanti. (Grand-père raconte des histoires intéressantes.)'},
+  {it:'la nonna',tr:'la nonna',fr:'la grand-mère',cat:'Famille',lvl:'a1',ex:'La nonna fa la torta più buona. (Grand-mère fait le meilleur gâteau.)'},
+  {it:'lo zio',tr:'lo dzio',fr:'l\'oncle',cat:'Famille',lvl:'a1',ex:'Mio zio è venuto dal Canada. (Mon oncle est venu du Canada.)'},
+  {it:'la zia',tr:'la dzia',fr:'la tante',cat:'Famille',lvl:'a1',ex:'Mia zia mi ha regalato un libro. (Ma tante m\'a offert un livre.)'},
+  {it:'il marito',tr:'il marito',fr:'le mari',cat:'Famille',lvl:'a1',ex:'Suo marito è programmatore. (Son mari est programmeur.)'},
+  {it:'la moglie',tr:'la molié',fr:'la femme (épouse)',cat:'Famille',lvl:'a1',ex:'Mia moglie è insegnante. (Ma femme est enseignante.)'},
+  {it:'il bambino',tr:'il bambino',fr:'le petit enfant',cat:'Famille',lvl:'a1',ex:'Che bambino simpatico! (Quel enfant sympa !)'},
+  {it:'l\'amico / l\'amica',tr:'lamiko / lamika',fr:'l\'ami / l\'amie',cat:'Famille',lvl:'a1',ex:'Il mio migliore amico si chiama Luca. (Mon meilleur ami s\'appelle Luca.)'},
+  {it:'il vicino',tr:'il vitchino',fr:'le voisin',cat:'Famille',lvl:'a1',ex:'Il vicino fa troppo rumore. (Le voisin fait trop de bruit.)'},
+  {it:'il collega',tr:'il kollega',fr:'le collègue',cat:'Famille',lvl:'a2',ex:'Il mio collega mi ha aiutato. (Mon collègue m\'a aidé.)'},
+  // Adjectifs
+  {it:'grande',tr:'grandé',fr:'grand',cat:'Adjectifs',lvl:'a1',ex:'Roma è una grande città. (Rome est une grande ville.)'},
+  {it:'piccolo',tr:'pikkolo',fr:'petit',cat:'Adjectifs',lvl:'a1',ex:'Un piccolo problema. (Un petit problème.)'},
+  {it:'bello / bella',tr:'béllo / bélla',fr:'beau / belle',cat:'Adjectifs',lvl:'a1',ex:'Che bella giornata! (Quelle belle journée !)'},
+  {it:'brutto / brutta',tr:'broutoh / broutta',fr:'laid / laide',cat:'Adjectifs',lvl:'a1',ex:'Che brutto tempo! (Quel mauvais temps !)'},
+  {it:'buono / buona',tr:'bouono / bouona',fr:'bon / bonne',cat:'Adjectifs',lvl:'a1',ex:'Questo vino è buono. (Ce vin est bon.)'},
+  {it:'cattivo / cattiva',tr:'kattivo / kattiva',fr:'mauvais / méchant',cat:'Adjectifs',lvl:'a1',ex:'Che cattivo film! (Quel mauvais film !)'},
+  {it:'nuovo / nuova',tr:'nouovo / nouova',fr:'nouveau / nouvelle',cat:'Adjectifs',lvl:'a1',ex:'Ho comprato un nuovo telefono. (J\'ai acheté un nouveau téléphone.)'},
+  {it:'vecchio / vecchia',tr:'vékkio / vékkia',fr:'vieux / vieille',cat:'Adjectifs',lvl:'a1',ex:'Questo edificio è molto vecchio. (Cet immeuble est très vieux.)'},
+  {it:'giovane',tr:'diovane',fr:'jeune',cat:'Adjectifs',lvl:'a1',ex:'È giovane ma esperto. (Il est jeune mais expérimenté.)'},
+  {it:'veloce',tr:'velotché',fr:'rapide',cat:'Adjectifs',lvl:'a1',ex:'Il treno è molto veloce. (Le train est très rapide.)'},
+  {it:'lento / lenta',tr:'lento / lenta',fr:'lent / lente',cat:'Adjectifs',lvl:'a1',ex:'La tartaruga è lenta. (La tortue est lente.)'},
+  {it:'caro / cara',tr:'karo / kara',fr:'cher / chère',cat:'Adjectifs',lvl:'a1',ex:'È troppo caro! (C\'est trop cher !)'},
+  {it:'economico',tr:'ekonomiko',fr:'bon marché',cat:'Adjectifs',lvl:'a1',ex:'È economico ma di qualità. (C\'est bon marché mais de qualité.)'},
+  {it:'interessante',tr:'interessante',fr:'intéressant',cat:'Adjectifs',lvl:'a1',ex:'Un libro molto interessante. (Un livre très intéressant.)'},
+  {it:'noioso / noiosa',tr:'noiozo / noioza',fr:'ennuyeux',cat:'Adjectifs',lvl:'a1',ex:'Un film noioso — mi sono addormentato. (Un film ennuyeux — je me suis endormi.)'},
+  {it:'simpatico / simpatica',tr:'simpatiko / simpatika',fr:'sympathique',cat:'Adjectifs',lvl:'a1',ex:'È una persona molto simpatica. (C\'est une personne très sympathique.)'},
+  {it:'antipatico',tr:'antipatiko',fr:'antipathique',cat:'Adjectifs',lvl:'a2',ex:'È un po\' antipatico. (Il est un peu antipathique.)'},
+  {it:'stanco / stanca',tr:'stanko / stanka',fr:'fatigué / fatiguée',cat:'Adjectifs',lvl:'a1',ex:'Sono stanco — vado a dormire. (Je suis fatigué — je vais dormir.)'},
+  {it:'contento / contenta',tr:'kontento / kontenta',fr:'content / contente',cat:'Adjectifs',lvl:'a1',ex:'Sono contento di vederti! (Je suis content de te voir !)'},
+  {it:'triste',tr:'triste',fr:'triste',cat:'Adjectifs',lvl:'a1',ex:'Perché sei triste oggi? (Pourquoi tu es triste aujourd\'hui ?)'},
+  {it:'freddo / fredda',tr:'fréddo / frédda',fr:'froid / froide',cat:'Adjectifs',lvl:'a1',ex:'Acqua fredda per favore. (Eau froide s\'il vous plaît.)'},
+  {it:'caldo / calda',tr:'kaldo / kalda',fr:'chaud / chaude',cat:'Adjectifs',lvl:'a1',ex:'Attenzione — caffè caldo! (Attention — café chaud !)'},
+  {it:'pulito / pulita',tr:'poulito / poulita',fr:'propre',cat:'Adjectifs',lvl:'a1',ex:'Mani pulite — salute. (Mains propres — santé.)'},
+  {it:'sporco / sporca',tr:'sporko / sporca',fr:'sale',cat:'Adjectifs',lvl:'a1',ex:'I vestiti sporchi — in lavatrice. (Les vêtements sales — dans la machine.)'},
+  {it:'pieno / piena',tr:'piéno / piéna',fr:'plein / pleine',cat:'Adjectifs',lvl:'a1',ex:'La borsa è piena di libri. (Le sac est plein de livres.)'},
+  {it:'vuoto / vuota',tr:'vouoto / vouota',fr:'vide',cat:'Adjectifs',lvl:'a1',ex:'Il portafoglio è vuoto. (Le portefeuille est vide.)'},
+  {it:'forte',tr:'forté',fr:'fort / solide',cat:'Adjectifs',lvl:'a1',ex:'È molto forte in matematica. (Il est très fort en maths.)'},
+  {it:'debole',tr:'débole',fr:'faible',cat:'Adjectifs',lvl:'a2',ex:'Mi sento debole. (Je me sens faible.)'},
+  {it:'facile',tr:'fatchiléh',fr:'facile',cat:'Adjectifs',lvl:'a1',ex:'L\'italiano è facile! (L\'italien est facile !)'},
+  {it:'difficile',tr:'difficile',fr:'difficile',cat:'Adjectifs',lvl:'a1',ex:'La grammatica è difficile. (La grammaire est difficile.)'},
+  {it:'importante',tr:'importante',fr:'important',cat:'Adjectifs',lvl:'a2',ex:'È una decisione molto importante. (C\'est une décision très importante.)'},
+  {it:'possibile',tr:'possibile',fr:'possible',cat:'Adjectifs',lvl:'a2',ex:'Tutto è possibile! (Tout est possible !)'},
+  {it:'impossibile',tr:'impossibile',fr:'impossible',cat:'Adjectifs',lvl:'a2',ex:'Non è impossibile, solo difficile. (Ce n\'est pas impossible, juste difficile.)'},
+  // Adverbes de degré
+  {it:'molto',tr:'molto',fr:'très / beaucoup',cat:'Adjectifs',lvl:'a1',ex:'Grazie molto! (Merci beaucoup !)'},
+  {it:'poco',tr:'poko',fr:'peu',cat:'Adjectifs',lvl:'a1',ex:'Mangio poco a cena. (Je mange peu au dîner.)'},
+  {it:'troppo',tr:'troppo',fr:'trop',cat:'Adjectifs',lvl:'a1',ex:'È troppo caro per me. (C\'est trop cher pour moi.)'},
+  {it:'abbastanza',tr:'abbastantsa',fr:'assez / suffisamment',cat:'Adjectifs',lvl:'a2',ex:'Ho dormito abbastanza. (J\'ai assez dormi.)'},
+  {it:'ancora',tr:'ancora',fr:'encore / toujours',cat:'Adjectifs',lvl:'a1',ex:'Ancora un minuto! (Encore une minute !)'},
+  {it:'già',tr:'dja',fr:'déjà',cat:'Adjectifs',lvl:'a1',ex:'Sei già pronto? (Tu es déjà prêt ?)'},
+  {it:'solo / soltanto',tr:'solo / soltanto',fr:'seulement',cat:'Adjectifs',lvl:'a1',ex:'Voglio solo guardare. (Je veux juste regarder.)'},
+  {it:'anche',tr:'anke',fr:'aussi / également',cat:'Adjectifs',lvl:'a1',ex:'Voglio venire anch\'io. (Je veux venir moi aussi.)'},
+  {it:'quasi',tr:'kouazi',fr:'presque',cat:'Adjectifs',lvl:'a2',ex:'Ho quasi finito. (J\'ai presque fini.)'},
+  {it:'davvero',tr:'davvero',fr:'vraiment',cat:'Adjectifs',lvl:'a2',ex:'Davvero? Non ci credo! (Vraiment ? Je n\'y crois pas !)'},
+  {it:'proprio',tr:'proprio',fr:'vraiment / exactement / propre',cat:'Adjectifs',lvl:'a2',ex:'Proprio così! (Exactement comme ça !)'},
+  {it:'più',tr:'piou',fr:'plus',cat:'Adjectifs',lvl:'a1',ex:'Voglio più caffè. (Je veux plus de café.)'},
+  {it:'meno',tr:'ménoh',fr:'moins',cat:'Adjectifs',lvl:'a1',ex:'Mangia meno zucchero. (Mange moins de sucre.)'},
+  {it:'tanto',tr:'tanto',fr:'beaucoup / tellement',cat:'Adjectifs',lvl:'a1',ex:'Ci sono tante persone. (Il y a tellement de gens.)'},
+  // Couleurs
+  {it:'rosso / rossa',tr:'rosso / rossa',fr:'rouge',cat:'Couleurs',lvl:'a1',ex:'Il pomodoro è rosso. (La tomate est rouge.)'},
+  {it:'blu / azzurro',tr:'blou / adzourro',fr:'bleu',cat:'Couleurs',lvl:'a1',ex:'Il cielo è blu. (Le ciel est bleu.)'},
+  {it:'verde',tr:'verdé',fr:'vert',cat:'Couleurs',lvl:'a1',ex:'L\'erba è verde. (L\'herbe est verte.)'},
+  {it:'giallo / gialla',tr:'djallo / djalla',fr:'jaune',cat:'Couleurs',lvl:'a1',ex:'I girasoli sono gialli. (Les tournesols sont jaunes.)'},
+  {it:'arancione',tr:'arantchione',fr:'orange',cat:'Couleurs',lvl:'a1',ex:'Il tramonto arancione. (Le coucher de soleil orange.)'},
+  {it:'viola',tr:'viola',fr:'violet',cat:'Couleurs',lvl:'a1',ex:'I fiori di lavanda sono viola. (Les fleurs de lavande sont violettes.)'},
+  {it:'rosa',tr:'roza',fr:'rose',cat:'Couleurs',lvl:'a1',ex:'I fenicotteri sono rosa. (Les flamants sont roses.)'},
+  {it:'nero / nera',tr:'néro / néra',fr:'noir / noire',cat:'Couleurs',lvl:'a1',ex:'Un gatto nero — buona fortuna! (Un chat noir — bonne chance !)'},
+  {it:'bianco / bianca',tr:'bianko / bianka',fr:'blanc / blanche',cat:'Couleurs',lvl:'a1',ex:'La neve è bianca e pura. (La neige est blanche et pure.)'},
+  {it:'grigio / grigia',tr:'griggio / griggia',fr:'gris / grise',cat:'Couleurs',lvl:'a1',ex:'Una giornata grigia senza sole. (Une journée grise sans soleil.)'},
+  {it:'marrone',tr:'marroné',fr:'marron / brun',cat:'Couleurs',lvl:'a1',ex:'Il cioccolato è marrone. (Le chocolat est marron.)'},
+  {it:'beige',tr:'bèdj',fr:'beige',cat:'Couleurs',lvl:'a2',ex:'Le pareti beige — stile neutro. (Les murs beiges — style neutre.)'},
+  // Sensations
+  {it:'ho freddo',tr:'o fréddo',fr:'j\'ai froid',cat:'Sensations',lvl:'a1',ex:'Ho freddo — accendi il riscaldamento. (J\'ai froid — allume le chauffage.)'},
+  {it:'ho caldo',tr:'o kaldo',fr:'j\'ai chaud',cat:'Sensations',lvl:'a1',ex:'Ho caldo — apri la finestra. (J\'ai chaud — ouvre la fenêtre.)'},
+  {it:'ho fame',tr:'o famé',fr:'j\'ai faim',cat:'Sensations',lvl:'a1',ex:'Ho fame — quando si mangia? (J\'ai faim — quand mange-t-on ?)'},
+  {it:'ho sete',tr:'o séte',fr:'j\'ai soif',cat:'Sensations',lvl:'a1',ex:'Ho sete — dammi dell\'acqua. (J\'ai soif — donne-moi de l\'eau.)'},
+  {it:'sono stanco',tr:'sono stanko',fr:'je suis fatigué',cat:'Sensations',lvl:'a1',ex:'Sono stanco — vado a letto. (Je suis fatigué — je vais au lit.)'},
+  {it:'ho sonno',tr:'o sonno',fr:'j\'ai sommeil',cat:'Sensations',lvl:'a1',ex:'Ho sonno — è già tardi. (J\'ai sommeil — il est déjà tard.)'},
+  {it:'mi fa male',tr:'mi fa malé',fr:'j\'ai mal (à...)',cat:'Sensations',lvl:'a1',ex:'Mi fa male la testa. (J\'ai mal à la tête.)'},
+  {it:'sto bene',tr:'sto béné',fr:'je vais bien',cat:'Sensations',lvl:'a1',ex:'Sto bene, grazie. (Je vais bien, merci.)'},
+  {it:'sto male',tr:'sto malé',fr:'je vais mal',cat:'Sensations',lvl:'a1',ex:'Sto male — chiamate un medico. (Je vais mal — appelez un médecin.)'},
+  {it:'sono felice',tr:'sono féliché',fr:'je suis heureux',cat:'Sensations',lvl:'a1',ex:'Sono felice di vederti! (Je suis heureux de te voir !)'},
+  {it:'sono triste',tr:'sono triste',fr:'je suis triste',cat:'Sensations',lvl:'a1',ex:'Sono triste oggi. (Je suis triste aujourd\'hui.)'},
+  {it:'sono nervoso',tr:'sono nervoso',fr:'je suis nerveux',cat:'Sensations',lvl:'a2',ex:'Sono nervoso prima dell\'esame. (Je suis nerveux avant l\'examen.)'},
+  {it:'sono annoiato',tr:'sono annoiato',fr:'je m\'ennuie',cat:'Sensations',lvl:'a2',ex:'Sono annoiato — cosa facciamo? (Je m\'ennuie — qu\'est-ce qu\'on fait ?)'},
+  {it:'ho paura',tr:'o paoura',fr:'j\'ai peur',cat:'Sensations',lvl:'a2',ex:'Ho paura del buio. (J\'ai peur du noir.)'},
+  {it:'sono sorpreso',tr:'sono sorpreso',fr:'je suis surpris',cat:'Sensations',lvl:'a2',ex:'Sono sorpreso — che notizia! (Je suis surpris — quelle nouvelle !)'},
+  {it:'mi annoio',tr:'mi annojo',fr:'je m\'ennuie',cat:'Sensations',lvl:'a2',ex:'Mi annoio — mettiamo la musica. (Je m\'ennuie — mettons de la musique.)'},
+  {it:'sono arrabbiato',tr:'sono arrabbiato',fr:'je suis en colère',cat:'Sensations',lvl:'a2',ex:'Sono arrabbiato — non toccarmi. (Je suis en colère — ne me touche pas.)'},
+  // Maison
+  {it:'la camera',tr:'la kaméra',fr:'la chambre',cat:'Maison',lvl:'a1',ex:'La mia camera è piccola ma accogliente. (Ma chambre est petite mais accueillante.)'},
+  {it:'la cucina',tr:'la koutchina',fr:'la cuisine',cat:'Maison',lvl:'a1',ex:'Il profumo viene dalla cucina. (L\'odeur vient de la cuisine.)'},
+  {it:'il salotto',tr:'il salotto',fr:'le salon',cat:'Maison',lvl:'a1',ex:'Guardiamo un film in salotto. (On regarde un film au salon.)'},
+  {it:'il bagno',tr:'il banio',fr:'la salle de bain',cat:'Maison',lvl:'a1',ex:'Il bagno è occupato. (La salle de bain est occupée.)'},
+  {it:'il letto',tr:'il letto',fr:'le lit',cat:'Maison',lvl:'a1',ex:'Un letto comodo per dormire bene. (Un lit confortable pour bien dormir.)'},
+  {it:'il tavolo',tr:'il tavolo',fr:'la table',cat:'Maison',lvl:'a1',ex:'I libri sono sul tavolo. (Les livres sont sur la table.)'},
+  {it:'la sedia',tr:'la sédia',fr:'la chaise',cat:'Maison',lvl:'a1',ex:'Siediti sulla sedia. (Assieds-toi sur la chaise.)'},
+  {it:'il divano',tr:'il divano',fr:'le canapé',cat:'Maison',lvl:'a1',ex:'Leggo sul divano. (Je lis sur le canapé.)'},
+  {it:'la finestra',tr:'la finéstra',fr:'la fenêtre',cat:'Maison',lvl:'a1',ex:'Apri la finestra — fa caldo. (Ouvre la fenêtre — il fait chaud.)'},
+  {it:'la porta',tr:'la porta',fr:'la porte',cat:'Maison',lvl:'a1',ex:'Chiudi la porta, per favore. (Ferme la porte, s\'il te plaît.)'},
+  {it:'il frigorifero',tr:'il frigoriféro',fr:'le réfrigérateur',cat:'Maison',lvl:'a1',ex:'Il latte è nel frigorifero. (Le lait est dans le réfrigérateur.)'},
+  {it:'la doccia',tr:'la dottcha',fr:'la douche',cat:'Maison',lvl:'a1',ex:'Una doccia la mattina rinfresca. (Une douche le matin rafraîchit.)'},
+  {it:'il balcone',tr:'il balkoné',fr:'le balcon',cat:'Maison',lvl:'a1',ex:'Il caffè del mattino sul balcone. (Le café du matin sur le balcon.)'},
+  {it:'l\'armadio',tr:'larmadio',fr:'l\'armoire',cat:'Maison',lvl:'a1',ex:'I vestiti nell\'armadio. (Les vêtements dans l\'armoire.)'},
+  {it:'il pavimento',tr:'il pavimento',fr:'le sol / le plancher',cat:'Maison',lvl:'a2',ex:'Il pavimento è freddo la mattina. (Le sol est froid le matin.)'},
+  {it:'il soffitto',tr:'il soffitto',fr:'le plafond',cat:'Maison',lvl:'a2',ex:'Un soffitto alto — spazioso. (Un plafond haut — spacieux.)'},
+  {it:'il muro',tr:'il mouro',fr:'le mur',cat:'Maison',lvl:'a1',ex:'Un quadro sul muro. (Un tableau sur le mur.)'},
+  {it:'le scale',tr:'lé skalé',fr:'l\'escalier',cat:'Maison',lvl:'a2',ex:'L\'ascensore è rotto — per le scale. (L\'ascenseur est en panne — par l\'escalier.)'},
+  {it:'l\'ascensore',tr:'lashensore',fr:'l\'ascenseur',cat:'Maison',lvl:'a1',ex:'L\'ascensore è al secondo piano. (L\'ascenseur est au deuxième étage.)'},
+  {it:'il cortile',tr:'il kortile',fr:'la cour',cat:'Maison',lvl:'a2',ex:'I bambini giocano nel cortile. (Les enfants jouent dans la cour.)'},
+  // Animaux
+  {it:'il cane',tr:'il kané',fr:'le chien',cat:'Animaux',lvl:'a1',ex:'Il cane è il migliore amico dell\'uomo. (Le chien est le meilleur ami de l\'homme.)'},
+  {it:'il gatto',tr:'il gatto',fr:'le chat',cat:'Animaux',lvl:'a1',ex:'Il gatto fa le fusa sul divano. (Le chat ronronne sur le canapé.)'},
+  {it:'il cavallo',tr:'il kavallo',fr:'le cheval',cat:'Animaux',lvl:'a1',ex:'Il cavallo corre nel campo. (Le cheval court dans le champ.)'},
+  {it:'la mucca',tr:'la moukka',fr:'la vache',cat:'Animaux',lvl:'a1',ex:'La mucca dà il latte. (La vache donne du lait.)'},
+  {it:'il maiale',tr:'il maialé',fr:'le cochon',cat:'Animaux',lvl:'a1',ex:'Il maiale grugnisce. (Le cochon grogne.)'},
+  {it:'il leone',tr:'il léoné',fr:'le lion',cat:'Animaux',lvl:'a1',ex:'Il leone è il re degli animali. (Le lion est le roi des animaux.)'},
+  {it:'l\'elefante',tr:'léléfante',fr:'l\'éléphant',cat:'Animaux',lvl:'a1',ex:'L\'elefante è il più grande animale terrestre. (L\'éléphant est le plus grand animal terrestre.)'},
+  {it:'l\'uccello',tr:'loutchéllo',fr:'l\'oiseau',cat:'Animaux',lvl:'a1',ex:'L\'uccello canta al mattino. (L\'oiseau chante le matin.)'},
+  {it:'il pesce',tr:'il péshé',fr:'le poisson',cat:'Animaux',lvl:'a1',ex:'Il pesce nuota nell\'acquario. (Le poisson nage dans l\'aquarium.)'},
+  {it:'l\'animale',tr:'lanimale',fr:'l\'animal',cat:'Animaux',lvl:'a1',ex:'Il mio animale preferito è il gatto. (Mon animal préféré est le chat.)'},
+  // Questions
+  {it:'dove?',tr:'dové',fr:'où ?',cat:'Questions',lvl:'a1',ex:'Dove abiti? (Où habites-tu ?)'},
+  {it:'quando?',tr:'kouando',fr:'quand ?',cat:'Questions',lvl:'a1',ex:'Quando inizia il film? (Quand commence le film ?)'},
+  {it:'perché?',tr:'pérké',fr:'pourquoi ?',cat:'Questions',lvl:'a1',ex:'Perché non sei venuto? (Pourquoi tu n\'es pas venu ?)'},
+  {it:'come?',tr:'komé',fr:'comment ?',cat:'Questions',lvl:'a1',ex:'Come ti chiami? (Comment tu t\'appelles ?)'},
+  {it:'quanto?',tr:'kouanto',fr:'combien ?',cat:'Questions',lvl:'a1',ex:'Quanto costa? (Combien ça coûte ?)'},
+  {it:'chi?',tr:'ki',fr:'qui ?',cat:'Questions',lvl:'a1',ex:'Chi parla? (Qui parle ?)'},
+  {it:'che cosa?',tr:'ke koza',fr:'quoi ? / que ?',cat:'Questions',lvl:'a1',ex:'Che cosa vuoi? (Que veux-tu ?)'},
+  {it:'quale?',tr:'koualle',fr:'quel / quelle ?',cat:'Questions',lvl:'a1',ex:'Qual è il tuo colore preferito? (Quelle est ta couleur préférée ?)'},
+  {it:'da dove?',tr:'da dové',fr:'d\'où ?',cat:'Questions',lvl:'a1',ex:'Da dove vieni? (D\'où viens-tu ?)'},
+  {it:'quanto tempo?',tr:'kouanto tempo',fr:'combien de temps ?',cat:'Questions',lvl:'a2',ex:'Quanto tempo ci vuole? (Combien de temps ça prend ?)'},
+  // Connecteurs
+  {it:'e',tr:'é',fr:'et',cat:'Connecteurs',lvl:'a1',ex:'Caffè e cornetto. (Café et croissant.)'},
+  {it:'ma',tr:'ma',fr:'mais',cat:'Connecteurs',lvl:'a1',ex:'Voleva venire, ma si è ammalato. (Il voulait venir, mais il est tombé malade.)'},
+  {it:'o / oppure',tr:'o / oppoure',fr:'ou / ou bien',cat:'Connecteurs',lvl:'a1',ex:'Tè o caffè? (Thé ou café ?)'},
+  {it:'perché',tr:'pérké',fr:'parce que / pourquoi',cat:'Connecteurs',lvl:'a1',ex:'Resto a casa perché piove. (Je reste à la maison parce qu\'il pleut.)'},
+  {it:'quindi',tr:'kouindi',fr:'donc / alors',cat:'Connecteurs',lvl:'a1',ex:'Sono stanco, quindi vado a letto. (Je suis fatigué, donc je vais au lit.)'},
+  {it:'se',tr:'sé',fr:'si',cat:'Connecteurs',lvl:'a1',ex:'Se vuoi, vieni! (Si tu veux, viens !)'},
+  {it:'quando',tr:'kouando',fr:'quand / lorsque',cat:'Connecteurs',lvl:'a1',ex:'Quando arrivi, chiamami. (Quand tu arrives, appelle-moi.)'},
+  {it:'anche',tr:'anké',fr:'aussi / également',cat:'Connecteurs',lvl:'a1',ex:'Vengo anch\'io! (Je viens moi aussi !)'},
+  {it:'però',tr:'péro',fr:'mais / cependant',cat:'Connecteurs',lvl:'a2',ex:'È vecchio, però è forte. (Il est vieux, pourtant fort.)'},
+  {it:'nonostante',tr:'nonostante',fr:'malgré / bien que',cat:'Connecteurs',lvl:'b1',ex:'Nonostante la pioggia, siamo usciti. (Malgré la pluie, nous sommes sortis.)'},
+  {it:'mentre',tr:'mèntré',fr:'pendant que / tandis que',cat:'Connecteurs',lvl:'a2',ex:'Mentre studio, lui dorme. (Pendant que j\'étudie, il dort.)'},
+  {it:'quindi / allora',tr:'kouindi / allora',fr:'donc / alors',cat:'Connecteurs',lvl:'a1',ex:'Allora, andiamo! (Alors, on y va !)'},
+  {it:'inoltre',tr:'inoultré',fr:'de plus / en outre',cat:'Connecteurs',lvl:'b1',ex:'Inoltre, c\'è un problema. (De plus, il y a un problème.)'},
+  {it:'infine',tr:'infiné',fr:'enfin / finalement',cat:'Connecteurs',lvl:'b1',ex:'Infine sei arrivato! (Tu es enfin arrivé !)'},
+  {it:'per esempio',tr:'per ézémpio',fr:'par exemple',cat:'Connecteurs',lvl:'a2',ex:'Per esempio, la parola "ciao". (Par exemple, le mot "ciao".)'},
+  {it:'cioè',tr:'tchoé',fr:'c\'est-à-dire',cat:'Connecteurs',lvl:'b1',ex:'Domani, cioè venerdì. (Demain, c\'est-à-dire vendredi.)'},
+  // Émotions
+  {it:'la gioia',tr:'la djoïa',fr:'la joie',cat:'Émotions',lvl:'a2',ex:'Che gioia vederti! (Quelle joie de te voir !)'},
+  {it:'la tristezza',tr:'la tristéttsa',fr:'la tristesse',cat:'Émotions',lvl:'a2',ex:'La tristezza negli occhi. (La tristesse dans les yeux.)'},
+  {it:'la paura',tr:'la paoura',fr:'la peur',cat:'Émotions',lvl:'a1',ex:'La paura paralizza. (La peur paralyse.)'},
+  {it:'la rabbia',tr:'la rabbja',fr:'la colère / la rage',cat:'Émotions',lvl:'a2',ex:'La rabbia è cattiva consigliera. (La colère est mauvaise conseillère.)'},
+  {it:'l\'amore',tr:'lamoré',fr:'l\'amour',cat:'Émotions',lvl:'a1',ex:'L\'amore muove il mondo. (L\'amour fait tourner le monde.)'},
+  {it:'la felicità',tr:'la félitchita',fr:'le bonheur / la joie',cat:'Émotions',lvl:'a2',ex:'La felicità è stare con i propri cari. (Le bonheur c\'est être avec ses proches.)'},
+  {it:'la sorpresa',tr:'la sorpreza',fr:'la surprise',cat:'Émotions',lvl:'a2',ex:'Che sorpresa! (Quelle surprise !)'},
+  {it:'la vergogna',tr:'la vergonia',fr:'la honte / la gêne',cat:'Émotions',lvl:'b1',ex:'Che vergogna! (Quelle honte !)'},
+  {it:'la nostalgia',tr:'la nostaldjia',fr:'la nostalgie',cat:'Émotions',lvl:'b1',ex:'Nostalgia dell\'infanzia. (La nostalgie de l\'enfance.)'},
+  {it:'l\'entusiasmo',tr:'lentouziazmo',fr:'l\'enthousiasme',cat:'Émotions',lvl:'b1',ex:'L\'entusiasmo di imparare. (L\'enthousiasme d\'apprendre.)'},
+  // Travail
+  {it:'il lavoro',tr:'il lavoro',fr:'le travail / le job',cat:'Travail',lvl:'a1',ex:'Il mio lavoro è la mia passione. (Mon travail est ma passion.)'},
+  {it:'l\'ufficio',tr:'louffitcho',fr:'le bureau',cat:'Travail',lvl:'a1',ex:'L\'ufficio è al terzo piano. (Le bureau est au troisième étage.)'},
+  {it:'la riunione',tr:'la riunioné',fr:'la réunion',cat:'Travail',lvl:'a2',ex:'La riunione alle dieci di mattina. (La réunion à dix heures du matin.)'},
+  {it:'il progetto',tr:'il prodjetoh',fr:'le projet',cat:'Travail',lvl:'a2',ex:'Questo progetto è importante. (Ce projet est important.)'},
+  {it:'il capo',tr:'il kapo',fr:'le chef / le patron',cat:'Travail',lvl:'a1',ex:'Il mio capo è esigente. (Mon patron est exigeant.)'},
+  {it:'lo stipendio',tr:'lo stipéndio',fr:'le salaire',cat:'Travail',lvl:'a2',ex:'Lo stipendio una volta al mese. (Le salaire une fois par mois.)'},
+  {it:'le ferie',tr:'lé férie',fr:'les congés / les vacances',cat:'Travail',lvl:'a2',ex:'Finalmente le ferie! (Enfin les vacances !)'},
+  {it:'il curriculum',tr:'il kourrikoloum',fr:'le CV',cat:'Travail',lvl:'b1',ex:'Ho scritto il mio curriculum. (J\'ai écrit mon CV.)'},
+  {it:'il colloquio',tr:'il kollokoio',fr:'l\'entretien',cat:'Travail',lvl:'b1',ex:'Il colloquio domani alle nove. (L\'entretien demain à neuf heures.)'},
+  // École
+  {it:'la classe',tr:'la klassé',fr:'la classe',cat:'École',lvl:'a1',ex:'Nella classe ci sono 25 alunni. (Dans la classe, 25 élèves.)'},
+  {it:'la lezione',tr:'la létsioné',fr:'la leçon / le cours',cat:'École',lvl:'a1',ex:'La lezione inizia alle otto. (La leçon commence à huit heures.)'},
+  {it:'i compiti',tr:'i kompiti',fr:'les devoirs',cat:'École',lvl:'a1',ex:'Ho fatto i compiti. (J\'ai fait mes devoirs.)'},
+  {it:'il voto',tr:'il voto',fr:'la note',cat:'École',lvl:'a1',ex:'Un voto ottimo! (Une excellente note !)'},
+  {it:'l\'esame',tr:'lézamé',fr:'l\'examen',cat:'École',lvl:'a1',ex:'Domani esame di matematica. (Demain examen de maths.)'},
+  {it:'il libro',tr:'il libro',fr:'le livre',cat:'École',lvl:'a1',ex:'Apri il libro a pagina 10. (Ouvre le livre à la page 10.)'},
+  {it:'il dizionario',tr:'il ditsionario',fr:'le dictionnaire',cat:'École',lvl:'a1',ex:'Controlla sul dizionario. (Vérifie dans le dictionnaire.)'},
+  {it:'l\'insegnante',tr:'linseniante',fr:'l\'enseignant(e)',cat:'École',lvl:'a1',ex:'L\'insegnante spiega la grammatica. (L\'enseignant explique la grammaire.)'},
+  {it:'lo studente',tr:'lo stoudente',fr:'l\'étudiant',cat:'École',lvl:'a1',ex:'Lo studente studia di notte. (L\'étudiant étudie la nuit.)'},
+  {it:'la laurea',tr:'la laouria',fr:'le diplôme universitaire',cat:'École',lvl:'b1',ex:'Ha preso la laurea. (Il a obtenu son diplôme.)'},
+  // Santé
+  {it:'il medico / il dottore',tr:'il médiko / il dottore',fr:'le médecin',cat:'Santé',lvl:'a1',ex:'Il medico ha detto di bere acqua. (Le médecin a dit de boire de l\'eau.)'},
+  {it:'la malattia',tr:'la malatia',fr:'la maladie',cat:'Santé',lvl:'a2',ex:'Una malattia — riposo forzato. (Une maladie — repos forcé.)'},
+  {it:'il dolore',tr:'il dolore',fr:'la douleur',cat:'Santé',lvl:'a1',ex:'Ho un dolore alla schiena. (J\'ai une douleur au dos.)'},
+  {it:'la febbre',tr:'la fébbré',fr:'la fièvre',cat:'Santé',lvl:'a1',ex:'Ho la febbre — resto a casa. (J\'ai de la fièvre — je reste à la maison.)'},
+  {it:'il raffreddore',tr:'il raffreddore',fr:'le rhume',cat:'Santé',lvl:'a1',ex:'Ho il raffreddore in inverno. (J\'ai un rhume en hiver.)'},
+  {it:'la tosse',tr:'la tosse',fr:'la toux',cat:'Santé',lvl:'a1',ex:'La tosse mi sveglia la notte. (La toux me réveille la nuit.)'},
+  {it:'la medicina',tr:'la médichina',fr:'le médicament',cat:'Santé',lvl:'a1',ex:'Prendi la medicina dopo i pasti. (Prends le médicament après les repas.)'},
+  {it:'l\'allergia',tr:'lallerdjia',fr:'l\'allergie',cat:'Santé',lvl:'a2',ex:'Ho l\'allergia ai gatti. (J\'ai une allergie aux chats.)'},
+  {it:'l\'ambulanza',tr:'lambooulantsa',fr:'l\'ambulance',cat:'Santé',lvl:'a1',ex:'Chiama l\'ambulanza! (Appelle l\'ambulance !)'},
+  // Nature
+  {it:'il cielo',tr:'il tchiélo',fr:'le ciel',cat:'Nature',lvl:'a1',ex:'Il cielo è blu senza nuvole. (Le ciel est bleu sans nuages.)'},
+  {it:'il sole',tr:'il solé',fr:'le soleil',cat:'Nature',lvl:'a1',ex:'Il sole scalda in estate. (Le soleil chauffe en été.)'},
+  {it:'la luna',tr:'la louna',fr:'la lune',cat:'Nature',lvl:'a1',ex:'La luna brilla di notte. (La lune brille la nuit.)'},
+  {it:'la pioggia',tr:'la piodja',fr:'la pluie',cat:'Nature',lvl:'a1',ex:'La pioggia cade tutto il giorno. (La pluie tombe toute la journée.)'},
+  {it:'la neve',tr:'la névé',fr:'la neige',cat:'Nature',lvl:'a1',ex:'La prima neve — come un miracolo! (La première neige — comme un miracle !)'},
+  {it:'il vento',tr:'il vento',fr:'le vent',cat:'Nature',lvl:'a1',ex:'Il vento forte ha spezzato il ramo. (Le vent fort a cassé la branche.)'},
+  {it:'la nuvola',tr:'la nouvola',fr:'le nuage',cat:'Nature',lvl:'a1',ex:'Una nuvola ha coperto il sole. (Un nuage a caché le soleil.)'},
+  {it:'l\'albero',tr:'lalbéro',fr:'l\'arbre',cat:'Nature',lvl:'a1',ex:'Un vecchio albero nel cortile. (Un vieux arbre dans la cour.)'},
+  {it:'il fiore',tr:'il fioré',fr:'la fleur',cat:'Nature',lvl:'a1',ex:'Un fiore rosso nel giardino. (Une fleur rouge dans le jardin.)'},
+  {it:'il mare',tr:'il maré',fr:'la mer',cat:'Nature',lvl:'a1',ex:'D\'estate andiamo al mare. (En été nous allons à la mer.)'},
+  {it:'la montagna',tr:'la montania',fr:'la montagne',cat:'Nature',lvl:'a1',ex:'Le montagne sono coperte di neve. (Les montagnes sont couvertes de neige.)'},
+  {it:'il fiume',tr:'il fioumé',fr:'le fleuve / la rivière',cat:'Nature',lvl:'a1',ex:'Il Tevere è il fiume di Roma. (Le Tibre est le fleuve de Rome.)'},
+  {it:'il bosco / la foresta',tr:'il bosko / la foresta',fr:'le bois / la forêt',cat:'Nature',lvl:'a1',ex:'Passeggiamo nel bosco. (On se promène dans le bois.)'},
+  // Technologie
+  {it:'il telefono',tr:'il téléfono',fr:'le téléphone',cat:'Technologie',lvl:'a1',ex:'Dov\'è il mio telefono? (Où est mon téléphone ?)'},
+  {it:'il computer',tr:'il kompiouter',fr:'l\'ordinateur',cat:'Technologie',lvl:'a1',ex:'Lavoro al computer. (Je travaille sur l\'ordinateur.)'},
+  {it:'internet',tr:'internet',fr:'internet',cat:'Technologie',lvl:'a1',ex:'Senza internet oggi è difficile. (Sans internet aujourd\'hui c\'est difficile.)'},
+  {it:'l\'app',tr:'lapp',fr:'l\'application',cat:'Technologie',lvl:'a1',ex:'Questa app è molto utile. (Cette appli est très utile.)'},
+  {it:'il sito web',tr:'il sito oèb',fr:'le site web',cat:'Technologie',lvl:'a1',ex:'Vai sul nostro sito web. (Va sur notre site web.)'},
+  {it:'l\'email / la posta elettronica',tr:'lémeil',fr:'l\'email',cat:'Technologie',lvl:'a1',ex:'Ho mandato un\'email. (J\'ai envoyé un email.)'},
+  {it:'il messaggio',tr:'il mésadjio',fr:'le message',cat:'Technologie',lvl:'a1',ex:'Nuovo messaggio! (Nouveau message !)'},
+  {it:'la password',tr:'la passouord',fr:'le mot de passe',cat:'Technologie',lvl:'a1',ex:'Non dimenticare la password! (N\'oublie pas le mot de passe !)'},
+  {it:'la batteria',tr:'la battéria',fr:'la batterie',cat:'Technologie',lvl:'a1',ex:'La batteria è scarica. (La batterie est déchargée.)'},
+  {it:'lo schermo',tr:'lo skermo',fr:'l\'écran',cat:'Technologie',lvl:'a2',ex:'Uno schermo grande per lavorare. (Un grand écran pour travailler.)'},
+  // Directions
+  {it:'a sinistra',tr:'a sinistra',fr:'à gauche',cat:'Directions',lvl:'a1',ex:'Girate a sinistra al semaforo. (Tournez à gauche au feu rouge.)'},
+  {it:'a destra',tr:'a déstra',fr:'à droite',cat:'Directions',lvl:'a1',ex:'La banca è a destra della farmacia. (La banque est à droite de la pharmacie.)'},
+  {it:'dritto / sempre dritto',tr:'dritto / sempre dritto',fr:'tout droit',cat:'Directions',lvl:'a1',ex:'Andate sempre dritto fino alla piazza. (Allez tout droit jusqu\'à la place.)'},
+  {it:'indietro',tr:'indiétro',fr:'en arrière',cat:'Directions',lvl:'a1',ex:'Torna indietro — hai dimenticato le chiavi. (Reviens — tu as oublié les clés.)'},
+  {it:'qui / qua',tr:'kouï / koua',fr:'ici',cat:'Directions',lvl:'a1',ex:'Sono qui, vicino all\'ingresso. (Je suis ici, près de l\'entrée.)'},
+  {it:'lì / là',tr:'li / la',fr:'là-bas',cat:'Directions',lvl:'a1',ex:'Il negozio è là, all\'angolo. (Le magasin est là-bas, au coin.)'},
+  {it:'vicino',tr:'vitchino',fr:'près / proche',cat:'Directions',lvl:'a1',ex:'La farmacia è vicina — 5 minuti a piedi. (La pharmacie est proche — 5 minutes à pied.)'},
+  {it:'lontano',tr:'lontano',fr:'loin',cat:'Directions',lvl:'a1',ex:'La stazione è lontana — meglio un taxi. (La gare est loin — mieux vaut un taxi.)'},
+  {it:'davanti',tr:'davanti',fr:'devant',cat:'Directions',lvl:'a1',ex:'Fermati davanti al semaforo. (Arrête-toi devant le feu rouge.)'},
+  {it:'dietro',tr:'diétro',fr:'derrière',cat:'Directions',lvl:'a1',ex:'Dietro l\'angolo c\'è un negozio. (Derrière le coin il y a un magasin.)'},
+  {it:'sopra',tr:'sopra',fr:'au-dessus / en haut',cat:'Directions',lvl:'a1',ex:'L\'aereo vola sopra le nuvole. (L\'avion vole au-dessus des nuages.)'},
+  {it:'sotto',tr:'sotto',fr:'sous / en dessous',cat:'Directions',lvl:'a1',ex:'Le chiavi sono sotto il tappetino. (Les clés sont sous le paillasson.)'},
+  {it:'tra / fra',tr:'tra / fra',fr:'entre / dans (temps)',cat:'Directions',lvl:'a1',ex:'Il caffè è tra la banca e la farmacia. (Le café est entre la banque et la pharmacie.)'},
+  {it:'l\'entrata / l\'ingresso',tr:'lentrata / lingrésso',fr:'l\'entrée',cat:'Directions',lvl:'a1',ex:'L\'entrata è dall\'altro lato. (L\'entrée est de l\'autre côté.)'},
+  {it:'l\'uscita',tr:'loushita',fr:'la sortie',cat:'Directions',lvl:'a1',ex:'L\'uscita è dove c\'è il cartello verde. (La sortie est là où il y a le panneau vert.)'},
+  {it:'il piano',tr:'il piano',fr:'l\'étage',cat:'Directions',lvl:'a1',ex:'Abito al terzo piano. (J\'habite au troisième étage.)'},
+  {it:'l\'incrocio',tr:'linkrotsio',fr:'le carrefour',cat:'Directions',lvl:'a2',ex:'Fermati all\'incrocio. (Arrête-toi au carrefour.)'},
+  {it:'il nord',tr:'il nord',fr:'le nord',cat:'Directions',lvl:'a2',ex:'Milano è al nord d\'Italia. (Milan est au nord de l\'Italie.)'},
+  {it:'il sud',tr:'il soud',fr:'le sud',cat:'Directions',lvl:'a2',ex:'La Sicilia è al sud. (La Sicile est au sud.)'},
+  {it:'l\'est',tr:'lest',fr:'l\'est',cat:'Directions',lvl:'a2',ex:'Il sole sorge ad est. (Le soleil se lève à l\'est.)'},
+  {it:'l\'ovest',tr:'lovest',fr:'l\'ouest',cat:'Directions',lvl:'a2',ex:'Il sole tramonta ad ovest. (Le soleil se couche à l\'ouest.)'},
+  // Vêtements
+  {it:'i vestiti',tr:'i vestiti',fr:'les vêtements',cat:'Vêtements',lvl:'a1',ex:'Che vestiti portare in viaggio? (Quels vêtements emporter en voyage ?)'},
+  {it:'la camicia',tr:'la kamitchia',fr:'la chemise',cat:'Vêtements',lvl:'a1',ex:'Camicia bianca per il lavoro. (Chemise blanche pour le travail.)'},
+  {it:'i pantaloni',tr:'i pantaloni',fr:'le pantalon',cat:'Vêtements',lvl:'a1',ex:'Pantaloni neri e camicia bianca. (Pantalon noir et chemise blanche.)'},
+  {it:'la gonna',tr:'la gonna',fr:'la jupe',cat:'Vêtements',lvl:'a1',ex:'Una gonna estiva a fiori. (Une jupe d\'été à fleurs.)'},
+  {it:'il vestito',tr:'il vestito',fr:'la robe / le costume',cat:'Vêtements',lvl:'a1',ex:'Un vestito elegante per la festa. (Une robe élégante pour la fête.)'},
+  {it:'il maglione',tr:'il malioneH',fr:'le pull',cat:'Vêtements',lvl:'a1',ex:'Un maglione caldo per l\'inverno. (Un pull chaud pour l\'hiver.)'},
+  {it:'la giacca',tr:'la djakkoh',fr:'la veste / le manteau',cat:'Vêtements',lvl:'a1',ex:'La giacca contro il vento. (La veste contre le vent.)'},
+  {it:'le scarpe',tr:'lé skarpe',fr:'les chaussures',cat:'Vêtements',lvl:'a1',ex:'Scarpe comode per camminare. (Chaussures confortables pour marcher.)'},
+  {it:'i calzini',tr:'i kaltsini',fr:'les chaussettes',cat:'Vêtements',lvl:'a1',ex:'Calzini caldi in inverno. (Chaussettes chaudes en hiver.)'},
+  {it:'il cappello',tr:'il kappéllo',fr:'le chapeau',cat:'Vêtements',lvl:'a1',ex:'Cappello e sciarpa nel gelo. (Chapeau et écharpe dans le gel.)'},
+  {it:'la sciarpa',tr:'la sharpa',fr:'l\'écharpe',cat:'Vêtements',lvl:'a1',ex:'Una sciarpa a quadri. (Une écharpe à carreaux.)'},
+  {it:'la borsa',tr:'la borsa',fr:'le sac',cat:'Vêtements',lvl:'a1',ex:'Una borsa pesante con i libri. (Un sac lourd avec les livres.)'},
+  // Expressions
+  {it:'c\'è / ci sono',tr:'tché / tchi sono',fr:'il y a',cat:'Expressions',lvl:'a1',ex:'C\'è un posto libero? (Il y a une place libre ?)'},
+  {it:'non c\'è',tr:'non tché',fr:'il n\'y a pas',cat:'Expressions',lvl:'a1',ex:'Non c\'è pane — lo compro. (Il n\'y a pas de pain — je l\'achète.)'},
+  {it:'bisogna / occorre',tr:'bizonya / okkorré',fr:'il faut',cat:'Expressions',lvl:'a2',ex:'Bisogna più pratica. (Il faut plus de pratique.)'},
+  {it:'si può',tr:'si pouo',fr:'on peut',cat:'Expressions',lvl:'a2',ex:'Si può fotografare qui? (On peut photographier ici ?)'},
+  {it:'non si può',tr:'non si pouo',fr:'on ne peut pas',cat:'Expressions',lvl:'a2',ex:'Qui non si può fumare. (On ne peut pas fumer ici.)'},
+  {it:'certo / certamente',tr:'tcherto / tchertamente',fr:'bien sûr / certainement',cat:'Expressions',lvl:'a1',ex:'Certo, ti aiuto! (Bien sûr, je t\'aide !)'},
+  {it:'forse',tr:'forse',fr:'peut-être',cat:'Expressions',lvl:'a1',ex:'Forse verrà più tardi. (Peut-être qu\'il viendra plus tard.)'},
+  {it:'probabilmente',tr:'probabilmente',fr:'probablement',cat:'Expressions',lvl:'b1',ex:'Probabilmente ha dimenticato. (Il a probablement oublié.)'},
+  {it:'purtroppo',tr:'pourtroppo',fr:'malheureusement',cat:'Expressions',lvl:'a2',ex:'Purtroppo non posso venire. (Malheureusement je ne peux pas venir.)'},
+  {it:'per fortuna',tr:'per fortouna',fr:'heureusement',cat:'Expressions',lvl:'a2',ex:'Per fortuna è finita bene. (Heureusement, ça s\'est bien terminé.)'},
+  {it:'in genere',tr:'in djéneré',fr:'en général',cat:'Expressions',lvl:'b1',ex:'In genere è puntuale. (En général il est ponctuel.)'},
+  {it:'a proposito',tr:'a propozito',fr:'à propos / au fait',cat:'Expressions',lvl:'b1',ex:'A proposito, hai visto le mie chiavi? (Au fait, tu as vu mes clés ?)'},
+  {it:'comunque',tr:'komounkoué',fr:'de toute façon / quoi qu\'il en soit',cat:'Expressions',lvl:'b1',ex:'Comunque, grazie mille. (De toute façon, merci beaucoup.)'},
+  {it:'insomma',tr:'insomma',fr:'enfin / bref / en somme',cat:'Expressions',lvl:'b1',ex:'Insomma, ci siamo capiti. (En somme, on s\'est compris.)'},
+  {it:'eppure',tr:'épouré',fr:'pourtant / et cependant',cat:'Expressions',lvl:'b2',ex:'Eppure è possibile. (Pourtant c\'est possible.)'},
+  // B1-B2
+  {it:'la libertà',tr:'la libérta',fr:'la liberté',cat:'B1–B2',lvl:'b1',ex:'La libertà è il valore più alto. (La liberté est la valeur la plus haute.)'},
+  {it:'la società',tr:'la sotchiéta',fr:'la société',cat:'B1–B2',lvl:'b1',ex:'Viviamo in una società democratica. (Nous vivons dans une société démocratique.)'},
+  {it:'l\'istruzione',tr:'listroutsioné',fr:'l\'éducation / l\'instruction',cat:'B1–B2',lvl:'b1',ex:'L\'istruzione apre le porte. (L\'éducation ouvre les portes.)'},
+  {it:'la legge',tr:'la léddié',fr:'la loi',cat:'B1–B2',lvl:'b1',ex:'La legge è uguale per tutti. (La loi est la même pour tous.)'},
+  {it:'il governo',tr:'il governo',fr:'le gouvernement',cat:'B1–B2',lvl:'b1',ex:'Il governo ha preso una decisione. (Le gouvernement a pris une décision.)'},
+  {it:'la democrazia',tr:'la démokratsia',fr:'la démocratie',cat:'B1–B2',lvl:'b2',ex:'La democrazia richiede partecipazione. (La démocratie nécessite participation.)'},
+  {it:'l\'economia',tr:'lékonomia',fr:'l\'économie',cat:'B1–B2',lvl:'b1',ex:'L\'economia è in crescita. (L\'économie est en croissance.)'},
+  {it:'la cultura',tr:'la koultoura',fr:'la culture',cat:'B1–B2',lvl:'b1',ex:'La cultura unisce le persone. (La culture unit les gens.)'},
+  {it:'l\'arte',tr:'larte',fr:'l\'art',cat:'B1–B2',lvl:'b1',ex:'L\'arte è il linguaggio dell\'anima. (L\'art est le langage de l\'âme.)'},
+  {it:'la scienza',tr:'la shénsa',fr:'la science',cat:'B1–B2',lvl:'b1',ex:'La scienza spiega il mondo. (La science explique le monde.)'},
+  {it:'l\'ambiente',tr:'lambienté',fr:'l\'environnement',cat:'B1–B2',lvl:'b1',ex:'Proteggiamo l\'ambiente! (Protégeons l\'environnement !)'},
+  {it:'il cambiamento climatico',tr:'il kambiamento klimatiko',fr:'le changement climatique',cat:'B1–B2',lvl:'b2',ex:'Il cambiamento climatico è una sfida. (Le changement climatique est un défi.)'},
+  {it:'la diseguaglianza',tr:'la dizégoualiansa',fr:'l\'inégalité',cat:'B1–B2',lvl:'b2',ex:'La diseguaglianza è un problema attuale. (L\'inégalité est un problème contemporain.)'},
+];
+
+
+// ── PHRASES ────────────────────────────────────────────
+const PHRASES=[
+  // Se présenter
+  {it:'Mi chiamo Antonio.',tr:'Mi kiamo Antonio.',fr:'Je m\'appelle Antoine.',cat:'Se présenter'},
+  {it:'Sono francese / svizzero.',tr:'Sono frantchéze / zvittsero.',fr:'Je suis français / suisse.',cat:'Se présenter'},
+  {it:'Ho venticinque anni.',tr:'O ventitchinkoué anni.',fr:'J\'ai vingt-cinq ans.',cat:'Se présenter'},
+  {it:'Abito a Parigi.',tr:'Abito a Paridji.',fr:'J\'habite à Paris.',cat:'Se présenter'},
+  {it:'Parlo un po\' di italiano.',tr:'Parlo oun po di italiano.',fr:'Je parle un peu d\'italien.',cat:'Se présenter'},
+  {it:'Studio l\'italiano da tre mesi.',tr:'Studio litaliano da tré mézi.',fr:'J\'étudie l\'italien depuis trois mois.',cat:'Se présenter'},
+  {it:'Sono qui in vacanza.',tr:'Sono kouï in vakantsa.',fr:'Je suis ici en vacances.',cat:'Se présenter'},
+  {it:'Lavoro come ingegnere.',tr:'Lavoro komé indjeniéré.',fr:'Je travaille comme ingénieur.',cat:'Se présenter'},
+  {it:'Piacere di conoscerti!',tr:'Piatcheré di konoshtcherti.',fr:'Enchanté de te rencontrer !',cat:'Se présenter'},
+  {it:'Di dove sei?',tr:'Di dové séï?',fr:'D\'où es-tu ?',cat:'Se présenter'},
+  // Se repérer
+  {it:'Dov\'è la stazione?',tr:'Dovè la statsioné?',fr:'Où est la gare ?',cat:'Se repérer'},
+  {it:'Come arrivo all\'aeroporto?',tr:'Komé arrivo allaeporto?',fr:'Comment j\'arrive à l\'aéroport ?',cat:'Se repérer'},
+  {it:'Giri a sinistra / destra.',tr:'Djiri a sinistra / déstra.',fr:'Tournez à gauche / droite.',cat:'Se repérer'},
+  {it:'È lontano da qui?',tr:'É lontano da kouï?',fr:'C\'est loin d\'ici ?',cat:'Se repérer'},
+  {it:'Sono perso / persa.',tr:'Sono pérso / pérsa.',fr:'Je suis perdu(e).',cat:'Se repérer'},
+  {it:'Può ripetere, per favore?',tr:'Pouo ripétéré, per favoré?',fr:'Pouvez-vous répéter, s\'il vous plaît ?',cat:'Se repérer'},
+  {it:'Non capisco, parli più lentamente.',tr:'Non kapisko, parli piou lentamente.',fr:'Je ne comprends pas, parlez plus lentement.',cat:'Se repérer'},
+  {it:'Scusi, mi sa dire dov\'è…?',tr:'Skouzi, mi sa diré dové...?',fr:'Excusez-moi, pouvez-vous me dire où est... ?',cat:'Se repérer'},
+  // Au restaurant
+  {it:'Un tavolo per due, per favore.',tr:'Oun tavolo per doué, per favoré.',fr:'Une table pour deux, s\'il vous plaît.',cat:'Restaurant'},
+  {it:'Ci porta il menu?',tr:'Tchi porta il ménou?',fr:'Vous nous apportez le menu ?',cat:'Restaurant'},
+  {it:'Cosa mi consiglia?',tr:'Koza mi konsilia?',fr:'Que me conseillez-vous ?',cat:'Restaurant'},
+  {it:'Sono allergico a…',tr:'Sono allérdjiko a...',fr:'Je suis allergique à...',cat:'Restaurant'},
+  {it:'Il conto, per favore!',tr:'Il konto, per favoré!',fr:'L\'addition, s\'il vous plaît !',cat:'Restaurant'},
+  {it:'Era delizioso, grazie!',tr:'Éra délitsiozo, gratsié!',fr:'C\'était délicieux, merci !',cat:'Restaurant'},
+  {it:'Vorrei ordinare…',tr:'Vorréï ordinare...',fr:'Je voudrais commander...',cat:'Restaurant'},
+  {it:'Senza… per favore.',tr:'Sentsa... per favoré.',fr:'Sans... s\'il vous plaît.',cat:'Restaurant'},
+  {it:'Avete piatti vegetariani?',tr:'Avéte piatti védjiétariani?',fr:'Avez-vous des plats végétariens ?',cat:'Restaurant'},
+  {it:'Acqua naturale o frizzante?',tr:'Akkoua natourale o fridsante?',fr:'Eau plate ou gazeuse ?',cat:'Restaurant'},
+  // Shopping
+  {it:'Quanto costa?',tr:'Kouanto kosta?',fr:'Combien ça coûte ?',cat:'Shopping'},
+  {it:'È troppo caro.',tr:'É troppo karo.',fr:'C\'est trop cher.',cat:'Shopping'},
+  {it:'Avete questo in taglia più grande?',tr:'Avéte kouesto in talia piou grandé?',fr:'Avez-vous ça dans une taille plus grande ?',cat:'Shopping'},
+  {it:'Posso provarlo?',tr:'Posso provarlo?',fr:'Je peux l\'essayer ?',cat:'Shopping'},
+  {it:'Posso pagare con carta?',tr:'Posso pagaré kon karta?',fr:'Je peux payer par carte ?',cat:'Shopping'},
+  {it:'Dov\'è la cassa?',tr:'Dovè la kassa?',fr:'Où est la caisse ?',cat:'Shopping'},
+  {it:'Cercavo qualcosa per…',tr:'Tcherkavo koualkoza per...',fr:'Je cherchais quelque chose pour...',cat:'Shopping'},
+  {it:'C\'è uno sconto?',tr:'Tché ouno skonto?',fr:'Il y a une réduction ?',cat:'Shopping'},
+  // Santé
+  {it:'Non mi sento bene.',tr:'Non mi sento béné.',fr:'Je ne me sens pas bien.',cat:'Santé'},
+  {it:'Ho bisogno di un medico.',tr:'O bizonio di oun médiko.',fr:'J\'ai besoin d\'un médecin.',cat:'Santé'},
+  {it:'Mi fa male qui.',tr:'Mi fa malé kouï.',fr:'J\'ai mal ici.',cat:'Santé'},
+  {it:'Ho la febbre.',tr:'O la fébbré.',fr:'J\'ai de la fièvre.',cat:'Santé'},
+  {it:'Sono allergico a…',tr:'Sono allérdjiko a...',fr:'Je suis allergique à...',cat:'Santé'},
+  {it:'Chiami un\'ambulanza!',tr:'Kiami ounambooulantsa!',fr:'Appelez une ambulance !',cat:'Santé'},
+  {it:'Dov\'è la farmacia più vicina?',tr:'Dovè la farmatchia piou vitchina?',fr:'Où est la pharmacie la plus proche ?',cat:'Santé'},
+  // Communication
+  {it:'Non capisco.',tr:'Non kapisko.',fr:'Je ne comprends pas.',cat:'Communication'},
+  {it:'Può parlare più lentamente?',tr:'Pouo parlare piou lentamente?',fr:'Pouvez-vous parler plus lentement ?',cat:'Communication'},
+  {it:'Come si dice… in italiano?',tr:'Komé si ditché... in italiano?',fr:'Comment dit-on... en italien ?',cat:'Communication'},
+  {it:'Può scriverlo?',tr:'Pouo skriveRlo?',fr:'Pouvez-vous l\'écrire ?',cat:'Communication'},
+  {it:'Ha un momento?',tr:'A oun momento?',fr:'Vous avez un moment ?',cat:'Communication'},
+  {it:'Che significa questa parola?',tr:'Ké sinifika kouésta parola?',fr:'Que signifie ce mot ?',cat:'Communication'},
+  {it:'Posso aiutarla?',tr:'Posso aioutarla?',fr:'Puis-je vous aider ?',cat:'Communication'},
+  {it:'Ha bisogno di aiuto?',tr:'A bizonio di aiouto?',fr:'Avez-vous besoin d\'aide ?',cat:'Communication'},
+  // Opinions
+  {it:'Secondo me…',tr:'Sékondo mé...',fr:'Selon moi...',cat:'Opinions'},
+  {it:'Sono d\'accordo.',tr:'Sono dakkordoh.',fr:'Je suis d\'accord.',cat:'Opinions'},
+  {it:'Non sono d\'accordo.',tr:'Non sono dakkordoh.',fr:'Je ne suis pas d\'accord.',cat:'Opinions'},
+  {it:'Hai ragione.',tr:'Aï radjoné.',fr:'Tu as raison.',cat:'Opinions'},
+  {it:'Hai torto.',tr:'Aï torto.',fr:'Tu as tort.',cat:'Opinions'},
+  {it:'Mi piace molto!',tr:'Mi piatché molto!',fr:'J\'aime beaucoup !',cat:'Opinions'},
+  {it:'Non mi piace.',tr:'Non mi piatché.',fr:'Je n\'aime pas.',cat:'Opinions'},
+  {it:'È fantastico!',tr:'É fantastiko!',fr:'C\'est fantastique !',cat:'Opinions'},
+  {it:'Che peccato!',tr:'Ké pékkato!',fr:'Quel dommage !',cat:'Opinions'},
+  {it:'Meno male!',tr:'Méno malé!',fr:'Heureusement ! / Ouf !',cat:'Opinions'},
+];
+
+
+// ── VERBES ─────────────────────────────────────────────
+const VERBS=[
+  {fr:'être',inf:'essere',
+   pres:[{pro:'io',it:'sono',tr:'sono'},{pro:'tu',it:'sei',tr:'séï'},{pro:'lui/lei',it:'è',tr:'é'},{pro:'noi',it:'siamo',tr:'siamo'},{pro:'voi',it:'siete',tr:'sieté'},{pro:'loro',it:'sono',tr:'sono'}],
+   past:[{pro:'io',it:'sono stato/a',tr:'sono stato/a'},{pro:'tu',it:'sei stato/a',tr:'séï stato/a'},{pro:'lui',it:'è stato',tr:'é stato'},{pro:'lei',it:'è stata',tr:'é stata'},{pro:'noi',it:'siamo stati',tr:'siamo stati'},{pro:'voi',it:'siete stati',tr:'siéte stati'},{pro:'loro',it:'sono stati',tr:'sono stati'}],
+   imperf:[{pro:'io',it:'ero',tr:'éro'},{pro:'tu',it:'eri',tr:'éri'},{pro:'lui/lei',it:'era',tr:'éra'},{pro:'noi',it:'eravamo',tr:'éravamo'},{pro:'voi',it:'eravate',tr:'éravate'},{pro:'loro',it:'erano',tr:'érano'}],
+   fut:[{pro:'io',it:'sarò',tr:'saro'},{pro:'tu',it:'sarai',tr:'saraï'},{pro:'lui/lei',it:'sarà',tr:'sara'},{pro:'noi',it:'saremo',tr:'sarémo'},{pro:'voi',it:'sarete',tr:'saréte'},{pro:'loro',it:'saranno',tr:'saranno'}]},
+  {fr:'avoir',inf:'avere',
+   pres:[{pro:'io',it:'ho',tr:'o'},{pro:'tu',it:'hai',tr:'aï'},{pro:'lui/lei',it:'ha',tr:'a'},{pro:'noi',it:'abbiamo',tr:'abbiamo'},{pro:'voi',it:'avete',tr:'avéte'},{pro:'loro',it:'hanno',tr:'anno'}],
+   past:[{pro:'io',it:'ho avuto',tr:'o avouto'},{pro:'tu',it:'hai avuto',tr:'aï avouto'},{pro:'lui/lei',it:'ha avuto',tr:'a avouto'},{pro:'noi',it:'abbiamo avuto',tr:'abbiamo avouto'},{pro:'voi',it:'avete avuto',tr:'avéte avouto'},{pro:'loro',it:'hanno avuto',tr:'anno avouto'}],
+   imperf:[{pro:'io',it:'avevo',tr:'avévo'},{pro:'tu',it:'avevi',tr:'avévi'},{pro:'lui/lei',it:'aveva',tr:'avéva'},{pro:'noi',it:'avevamo',tr:'avévamo'},{pro:'voi',it:'avevate',tr:'avévate'},{pro:'loro',it:'avevano',tr:'avévano'}],
+   fut:[{pro:'io',it:'avrò',tr:'avro'},{pro:'tu',it:'avrai',tr:'avraï'},{pro:'lui/lei',it:'avrà',tr:'avra'},{pro:'noi',it:'avremo',tr:'avrémo'},{pro:'voi',it:'avrete',tr:'avréte'},{pro:'loro',it:'avranno',tr:'avranno'}]},
+  {fr:'parler',inf:'parlare',
+   pres:[{pro:'io',it:'parlo',tr:'parlo'},{pro:'tu',it:'parli',tr:'parli'},{pro:'lui/lei',it:'parla',tr:'parla'},{pro:'noi',it:'parliamo',tr:'parliamo'},{pro:'voi',it:'parlate',tr:'parlate'},{pro:'loro',it:'parlano',tr:'parlano'}],
+   past:[{pro:'io',it:'ho parlato',tr:'o parlato'},{pro:'tu',it:'hai parlato',tr:'aï parlato'},{pro:'lui/lei',it:'ha parlato',tr:'a parlato'},{pro:'noi',it:'abbiamo parlato',tr:'abbiamo parlato'},{pro:'voi',it:'avete parlato',tr:'avété parlato'},{pro:'loro',it:'hanno parlato',tr:'anno parlato'}],
+   imperf:[{pro:'io',it:'parlavo',tr:'parlavo'},{pro:'tu',it:'parlavi',tr:'parlavi'},{pro:'lui/lei',it:'parlava',tr:'parlava'},{pro:'noi',it:'parlavamo',tr:'parlavamo'},{pro:'voi',it:'parlavate',tr:'parlavate'},{pro:'loro',it:'parlavano',tr:'parlavano'}],
+   fut:[{pro:'io',it:'parlerò',tr:'parléro'},{pro:'tu',it:'parlerai',tr:'parléraï'},{pro:'lui/lei',it:'parlerà',tr:'parlera'},{pro:'noi',it:'parleremo',tr:'parlérémo'},{pro:'voi',it:'parlerete',tr:'parléréte'},{pro:'loro',it:'parleranno',tr:'parléranno'}]},
+  {fr:'aller',inf:'andare',
+   pres:[{pro:'io',it:'vado',tr:'vado'},{pro:'tu',it:'vai',tr:'vaï'},{pro:'lui/lei',it:'va',tr:'va'},{pro:'noi',it:'andiamo',tr:'andiamo'},{pro:'voi',it:'andate',tr:'andate'},{pro:'loro',it:'vanno',tr:'vanno'}],
+   past:[{pro:'io',it:'sono andato/a',tr:'sono andato/a'},{pro:'tu',it:'sei andato/a',tr:'séï andato/a'},{pro:'lui',it:'è andato',tr:'é andato'},{pro:'lei',it:'è andata',tr:'é andata'},{pro:'noi',it:'siamo andati',tr:'siamo andati'},{pro:'voi',it:'siete andati',tr:'siété andati'},{pro:'loro',it:'sono andati',tr:'sono andati'}],
+   imperf:[{pro:'io',it:'andavo',tr:'andavo'},{pro:'tu',it:'andavi',tr:'andavi'},{pro:'lui/lei',it:'andava',tr:'andava'},{pro:'noi',it:'andavamo',tr:'andavamo'},{pro:'voi',it:'andavate',tr:'andavate'},{pro:'loro',it:'andavano',tr:'andavano'}],
+   fut:[{pro:'io',it:'andrò',tr:'andro'},{pro:'tu',it:'andrai',tr:'andraï'},{pro:'lui/lei',it:'andrà',tr:'andra'},{pro:'noi',it:'andremo',tr:'andrémo'},{pro:'voi',it:'andrete',tr:'andréte'},{pro:'loro',it:'andranno',tr:'andranno'}]},
+  {fr:'faire',inf:'fare',
+   pres:[{pro:'io',it:'faccio',tr:'fattchio'},{pro:'tu',it:'fai',tr:'faï'},{pro:'lui/lei',it:'fa',tr:'fa'},{pro:'noi',it:'facciamo',tr:'fatchiamo'},{pro:'voi',it:'fate',tr:'faté'},{pro:'loro',it:'fanno',tr:'fanno'}],
+   past:[{pro:'io',it:'ho fatto',tr:'o fatto'},{pro:'tu',it:'hai fatto',tr:'aï fatto'},{pro:'lui/lei',it:'ha fatto',tr:'a fatto'},{pro:'noi',it:'abbiamo fatto',tr:'abbiamo fatto'},{pro:'voi',it:'avete fatto',tr:'avété fatto'},{pro:'loro',it:'hanno fatto',tr:'anno fatto'}],
+   imperf:[{pro:'io',it:'facevo',tr:'fatcévo'},{pro:'tu',it:'facevi',tr:'fatcévi'},{pro:'lui/lei',it:'faceva',tr:'fatcéva'},{pro:'noi',it:'facevamo',tr:'fatcévamo'},{pro:'voi',it:'facevate',tr:'fatcévate'},{pro:'loro',it:'facevano',tr:'fatcévano'}],
+   fut:[{pro:'io',it:'farò',tr:'faro'},{pro:'tu',it:'farai',tr:'faraï'},{pro:'lui/lei',it:'farà',tr:'fara'},{pro:'noi',it:'faremo',tr:'farémo'},{pro:'voi',it:'farete',tr:'faréte'},{pro:'loro',it:'faranno',tr:'faranno'}]},
+  {fr:'venir',inf:'venire',
+   pres:[{pro:'io',it:'vengo',tr:'vengo'},{pro:'tu',it:'vieni',tr:'vieni'},{pro:'lui/lei',it:'viene',tr:'vièné'},{pro:'noi',it:'veniamo',tr:'veniamo'},{pro:'voi',it:'venite',tr:'venite'},{pro:'loro',it:'vengono',tr:'vengono'}],
+   past:[{pro:'io',it:'sono venuto/a',tr:'sono venouto/a'},{pro:'tu',it:'sei venuto/a',tr:'séï venouto/a'},{pro:'lui',it:'è venuto',tr:'é venouto'},{pro:'lei',it:'è venuta',tr:'é venouta'},{pro:'noi',it:'siamo venuti',tr:'siamo venoutï'},{pro:'voi',it:'siete venuti',tr:'siété venoutï'},{pro:'loro',it:'sono venuti',tr:'sono venoutï'}],
+   imperf:[{pro:'io',it:'venivo',tr:'venivo'},{pro:'tu',it:'venivi',tr:'venivi'},{pro:'lui/lei',it:'veniva',tr:'veniva'},{pro:'noi',it:'venivamo',tr:'venivamo'},{pro:'voi',it:'venivate',tr:'venivate'},{pro:'loro',it:'venivano',tr:'venivano'}],
+   fut:[{pro:'io',it:'verrò',tr:'vérro'},{pro:'tu',it:'verrai',tr:'vérraï'},{pro:'lui/lei',it:'verrà',tr:'vérra'},{pro:'noi',it:'verremo',tr:'vérrémo'},{pro:'voi',it:'verrete',tr:'vérréte'},{pro:'loro',it:'verranno',tr:'vérranno'}]},
+  {fr:'savoir',inf:'sapere',
+   pres:[{pro:'io',it:'so',tr:'so'},{pro:'tu',it:'sai',tr:'saï'},{pro:'lui/lei',it:'sa',tr:'sa'},{pro:'noi',it:'sappiamo',tr:'sappiamo'},{pro:'voi',it:'sapete',tr:'sapéte'},{pro:'loro',it:'sanno',tr:'sanno'}],
+   past:[{pro:'io',it:'ho saputo',tr:'o sapouto'},{pro:'tu',it:'hai saputo',tr:'aï sapouto'},{pro:'lui/lei',it:'ha saputo',tr:'a sapouto'},{pro:'noi',it:'abbiamo saputo',tr:'abbiamo sapouto'},{pro:'voi',it:'avete saputo',tr:'avété sapouto'},{pro:'loro',it:'hanno saputo',tr:'anno sapouto'}],
+   imperf:[{pro:'io',it:'sapevo',tr:'sapévo'},{pro:'tu',it:'sapevi',tr:'sapévi'},{pro:'lui/lei',it:'sapeva',tr:'sapéva'},{pro:'noi',it:'sapevamo',tr:'sapévamo'},{pro:'voi',it:'sapevate',tr:'sapévate'},{pro:'loro',it:'sapevano',tr:'sapévano'}],
+   fut:[{pro:'io',it:'saprò',tr:'sapro'},{pro:'tu',it:'saprai',tr:'sapraï'},{pro:'lui/lei',it:'saprà',tr:'sapra'},{pro:'noi',it:'sapremo',tr:'saprémo'},{pro:'voi',it:'saprete',tr:'sapréte'},{pro:'loro',it:'sapranno',tr:'sapranno'}]},
+  {fr:'pouvoir',inf:'potere',
+   pres:[{pro:'io',it:'posso',tr:'posso'},{pro:'tu',it:'puoi',tr:'pouoï'},{pro:'lui/lei',it:'può',tr:'pouo'},{pro:'noi',it:'possiamo',tr:'possiamo'},{pro:'voi',it:'potete',tr:'potéte'},{pro:'loro',it:'possono',tr:'possono'}],
+   past:[{pro:'io',it:'ho potuto',tr:'o poutouto'},{pro:'tu',it:'hai potuto',tr:'aï poutouto'},{pro:'lui/lei',it:'ha potuto',tr:'a poutouto'},{pro:'noi',it:'abbiamo potuto',tr:'abbiamo poutouto'},{pro:'voi',it:'avete potuto',tr:'avété poutouto'},{pro:'loro',it:'hanno potuto',tr:'anno poutouto'}],
+   imperf:[{pro:'io',it:'potevo',tr:'potévo'},{pro:'tu',it:'potevi',tr:'potévi'},{pro:'lui/lei',it:'poteva',tr:'potéva'},{pro:'noi',it:'potevamo',tr:'potévamo'},{pro:'voi',it:'potevate',tr:'potévate'},{pro:'loro',it:'potevano',tr:'potévano'}],
+   fut:[{pro:'io',it:'potrò',tr:'potro'},{pro:'tu',it:'potrai',tr:'potraï'},{pro:'lui/lei',it:'potrà',tr:'potra'},{pro:'noi',it:'potremo',tr:'potrémo'},{pro:'voi',it:'potrete',tr:'potréte'},{pro:'loro',it:'potranno',tr:'potranno'}]},
+  {fr:'vouloir',inf:'volere',
+   pres:[{pro:'io',it:'voglio',tr:'volio'},{pro:'tu',it:'vuoi',tr:'vouoï'},{pro:'lui/lei',it:'vuole',tr:'vouolé'},{pro:'noi',it:'vogliamo',tr:'voliamo'},{pro:'voi',it:'volete',tr:'voléte'},{pro:'loro',it:'vogliono',tr:'voliono'}],
+   past:[{pro:'io',it:'ho voluto',tr:'o volouto'},{pro:'tu',it:'hai voluto',tr:'aï volouto'},{pro:'lui/lei',it:'ha voluto',tr:'a volouto'},{pro:'noi',it:'abbiamo voluto',tr:'abbiamo volouto'},{pro:'voi',it:'avete voluto',tr:'avété volouto'},{pro:'loro',it:'hanno voluto',tr:'anno volouto'}],
+   imperf:[{pro:'io',it:'volevo',tr:'volévo'},{pro:'tu',it:'volevi',tr:'volévi'},{pro:'lui/lei',it:'voleva',tr:'voléva'},{pro:'noi',it:'volevamo',tr:'volévamo'},{pro:'voi',it:'volevate',tr:'volévate'},{pro:'loro',it:'volevano',tr:'volévano'}],
+   fut:[{pro:'io',it:'vorrò',tr:'vorro'},{pro:'tu',it:'vorrai',tr:'vorraï'},{pro:'lui/lei',it:'vorrà',tr:'vorra'},{pro:'noi',it:'vorremo',tr:'vourrémo'},{pro:'voi',it:'vorrete',tr:'vorréte'},{pro:'loro',it:'vorranno',tr:'vorranno'}]},
+  {fr:'devoir',inf:'dovere',
+   pres:[{pro:'io',it:'devo',tr:'dévo'},{pro:'tu',it:'devi',tr:'dévi'},{pro:'lui/lei',it:'deve',tr:'dévé'},{pro:'noi',it:'dobbiamo',tr:'dobbiamo'},{pro:'voi',it:'dovete',tr:'dovéte'},{pro:'loro',it:'devono',tr:'dévono'}],
+   past:[{pro:'io',it:'ho dovuto',tr:'o devouto'},{pro:'tu',it:'hai dovuto',tr:'aï devouto'},{pro:'lui/lei',it:'ha dovuto',tr:'a devouto'},{pro:'noi',it:'abbiamo dovuto',tr:'abbiamo devouto'},{pro:'voi',it:'avete dovuto',tr:'avété devouto'},{pro:'loro',it:'hanno dovuto',tr:'anno devouto'}],
+   imperf:[{pro:'io',it:'dovevo',tr:'dovévo'},{pro:'tu',it:'dovevi',tr:'dovévi'},{pro:'lui/lei',it:'doveva',tr:'dovéva'},{pro:'noi',it:'dovevamo',tr:'dovévamo'},{pro:'voi',it:'dovevate',tr:'dovévate'},{pro:'loro',it:'dovevano',tr:'dovévano'}],
+   fut:[{pro:'io',it:'dovrò',tr:'dovro'},{pro:'tu',it:'dovrai',tr:'dovraï'},{pro:'lui/lei',it:'dovrà',tr:'dovra'},{pro:'noi',it:'dovremo',tr:'dovrémo'},{pro:'voi',it:'dovrete',tr:'dovréte'},{pro:'loro',it:'dovranno',tr:'dovranno'}]},
+  {fr:'manger',inf:'mangiare',
+   pres:[{pro:'io',it:'mangio',tr:'mandjo'},{pro:'tu',it:'mangi',tr:'mandji'},{pro:'lui/lei',it:'mangia',tr:'mandja'},{pro:'noi',it:'mangiamo',tr:'mandiamo'},{pro:'voi',it:'mangiate',tr:'mandiate'},{pro:'loro',it:'mangiano',tr:'mandiano'}],
+   past:[{pro:'io',it:'ho mangiato',tr:'o mandjato'},{pro:'tu',it:'hai mangiato',tr:'aï mandjato'},{pro:'lui/lei',it:'ha mangiato',tr:'a mandjato'},{pro:'noi',it:'abbiamo mangiato',tr:'abbiamo mandjato'},{pro:'voi',it:'avete mangiato',tr:'avété mandjato'},{pro:'loro',it:'hanno mangiato',tr:'anno mandjato'}],
+   imperf:[{pro:'io',it:'mangiavo',tr:'mandjavo'},{pro:'tu',it:'mangiavi',tr:'mandjavi'},{pro:'lui/lei',it:'mangiava',tr:'mandjava'},{pro:'noi',it:'mangiavamo',tr:'mandjàvamo'},{pro:'voi',it:'mangiavate',tr:'mandjàvate'},{pro:'loro',it:'mangiavano',tr:'mandjàvano'}],
+   fut:[{pro:'io',it:'mangerò',tr:'mandjeRo'},{pro:'tu',it:'mangerai',tr:'mandjeraï'},{pro:'lui/lei',it:'mangerà',tr:'mandjera'},{pro:'noi',it:'mangeremo',tr:'mandjerémo'},{pro:'voi',it:'mangerete',tr:'mandjeréte'},{pro:'loro',it:'mangeranno',tr:'mandjeranno'}]},
+  {fr:'boire',inf:'bere',
+   pres:[{pro:'io',it:'bevo',tr:'bévo'},{pro:'tu',it:'bevi',tr:'bévi'},{pro:'lui/lei',it:'beve',tr:'bévé'},{pro:'noi',it:'beviamo',tr:'beviamo'},{pro:'voi',it:'bevete',tr:'bevéte'},{pro:'loro',it:'bevono',tr:'bévono'}],
+   past:[{pro:'io',it:'ho bevuto',tr:'o bevouto'},{pro:'tu',it:'hai bevuto',tr:'aï bevouto'},{pro:'lui/lei',it:'ha bevuto',tr:'a bevouto'},{pro:'noi',it:'abbiamo bevuto',tr:'abbiamo bevouto'},{pro:'voi',it:'avete bevuto',tr:'avété bevouto'},{pro:'loro',it:'hanno bevuto',tr:'anno bevouto'}],
+   imperf:[{pro:'io',it:'bevevo',tr:'bevévo'},{pro:'tu',it:'bevevi',tr:'bevévi'},{pro:'lui/lei',it:'beveva',tr:'bevéva'},{pro:'noi',it:'bevevamo',tr:'bevévamo'},{pro:'voi',it:'bevevate',tr:'bevévate'},{pro:'loro',it:'bevevano',tr:'bevévano'}],
+   fut:[{pro:'io',it:'berrò',tr:'bérro'},{pro:'tu',it:'berrai',tr:'bérraï'},{pro:'lui/lei',it:'berrà',tr:'bérra'},{pro:'noi',it:'berremo',tr:'bérrémo'},{pro:'voi',it:'berrete',tr:'bérréte'},{pro:'loro',it:'berranno',tr:'bérranno'}]},
+  {fr:'dormir',inf:'dormire',
+   pres:[{pro:'io',it:'dormo',tr:'dormo'},{pro:'tu',it:'dormi',tr:'dormi'},{pro:'lui/lei',it:'dorme',tr:'dormé'},{pro:'noi',it:'dormiamo',tr:'dormiamo'},{pro:'voi',it:'dormite',tr:'dormite'},{pro:'loro',it:'dormono',tr:'dormono'}],
+   past:[{pro:'io',it:'ho dormito',tr:'o dormito'},{pro:'tu',it:'hai dormito',tr:'aï dormito'},{pro:'lui/lei',it:'ha dormito',tr:'a dormito'},{pro:'noi',it:'abbiamo dormito',tr:'abbiamo dormito'},{pro:'voi',it:'avete dormito',tr:'avété dormito'},{pro:'loro',it:'hanno dormito',tr:'anno dormito'}],
+   imperf:[{pro:'io',it:'dormivo',tr:'dormivo'},{pro:'tu',it:'dormivi',tr:'dormivi'},{pro:'lui/lei',it:'dormiva',tr:'dormiva'},{pro:'noi',it:'dormivamo',tr:'dormivamo'},{pro:'voi',it:'dormivate',tr:'dormivate'},{pro:'loro',it:'dormivano',tr:'dormivano'}],
+   fut:[{pro:'io',it:'dormirò',tr:'dormiro'},{pro:'tu',it:'dormirai',tr:'dormiraï'},{pro:'lui/lei',it:'dormirà',tr:'dormira'},{pro:'noi',it:'dormiremo',tr:'dormirémo'},{pro:'voi',it:'dormirete',tr:'dormiréte'},{pro:'loro',it:'dormiranno',tr:'dormiranno'}]},
+  {fr:'travailler',inf:'lavorare',
+   pres:[{pro:'io',it:'lavoro',tr:'lavoro'},{pro:'tu',it:'lavori',tr:'lavori'},{pro:'lui/lei',it:'lavora',tr:'lavora'},{pro:'noi',it:'lavoriamo',tr:'lavoriamo'},{pro:'voi',it:'lavorate',tr:'lavorate'},{pro:'loro',it:'lavorano',tr:'lavorano'}],
+   past:[{pro:'io',it:'ho lavorato',tr:'o lavorato'},{pro:'tu',it:'hai lavorato',tr:'aï lavorato'},{pro:'lui/lei',it:'ha lavorato',tr:'a lavorato'},{pro:'noi',it:'abbiamo lavorato',tr:'abbiamo lavorato'},{pro:'voi',it:'avete lavorato',tr:'avété lavorato'},{pro:'loro',it:'hanno lavorato',tr:'anno lavorato'}],
+   imperf:[{pro:'io',it:'lavoravo',tr:'lavoravo'},{pro:'tu',it:'lavoravi',tr:'lavoravi'},{pro:'lui/lei',it:'lavorava',tr:'lavorava'},{pro:'noi',it:'lavoravamo',tr:'lavoravamo'},{pro:'voi',it:'lavoravate',tr:'lavoravate'},{pro:'loro',it:'lavoravano',tr:'lavoravano'}],
+   fut:[{pro:'io',it:'lavorerò',tr:'lavoreRo'},{pro:'tu',it:'lavorerai',tr:'lavoreraï'},{pro:'lui/lei',it:'lavorerà',tr:'lavorera'},{pro:'noi',it:'lavoreremo',tr:'lavorerémo'},{pro:'voi',it:'lavorerete',tr:'lavoreréte'},{pro:'loro',it:'lavoreranno',tr:'lavoreranno'}]},
+  {fr:'étudier',inf:'studiare',
+   pres:[{pro:'io',it:'studio',tr:'stoudio'},{pro:'tu',it:'studi',tr:'stoudi'},{pro:'lui/lei',it:'studia',tr:'stoudia'},{pro:'noi',it:'studiamo',tr:'stoudiamo'},{pro:'voi',it:'studiate',tr:'stoudiate'},{pro:'loro',it:'studiano',tr:'stoudiano'}],
+   past:[{pro:'io',it:'ho studiato',tr:'o stoudiato'},{pro:'tu',it:'hai studiato',tr:'aï stoudiato'},{pro:'lui/lei',it:'ha studiato',tr:'a stoudiato'},{pro:'noi',it:'abbiamo studiato',tr:'abbiamo stoudiato'},{pro:'voi',it:'avete studiato',tr:'avété stoudiato'},{pro:'loro',it:'hanno studiato',tr:'anno stoudiato'}],
+   imperf:[{pro:'io',it:'studiavo',tr:'stoudiavo'},{pro:'tu',it:'studiavi',tr:'stoudiavi'},{pro:'lui/lei',it:'studiava',tr:'stoudiava'},{pro:'noi',it:'studiavamo',tr:'stoudiavamo'},{pro:'voi',it:'studiavate',tr:'stoudiavate'},{pro:'loro',it:'studiavano',tr:'stoudiavano'}],
+   fut:[{pro:'io',it:'studierò',tr:'stoudieRo'},{pro:'tu',it:'studierai',tr:'stoudieraï'},{pro:'lui/lei',it:'studierà',tr:'stoudiera'},{pro:'noi',it:'studieremo',tr:'stoudierémo'},{pro:'voi',it:'studierete',tr:'stoudieréte'},{pro:'loro',it:'studieranno',tr:'stoudieranno'}]},
+  {fr:'comprendre',inf:'capire',
+   pres:[{pro:'io',it:'capisco',tr:'kapisko'},{pro:'tu',it:'capisci',tr:'kapishi'},{pro:'lui/lei',it:'capisce',tr:'kapishe'},{pro:'noi',it:'capiamo',tr:'kapiamo'},{pro:'voi',it:'capite',tr:'kapite'},{pro:'loro',it:'capiscono',tr:'kapiskono'}],
+   past:[{pro:'io',it:'ho capito',tr:'o kapito'},{pro:'tu',it:'hai capito',tr:'aï kapito'},{pro:'lui/lei',it:'ha capito',tr:'a kapito'},{pro:'noi',it:'abbiamo capito',tr:'abbiamo kapito'},{pro:'voi',it:'avete capito',tr:'avété kapito'},{pro:'loro',it:'hanno capito',tr:'anno kapito'}],
+   imperf:[{pro:'io',it:'capivo',tr:'kapivo'},{pro:'tu',it:'capivi',tr:'kapivi'},{pro:'lui/lei',it:'capiva',tr:'kapiva'},{pro:'noi',it:'capivamo',tr:'kapivamo'},{pro:'voi',it:'capivate',tr:'kapivate'},{pro:'loro',it:'capivano',tr:'kapivano'}],
+   fut:[{pro:'io',it:'capirò',tr:'kapiro'},{pro:'tu',it:'capirai',tr:'kapiraï'},{pro:'lui/lei',it:'capirà',tr:'kapira'},{pro:'noi',it:'capiremo',tr:'kapirémo'},{pro:'voi',it:'capirete',tr:'kapiréte'},{pro:'loro',it:'capiranno',tr:'kapiranno'}]},
+  {fr:'voir',inf:'vedere',
+   pres:[{pro:'io',it:'vedo',tr:'védo'},{pro:'tu',it:'vedi',tr:'védi'},{pro:'lui/lei',it:'vede',tr:'védé'},{pro:'noi',it:'vediamo',tr:'vediamo'},{pro:'voi',it:'vedete',tr:'vedéte'},{pro:'loro',it:'vedono',tr:'védono'}],
+   past:[{pro:'io',it:'ho visto',tr:'o visto'},{pro:'tu',it:'hai visto',tr:'aï visto'},{pro:'lui/lei',it:'ha visto',tr:'a visto'},{pro:'noi',it:'abbiamo visto',tr:'abbiamo visto'},{pro:'voi',it:'avete visto',tr:'avété visto'},{pro:'loro',it:'hanno visto',tr:'anno visto'}],
+   imperf:[{pro:'io',it:'vedevo',tr:'vedévo'},{pro:'tu',it:'vedevi',tr:'vedévi'},{pro:'lui/lei',it:'vedeva',tr:'vedéva'},{pro:'noi',it:'vedevamo',tr:'vedévamo'},{pro:'voi',it:'vedevate',tr:'vedévate'},{pro:'loro',it:'vedevano',tr:'vedévano'}],
+   fut:[{pro:'io',it:'vedrò',tr:'védro'},{pro:'tu',it:'vedrai',tr:'védraï'},{pro:'lui/lei',it:'vedrà',tr:'védra'},{pro:'noi',it:'vedremo',tr:'védrémo'},{pro:'voi',it:'vedrete',tr:'védréte'},{pro:'loro',it:'vedranno',tr:'védranno'}]},
+  {fr:'dire',inf:'dire',
+   pres:[{pro:'io',it:'dico',tr:'diko'},{pro:'tu',it:'dici',tr:'ditchi'},{pro:'lui/lei',it:'dice',tr:'ditché'},{pro:'noi',it:'diciamo',tr:'ditchiamo'},{pro:'voi',it:'dite',tr:'dite'},{pro:'loro',it:'dicono',tr:'dikono'}],
+   past:[{pro:'io',it:'ho detto',tr:'o detto'},{pro:'tu',it:'hai detto',tr:'aï detto'},{pro:'lui/lei',it:'ha detto',tr:'a detto'},{pro:'noi',it:'abbiamo detto',tr:'abbiamo detto'},{pro:'voi',it:'avete detto',tr:'avété detto'},{pro:'loro',it:'hanno detto',tr:'anno detto'}],
+   imperf:[{pro:'io',it:'dicevo',tr:'ditchévo'},{pro:'tu',it:'dicevi',tr:'ditchévi'},{pro:'lui/lei',it:'diceva',tr:'ditchéva'},{pro:'noi',it:'dicevamo',tr:'ditchévamo'},{pro:'voi',it:'dicevate',tr:'ditchévate'},{pro:'loro',it:'dicevano',tr:'ditchévano'}],
+   fut:[{pro:'io',it:'dirò',tr:'diro'},{pro:'tu',it:'dirai',tr:'diraï'},{pro:'lui/lei',it:'dirà',tr:'dira'},{pro:'noi',it:'diremo',tr:'dirémo'},{pro:'voi',it:'direte',tr:'diréte'},{pro:'loro',it:'diranno',tr:'diranno'}]},
+  {fr:'prendre',inf:'prendere',
+   pres:[{pro:'io',it:'prendo',tr:'prendo'},{pro:'tu',it:'prendi',tr:'prendi'},{pro:'lui/lei',it:'prende',tr:'prende'},{pro:'noi',it:'prendiamo',tr:'prendiamo'},{pro:'voi',it:'prendete',tr:'prende&te'},{pro:'loro',it:'prendono',tr:'prendono'}],
+   past:[{pro:'io',it:'ho preso',tr:'o prézo'},{pro:'tu',it:'hai preso',tr:'aï prézo'},{pro:'lui/lei',it:'ha preso',tr:'a prézo'},{pro:'noi',it:'abbiamo preso',tr:'abbiamo prézo'},{pro:'voi',it:'avete preso',tr:'avété prézo'},{pro:'loro',it:'hanno preso',tr:'anno prézo'}],
+   imperf:[{pro:'io',it:'prendevo',tr:'prende&vo'},{pro:'tu',it:'prendevi',tr:'prende&vi'},{pro:'lui/lei',it:'prendeva',tr:'prende&va'},{pro:'noi',it:'prendevamo',tr:'prende&vamo'},{pro:'voi',it:'prendevate',tr:'prende&vate'},{pro:'loro',it:'prendevano',tr:'prende&vano'}],
+   fut:[{pro:'io',it:'prenderò',tr:'prendeRo'},{pro:'tu',it:'prenderai',tr:'prenderaï'},{pro:'lui/lei',it:'prenderà',tr:'prendera'},{pro:'noi',it:'prenderemo',tr:'prenderémo'},{pro:'voi',it:'prenderete',tr:'prenderéte'},{pro:'loro',it:'prenderanno',tr:'prenderanno'}]},
+  {fr:'aimer',inf:'amare',
+   pres:[{pro:'io',it:'amo',tr:'amo'},{pro:'tu',it:'ami',tr:'ami'},{pro:'lui/lei',it:'ama',tr:'ama'},{pro:'noi',it:'amiamo',tr:'amiamo'},{pro:'voi',it:'amate',tr:'amate'},{pro:'loro',it:'amano',tr:'amano'}],
+   past:[{pro:'io',it:'ho amato',tr:'o amato'},{pro:'tu',it:'hai amato',tr:'aï amato'},{pro:'lui/lei',it:'ha amato',tr:'a amato'},{pro:'noi',it:'abbiamo amato',tr:'abbiamo amato'},{pro:'voi',it:'avete amato',tr:'avété amato'},{pro:'loro',it:'hanno amato',tr:'anno amato'}],
+   imperf:[{pro:'io',it:'amavo',tr:'amavo'},{pro:'tu',it:'amavi',tr:'amavi'},{pro:'lui/lei',it:'amava',tr:'amava'},{pro:'noi',it:'amavamo',tr:'amavamo'},{pro:'voi',it:'amavate',tr:'amavate'},{pro:'loro',it:'amavano',tr:'amavano'}],
+   fut:[{pro:'io',it:'amerò',tr:'améRo'},{pro:'tu',it:'amerai',tr:'améraï'},{pro:'lui/lei',it:'amerà',tr:'améra'},{pro:'noi',it:'ameremo',tr:'amérémo'},{pro:'voi',it:'amerete',tr:'améréte'},{pro:'loro',it:'ameranno',tr:'améranno'}]},
+  {fr:'habiter / vivre',inf:'abitare / vivere',
+   pres:[{pro:'io',it:'abito / vivo',tr:'abito / vivo'},{pro:'tu',it:'abiti / vivi',tr:'abiti / vivi'},{pro:'lui/lei',it:'abita / vive',tr:'abita / vivé'},{pro:'noi',it:'abitiamo / viviamo',tr:'abitiamo / viviamo'},{pro:'voi',it:'abitate / vivete',tr:'abitate / vivéte'},{pro:'loro',it:'abitano / vivono',tr:'abitano / vivono'}],
+   past:[{pro:'io',it:'ho abitato / vissuto',tr:'o abitato / vissouto'},{pro:'tu',it:'hai abitato',tr:'aï abitato'},{pro:'lui/lei',it:'ha vissuto',tr:'a vissouto'},{pro:'noi',it:'abbiamo vissuto',tr:'abbiamo vissouto'},{pro:'voi',it:'avete vissuto',tr:'avété vissouto'},{pro:'loro',it:'hanno vissuto',tr:'anno vissouto'}],
+   imperf:[{pro:'io',it:'abitavo / vivevo',tr:'abitavo / vivévo'},{pro:'tu',it:'abitavi / vivevi',tr:'abitavi / vivévi'},{pro:'lui/lei',it:'abitava / viveva',tr:'abitava / vivéva'},{pro:'noi',it:'abitavamo',tr:'abitavamo'},{pro:'voi',it:'abitavate',tr:'abitavate'},{pro:'loro',it:'abitavano',tr:'abitavano'}],
+   fut:[{pro:'io',it:'abiterò',tr:'abiteRo'},{pro:'tu',it:'abiterai',tr:'abiteraï'},{pro:'lui/lei',it:'abiterà',tr:'abitera'},{pro:'noi',it:'abiteremo',tr:'abiterémo'},{pro:'voi',it:'abiterete',tr:'abiteréte'},{pro:'loro',it:'abiteranno',tr:'abiteranno'}]},
+];
+
+
+// ── GRAMMAIRE ──────────────────────────────────────────
+const GRAM=[
+  {cat:'Articles',icon:'📰',lvl:'a1',title:'Les articles définis (il, la, i, le...)',
+   rule:'En italien, l\'article défini change selon le genre, le nombre et la première lettre du nom. C\'est différent du français car il y a plus de formes.',
+   table:{heads:['Genre','Singulier','Pluriel','Quand ?'],rows:[
+     ['Masc. (consonne)','il (il libro)','i (i libri)','Devant consonne normale'],
+     ['Masc. (s+cons, z, ps...)','lo (lo zaino)','gli (gli zaini)','Devant s+consonne, z, ps, gn'],
+     ['Masc. (voyelle)','l\' (l\'amico)','gli (gli amici)','Devant voyelle'],
+     ['Fém. (consonne)','la (la casa)','le (le case)','Devant consonne'],
+     ['Fém. (voyelle)','l\' (l\'amica)','le (le amiche)','Devant voyelle'],
+   ]},
+   tip:'💡 Astuce : lo et gli sont les plus spéciaux. Si le mot commence par z, s+cons, gn, ps, x, y → utilisez lo/gli !',
+   examples:[
+     {it:'Il ragazzo mangia la pizza.',tr:'Il radjazo mandia la pittsa.',fr:'Le garçon mange la pizza.'},
+     {it:'Gli studenti studiano l\'italiano.',tr:'Li stoudenti stoudiano litaliano.',fr:'Les étudiants étudient l\'italien.'},
+   ]},
+  {cat:'Articles',icon:'📝',lvl:'a1',title:'Les articles indéfinis (un, una, uno)',
+   rule:'L\'article indéfini change selon le genre et la lettre initiale du nom. Plus simple que l\'article défini car pas de pluriel.',
+   table:{heads:['Genre','Forme','Quand ?','Exemple'],rows:[
+     ['Masculin','un','Devant voyelle ou consonne normale','un libro, un amico'],
+     ['Masculin','uno','Devant s+cons, z, gn, ps','uno zaino, uno studente'],
+     ['Féminin','una','Devant consonne','una casa, una pizza'],
+     ['Féminin','un\'','Devant voyelle','un\'amica, un\'ora'],
+   ]},
+   tip:'💡 Il n\'y a pas d\'article indéfini pluriel en italien. Pour exprimer "des livres" on dit juste "libri" ou on ajoute "dei/delle" (partitif).',
+   examples:[
+     {it:'Ho un gatto e una cane.',tr:'O oun gatto é ouna kané.',fr:'J\'ai un chat et un chien.'},
+     {it:'Voglio uno zaino nuovo.',tr:'Volio ouno dzaïno nouovo.',fr:'Je veux un nouveau sac à dos.'},
+   ]},
+  {cat:'Genre',icon:'♂♀',lvl:'a1',title:'Le genre des noms (masculin / féminin)',
+   rule:'En italien, tous les noms ont un genre. En général : les noms en -o sont masculins, les noms en -a sont féminins. Mais attention aux exceptions !',
+   table:{heads:['Terminaison','Genre','Exemples','Pluriel'],rows:[
+     ['-o','Masculin','libro, ragazzo, gatto','→ libri, ragazzi, gatti'],
+     ['-a','Féminin','casa, ragazza, pizza','→ case, ragazze, pizze'],
+     ['-e','Masculin ou Féminin','nome (m), notte (f)','→ nomi, notti'],
+     ['-ione','-ione','Féminin','nazione, stazione','→ nazioni, stazioni'],
+     ['-ore','-ore','Masculin','dottore, colore','→ dottori, colori'],
+   ]},
+   tip:'💡 Exceptions courantes : il problema (masc.), la mano (fém.), il cinema (masc.). Apprenez toujours le nom avec son article !',
+   examples:[
+     {it:'Il ragazzo e la ragazza.',tr:'Il radjazo é la radjattsa.',fr:'Le garçon et la fille.'},
+     {it:'Il libro è sul tavolo.',tr:'Il libro é soul tavolo.',fr:'Le livre est sur la table.'},
+   ]},
+  {cat:'Genre',icon:'🔄',lvl:'a1',title:'Le pluriel des noms',
+   rule:'Le pluriel en italien est régulier dans la plupart des cas. Il suit les terminaisons du singulier.',
+   table:{heads:['Singulier','Pluriel','Exemple'],rows:[
+     ['-o (masc.)','→ -i','libro → libri'],
+     ['-a (fém.)','→ -e','casa → case'],
+     ['-e (masc./fém.)','→ -i','nome → nomi, notte → notti'],
+     ['-ca / -ga','→ -che / -ghe','amica → amiche, collega → colleghe'],
+     ['-co / -go','→ -chi / -ghi (dur) ou -ci / -gi (doux)','banco → banchi, amico → amici'],
+     ['Accent final','invariable','caffè → caffè, città → città'],
+   ]},
+   tip:'💡 Les mots empruntés comme sport, bar, film, computer ne changent pas au pluriel.',
+   examples:[
+     {it:'Un libro → due libri',tr:'Oun libro → doué libri',fr:'Un livre → deux livres'},
+     {it:'Una casa → molte case',tr:'Ouna kasa → molté kazé',fr:'Une maison → beaucoup de maisons'},
+   ]},
+  {cat:'Accord',icon:'✅',lvl:'a1',title:'L\'accord des adjectifs',
+   rule:'En italien, les adjectifs s\'accordent en genre et en nombre avec le nom. Ils se placent généralement après le nom (contrairement au français).',
+   table:{heads:['Type','Masc. sg.','Fém. sg.','Masc. pl.','Fém. pl.'],rows:[
+     ['Adj. en -o','bello','bella','belli','belle'],
+     ['Adj. en -e','grande','grande','grandi','grandi'],
+     ['Adj. en -ore','migliore','migliore','migliori','migliori'],
+   ]},
+   tip:'💡 Bello, buono, quello ont des formes spéciales devant le nom (comme l\'article) : bel, bell\', bello, bei, begli, belle.',
+   examples:[
+     {it:'Un ragazzo alto e una ragazza alta.',tr:'Oun radjattso alto é ouna radjattsa alta.',fr:'Un garçon grand et une fille grande.'},
+     {it:'Libri interessanti.',tr:'Libri interessanti.',fr:'Des livres intéressants.'},
+   ]},
+  {cat:'Verbes',icon:'⏰',lvl:'a1',title:'Le présent de l\'indicatif',
+   rule:'Les verbes italiens ont 3 conjugaisons selon leur infinitif : -are (parlare), -ere (vedere), -ire (dormire). Chaque conjugaison a ses terminaisons au présent.',
+   table:{heads:['Pronom','parlare (-are)','vedere (-ere)','dormire (-ire)','capire (-ire+isc)'],rows:[
+     ['io','parlo','vedo','dormo','capisco'],
+     ['tu','parli','vedi','dormi','capisci'],
+     ['lui/lei','parla','vede','dorme','capisce'],
+     ['noi','parliamo','vediamo','dormiamo','capiamo'],
+     ['voi','parlate','vedete','dormite','capite'],
+     ['loro','parlano','vedono','dormono','capiscono'],
+   ]},
+   tip:'💡 Beaucoup de verbes en -ire ajoutent -isc- entre le radical et la terminaison (capire, finire, preferire). Mémorisez-les !',
+   examples:[
+     {it:'Io parlo italiano e francese.',tr:'Io parlo italiano é frantchéze.',fr:'Je parle italien et français.'},
+     {it:'Loro capiscono tutto.',tr:'Loro kapiskono toutto.',fr:'Ils comprennent tout.'},
+   ]},
+  {cat:'Verbes',icon:'📅',lvl:'a2',title:'Le passé composé (passato prossimo)',
+   rule:'Le passé composé (passato prossimo) se forme avec : avoir (avere) ou être (essere) au présent + participe passé. Le choix entre essere et avere est important !',
+   table:{heads:['Auxiliaire','Quand l\'utiliser ?','Exemples de verbes'],rows:[
+     ['avere (ho, hai...)','Verbes transitifs (avec objet direct)','mangiare, vedere, fare, dire, prendere'],
+     ['essere (sono, sei...)','Verbes de mouvement et changement d\'état','andare, venire, partire, arrivare, nascere, morire'],
+     ['essere','Verbes réfléchis','alzarsi, lavarsi, vestirsi'],
+     ['essere','Essere et stare','essere, stare'],
+   ]},
+   tip:'💡 Avec essere, le participe passé s\'accorde : andato/andata/andati/andate. Avec avere, pas d\'accord en général.',
+   examples:[
+     {it:'Ho mangiato la pizza. (avere)',tr:'O mandjato la pittsa.',fr:'J\'ai mangé la pizza.'},
+     {it:'Sono andato a Roma. (essere)',tr:'Sono andato a Roma.',fr:'Je suis allé à Rome.'},
+     {it:'Maria è partita ieri. (essere + accord)',tr:'Maria é partita iéri.',fr:'Maria est partie hier.'},
+   ]},
+  {cat:'Verbes',icon:'🌊',lvl:'b1',title:'L\'imparfait (imperfetto)',
+   rule:'L\'imparfait exprime une action passée habituelle, répétée, ou un état dans le passé. Il s\'oppose au passé composé qui exprime une action ponctuelle, terminée.',
+   table:{heads:['Pronom','parlare','avere','essere'],rows:[
+     ['io','parlavo','avevo','ero'],
+     ['tu','parlavi','avevi','eri'],
+     ['lui/lei','parlava','aveva','era'],
+     ['noi','parlavamo','avevamo','eravamo'],
+     ['voi','parlavate','avevate','eravate'],
+     ['loro','parlavano','avevano','erano'],
+   ]},
+   tip:'💡 Règle d\'or : imparfait = habitude ou état (da bambino andavo...). Passé composé = action précise terminée (ieri sono andato...).',
+   examples:[
+     {it:'Da bambino mangiavo sempre la pasta.',tr:'Da bambino mandjavo sempre la pasta.',fr:'Quand j\'étais petit, je mangeais toujours des pâtes.'},
+     {it:'Mentre dormivo, lui lavorava.',tr:'Mèntré dormivo, louï lavorava.',fr:'Pendant que je dormais, il travaillait.'},
+   ]},
+  {cat:'Verbes',icon:'🔮',lvl:'a2',title:'Le futur simple (futuro semplice)',
+   rule:'Le futur simple exprime une action future. Il se forme sur le radical de l\'infinitif (sans le -e final) + terminaisons.',
+   table:{heads:['Pronom','Terminaison','-are (parlare)','-ere (vedere)','-ire (dormire)'],rows:[
+     ['io','-ò','parlerò','vedrò','dormirò'],
+     ['tu','-ai','parlerai','vedrai','dormirai'],
+     ['lui/lei','-à','parlerà','vedrà','dormirà'],
+     ['noi','-emo','parleremo','vedremo','dormiremo'],
+     ['voi','-ete','parlerete','vedrete','dormirete'],
+     ['loro','-anno','parleranno','vedranno','dormiranno'],
+   ]},
+   tip:'💡 Attention aux irréguliers : essere → sarò, avere → avrò, fare → farò, andare → andrò, venire → verrò, potere → potrò, volere → vorrò, dovere → dovrò.',
+   examples:[
+     {it:'Domani andrò al cinema.',tr:'Domani andro al tchénéma.',fr:'Demain j\'irai au cinéma.'},
+     {it:'L\'anno prossimo studierò in Italia.',tr:'Lanno prossimo stoudiero in Italia.',fr:'L\'année prochaine j\'étudierai en Italie.'},
+   ]},
+  {cat:'Pronoms',icon:'👤',lvl:'a1',title:'Les pronoms sujets',
+   rule:'En italien, les pronoms sujets peuvent souvent être omis car la terminaison du verbe indique déjà la personne. On les utilise pour insister ou clarifier.',
+   table:{heads:['Pronom','Italien','Utilisation'],rows:[
+     ['je','io','Toujours minuscule (sauf début de phrase)'],
+     ['tu','tu','Informel — amis, famille'],
+     ['il / elle','lui / lei','Même forme pour masc. et fém.'],
+     ['vous (formel)','Lei','Majuscule ! Comme "elle" mais formel'],
+     ['nous','noi','Normal'],
+     ['vous (pluriel)','voi','Pluriel informel'],
+     ['ils / elles','loro','Pour personnes et objets'],
+   ]},
+   tip:'💡 En pratique : "Mangio" suffit pour dire "je mange". On dit "Io mangio" seulement pour insister : "C\'est MOI qui mange".',
+   examples:[
+     {it:'Parlo italiano. (io implicite)',tr:'Parlo italiano.',fr:'Je parle italien. (io implicite)'},
+     {it:'Lei è professoressa? (Lei formel)',tr:'Léï é professorressa?',fr:'Vous êtes professeure ? (Lei formel)'},
+   ]},
+  {cat:'Pronoms',icon:'🔄',lvl:'a2',title:'Les pronoms directs et indirects',
+   rule:'Les pronoms compléments remplacent un nom. En italien, ils se placent AVANT le verbe conjugué (sauf à l\'impératif et à l\'infinitif).',
+   table:{heads:['Personne','Pronom direct (COD)','Pronom indirect (COI)','Exemple'],rows:[
+     ['io','mi','mi','Mi vede. / Mi parla.'],
+     ['tu','ti','ti','Ti chiamo. / Ti scrivo.'],
+     ['lui','lo','gli','Lo vedo. / Gli parlo.'],
+     ['lei','la','le','La saluto. / Le scrivo.'],
+     ['noi','ci','ci','Ci vede. / Ci scrive.'],
+     ['voi','vi','vi','Vi chiamo. / Vi mando.'],
+     ['loro','li / le','loro','Li vedo. / Le saluto.'],
+   ]},
+   tip:'💡 Direct = remplace l\'objet direct (vedo Mario → lo vedo). Indirect = remplace l\'objet avec "a" (parlo a Mario → gli parlo).',
+   examples:[
+     {it:'Lo vedo ogni giorno.',tr:'Lo védo oni djorno.',fr:'Je le vois chaque jour.'},
+     {it:'Gli ho detto la verità.',tr:'Li o detto la verita.',fr:'Je lui ai dit la vérité.'},
+   ]},
+  {cat:'Grammaire',icon:'❓',lvl:'a1',title:'Poser des questions en italien',
+   rule:'En italien, on peut poser une question simplement en changeant l\'intonation (voix qui monte) ou en utilisant des mots interrogatifs.',
+   table:{heads:['Français','Italien','Prononciation','Exemple'],rows:[
+     ['où ?','dove ?','dové','Dove sei?'],
+     ['quand ?','quando ?','kouando','Quando arrivi?'],
+     ['pourquoi ?','perché ?','pérké','Perché piangi?'],
+     ['comment ?','come ?','komé','Come stai?'],
+     ['combien ?','quanto/a ?','kouanto','Quanto costa?'],
+     ['qui ?','chi ?','ki','Chi sei?'],
+     ['que / quoi ?','che cosa ?','ké koza','Che cosa vuoi?'],
+     ['quel / quelle ?','quale ?','kouale','Quale preferisci?'],
+   ]},
+   tip:'💡 Contrairement au français, on n\'inverse pas le sujet et le verbe : "Parli italiano?" = "Tu parles italien ?" (intonation montante).',
+   examples:[
+     {it:'Dove abiti?',tr:'Dové abiti?',fr:'Où habites-tu ?'},
+     {it:'Quanti anni hai?',tr:'Kouanti anni aï?',fr:'Quel âge as-tu ?'},
+     {it:'Perché studi l\'italiano?',tr:'Pérké stoudi litaliano?',fr:'Pourquoi étudies-tu l\'italien ?'},
+   ]},
+];
+
+
+// ── DICTIONNAIRE TRADUCTION FR→IT ──────────────────────
+const TRAD_DB={
+  phrases:{
+    'bonjour':'ciao / buongiorno','bonsoir':'buonasera','bonne nuit':'buonanotte',
+    'merci':'grazie','merci beaucoup':'grazie mille','de rien':'prego',
+    's\'il vous plaît':'per favore','excusez-moi':'scusi','pardon':'mi scusi',
+    'je suis désolé':'mi dispiace','comment tu vas':'come stai','ça va bien':'sto bene',
+    'au revoir':'arrivederci / ciao','à bientôt':'a presto','bienvenu':'benvenuto',
+    'je t\'aime':'ti amo','je vous aime':'vi voglio bene','bonne chance':'in bocca al lupo',
+    'félicitations':'congratulazioni','joyeux anniversaire':'buon compleanno',
+    'bonne année':'buon anno','joyeux noël':'buon natale',
+    'je ne comprends pas':'non capisco','parlez plus lentement':'parli più lentamente',
+    'je ne parle pas bien italien':'non parlo bene l\'italiano',
+    'où est la gare':'dov\'è la stazione','où est l\'hôtel':'dov\'è l\'albergo',
+    'où est la pharmacie':'dov\'è la farmacia','c\'est combien':'quanto costa',
+    'c\'est trop cher':'è troppo caro','l\'addition':'il conto',
+    'j\'ai faim':'ho fame','j\'ai soif':'ho sete','j\'ai froid':'ho freddo',
+    'j\'ai chaud':'ho caldo','j\'ai mal à la tête':'ho mal di testa',
+    'je suis fatigué':'sono stanco','je suis content':'sono contento',
+    'je suis triste':'sono triste','je suis malade':'sono malato',
+    'au secours':'aiuto','appelez la police':'chiami la polizia',
+    'il y a':'c\'è / ci sono','il n\'y a pas':'non c\'è',
+    'il faut':'bisogna / occorre','on peut':'si può',
+    'bien sûr':'certo / certamente','peut-être':'forse',
+    'malheureusement':'purtroppo','heureusement':'per fortuna',
+    'à mon avis':'secondo me','je suis d\'accord':'sono d\'accordo',
+    'je ne suis pas d\'accord':'non sono d\'accordo',
+    'c\'est délicieux':'è delizioso','c\'est magnifique':'è magnifico',
+    'bonne journée':'buona giornata','bon week-end':'buon fine settimana',
+  },
+  mots:{
+    // Articles & pronoms
+    'le':'il / lo','la':'la','les':'i / gli / le','un':'un / uno','une':'una',
+    'ce':'questo','cette':'questa','ces':'questi / queste',
+    'mon':'mio','ma':'mia','mes':'miei / mie','ton':'tuo','ta':'tua',
+    'son':'suo / sua','leur':'loro','notre':'nostro / nostra',
+    // Prépositions
+    'et':'e','ou':'o','mais':'ma','parce que':'perché','donc':'quindi',
+    'si':'se','quand':'quando','aussi':'anche','encore':'ancora',
+    'déjà':'già','seulement':'solo','même':'anche / pure','très':'molto',
+    'trop':'troppo','assez':'abbastanza','peu':'poco','beaucoup':'molto / tanti',
+    'plus':'più','moins':'meno','presque':'quasi','vraiment':'davvero',
+    'dans':'in / dentro','sur':'su','sous':'sotto','entre':'tra / fra',
+    'devant':'davanti','derrière':'dietro','avec':'con','sans':'senza',
+    'pour':'per','contre':'contro','ici':'qui','là':'lì',
+    // Verbes courants
+    'être':'essere','avoir':'avere','faire':'fare','aller':'andare',
+    'venir':'venire','voir':'vedere','savoir':'sapere','vouloir':'volere',
+    'pouvoir':'potere','devoir':'dovere','parler':'parlare','écouter':'ascoltare',
+    'lire':'leggere','écrire':'scrivere','manger':'mangiare','boire':'bere',
+    'dormir':'dormire','travailler':'lavorare','étudier':'studiare',
+    'comprendre':'capire','aimer':'amare / piacere','habiter':'abitare',
+    'acheter':'comprare','vendre':'vendere','payer':'pagare',
+    'chercher':'cercare','trouver':'trovare','perdre':'perdere',
+    'commencer':'cominciare / iniziare','finir':'finire',
+    'attendre':'aspettare','aider':'aiutare','demander':'chiedere',
+    'répondre':'rispondere','penser':'pensare','croire':'credere',
+    'oublier':'dimenticare','se souvenir':'ricordare','expliquer':'spiegare',
+    'rire':'ridere','pleurer':'piangere','chanter':'cantare','danser':'ballare',
+    'jouer':'giocare','courir':'correre','marcher':'camminare',
+    'appeler':'chiamare','envoyer':'mandare','recevoir':'ricevere',
+    'sortir':'uscire','entrer':'entrare','rentrer':'tornare','partir':'partire',
+    'arriver':'arrivare','voyager':'viaggiare','visiter':'visitare',
+    'cuisiner':'cucinare','nettoyer':'pulire','laver':'lavare',
+    'se lever':'alzarsi','se coucher':'andare a letto','se réveiller':'svegliarsi',
+    // Adjectifs
+    'grand':'grande','petit':'piccolo','beau':'bello','bonne':'buono',
+    'nouveau':'nuovo','vieux':'vecchio','jeune':'giovane','rapide':'veloce',
+    'lent':'lento','fort':'forte','faible':'debole','cher':'caro',
+    'difficile':'difficile','facile':'facile','important':'importante',
+    'propre':'pulito','sale':'sporco','plein':'pieno','vide':'vuoto',
+    'ouvert':'aperto','fermé':'chiuso','froid':'freddo','chaud':'caldo',
+    'chaud (agréable)':'caldo / tiepido','frais':'fresco',
+    'fatigué':'stanco','content':'contento','triste':'triste',
+    'intéressant':'interessante','ennuyeux':'noioso','sympa':'simpatico',
+    // Couleurs
+    'rouge':'rosso','bleu':'blu / azzurro','vert':'verde','jaune':'giallo',
+    'orange':'arancione','violet':'viola','rose':'rosa','noir':'nero',
+    'blanc':'bianco','gris':'grigio','marron':'marrone','beige':'beige',
+    // Chiffres
+    'zéro':'zero','un':'uno','deux':'due','trois':'tre','quatre':'quattro',
+    'cinq':'cinque','six':'sei','sept':'sette','huit':'otto','neuf':'nove',
+    'dix':'dieci','vingt':'venti','cent':'cento','mille':'mille',
+    // Corps
+    'tête':'testa','yeux':'occhi','nez':'naso','bouche':'bocca',
+    'oreille':'orecchio','main':'mano','bras':'braccio','jambe':'gamba',
+    'pied':'piede','dos':'schiena','ventre':'pancia','cœur':'cuore',
+    // Lieux
+    'maison':'casa','ville':'città','rue':'strada','école':'scuola',
+    'hôpital':'ospedale','pharmacie':'farmacia','restaurant':'ristorante',
+    'hôtel':'albergo','gare':'stazione','aéroport':'aeroporto','banque':'banca',
+    'église':'chiesa','musée':'museo','parc':'parco','plage':'spiaggia',
+    'marché':'mercato','magasin':'negozio','supermarché':'supermercato',
+    // Nourriture
+    'eau':'acqua','pain':'pane','café':'caffè','thé':'tè','lait':'latte',
+    'viande':'carne','poisson':'pesce','œuf':'uovo','fromage':'formaggio',
+    'sel':'sale','sucre':'zucchero','riz':'riso','pâtes':'pasta',
+    'pizza':'pizza','glace':'gelato','vin':'vino','bière':'birra',
+    'petit-déjeuner':'colazione','déjeuner':'pranzo','dîner':'cena',
+    // Famille
+    'père':'padre / papà','mère':'madre / mamma','frère':'fratello',
+    'sœur':'sorella','fils':'figlio','fille':'figlia','enfant':'bambino',
+    'grand-père':'nonno','grand-mère':'nonna','ami':'amico',
+    'mari':'marito','femme':'moglie',
+    // Temps
+    'aujourd\'hui':'oggi','demain':'domani','hier':'ieri','maintenant':'adesso',
+    'toujours':'sempre','jamais':'mai','souvent':'spesso','parfois':'a volte',
+    'minute':'minuto','heure':'ora','jour':'giorno','semaine':'settimana',
+    'mois':'mese','année':'anno','lundi':'lunedì','mardi':'martedì',
+    'mercredi':'mercoledì','jeudi':'giovedì','vendredi':'venerdì',
+    'samedi':'sabato','dimanche':'domenica','printemps':'primavera',
+    'été':'estate','automne':'autunno','hiver':'inverno',
+    // Questions
+    'où':'dove','quand':'quando','pourquoi':'perché','comment':'come',
+    'combien':'quanto','qui':'chi','que / quoi':'cosa',
+    // Directions
+    'à gauche':'a sinistra','à droite':'a destra','tout droit':'sempre dritto',
+    'ici':'qui','là-bas':'lì','près':'vicino','loin':'lontano',
+    'devant':'davanti','derrière':'dietro','nord':'nord','sud':'sud',
+  }
+};
+
+function smartTranslate(input){
+  const low=input.toLowerCase().trim().replace(/[?!.,;:]/g,'');
+  if(TRAD_DB.phrases[low]) return {it:TRAD_DB.phrases[low],note:'Phrase complète'};
+  if(TRAD_DB.mots[low]) return {it:TRAD_DB.mots[low],note:'Mot'};
+  // Cherche dans VOCAB
+  const vEx=VOCAB.find(w=>w.fr.toLowerCase()===low);
+  if(vEx) return {it:vEx.it,note:'Vocabulaire · '+vEx.cat};
+  const pEx=PHRASES.find(p=>p.fr.toLowerCase()===low);
+  if(pEx) return {it:pEx.it,note:'Phrase · '+pEx.cat};
+  // Recherche partielle phrases
+  const pk=Object.keys(TRAD_DB.phrases).find(k=>low.includes(k)||k.includes(low));
+  if(pk) return {it:TRAD_DB.phrases[pk],note:'Correspondance approchée'};
+  // Mots-clés
+  const words=low.split(/\s+/).filter(w=>w.length>2);
+  const parts=words.map(w=>{
+    const m=TRAD_DB.mots[w]||VOCAB.find(v=>v.fr.toLowerCase()===w);
+    return m?{fr:w,it:m.it||m}:null;
+  }).filter(Boolean);
+  if(parts.length>=Math.ceil(words.length*0.5)){
+    return {it:parts.map(p=>p.it).join(' '),note:'Traduction mot à mot (approximative)'};
+  }
+  const mk=Object.keys(TRAD_DB.mots).find(k=>low.includes(k)&&k.length>3);
+  if(mk) return {it:TRAD_DB.mots[mk],note:'Correspondance partielle : "'+mk+'"'};
+  return null;
+}
+
+function translateInput(){
+  const input=document.getElementById('trad-input').value.trim();
+  if(!input)return;
+  document.getElementById('trad-result').style.display='none';
+  document.getElementById('trad-error').style.display='none';
+  document.getElementById('trad-loading').style.display='block';
+  haptic();
+  setTimeout(()=>{
+    const r=smartTranslate(input);
+    document.getElementById('trad-loading').style.display='none';
+    if(r){
+      tradPending={fr:input,it:r.it,note:r.note||'',known:false};
+      document.getElementById('trad-it').textContent=r.it;
+      document.getElementById('trad-note2').textContent=r.note||'';
+      document.getElementById('trad-result').style.display='block';
+    } else {
+      document.getElementById('trad-error').textContent='Expression non trouvée. Essayez avec des mots plus simples.';
+      document.getElementById('trad-error').style.display='block';
+    }
+  },300);
+}
+
+
+// ── ÉTAT ───────────────────────────────────────────────
+let known=new Set(), knownVerbs=new Set(), xp=0;
+let ankiSession=[], ankiIdx=0, ankiFlipped=false, ankiDoneToday=0;
+let flashMode='vocab', flashDeck=[], flashIdx=0, flashFlipped=false, flashOk=0, flashCatSel='Tous', flashFilterUnknown=false;
+let selCat='Tous', selVerb=0, curTense='pres', selGramCat='Tous';
+let openVerbIdx=null;
+let tradList=[], tradPending=null;
+let quizQ=[], quizIdx=0, quizScore=0, quizDone=false;
+
+function saveData(){
+  try{
+    localStorage.setItem('it_known',JSON.stringify([...known]));
+    localStorage.setItem('it_xp',xp);
+    localStorage.setItem('it_anki',ankiDoneToday);
+    localStorage.setItem('it_known_verbs',JSON.stringify([...knownVerbs]));
+  }catch(e){}
+}
+function loadData(){
+  try{
+    const k=localStorage.getItem('it_known'); if(k)known=new Set(JSON.parse(k));
+    const x=localStorage.getItem('it_xp'); if(x)xp=parseInt(x)||0;
+    const a=localStorage.getItem('it_anki'); if(a)ankiDoneToday=parseInt(a)||0;
+    const kv=localStorage.getItem('it_known_verbs'); if(kv)knownVerbs=new Set(JSON.parse(kv));
+  }catch(e){}
+}
+function saveTradData(){try{localStorage.setItem('it_trad',JSON.stringify(tradList));}catch(e){}}
+function loadTradData(){try{const d=localStorage.getItem('it_trad');if(d)tradList=JSON.parse(d);}catch(e){}}
+
+function addXP(n){xp+=n;saveData();updateAll();}
+function haptic(){try{if(navigator.vibrate)navigator.vibrate(10);}catch(e){}}
+
+function speak(txt,e){
+  if(e)e.stopPropagation();
+  try{
+    const u=new SpeechSynthesisUtterance(txt);
+    u.lang='it-IT';u.rate=0.85;
+    speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch(e){}
+  haptic();
+}
+
+function shuffle(a){
+  const b=[...a];
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
+
+const pages=['home','vocab','flash','quiz','anki','trad','phrases','conj','gram'];
+function go(id){
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.toggle('on',p===id);
+    const btn=document.getElementById('bnav-'+p);
+    if(btn)btn.classList.toggle('on',p===id);
+  });
+  document.querySelector('.content').scrollTop=0;
+  if(id==='vocab')renderVocab();
+  if(id==='flash'){buildFlashCats();initFlash();}
+  if(id==='quiz')startQuiz();
+  if(id==='anki')initAnki();
+  if(id==='phrases')renderPhrases();
+  if(id==='conj')renderConj();
+  if(id==='gram')renderGram();
+  if(id==='trad')renderTrad();
+  haptic();
+}
+
+function updateAll(){
+  document.getElementById('xp-lbl').textContent=xp+' XP';
+  document.getElementById('kc').textContent=known.size;
+  document.getElementById('s1').textContent=known.size;
+  document.getElementById('s2').textContent=ankiDoneToday;
+  document.getElementById('s3').textContent=xp;
+  const pct=Math.round(known.size/VOCAB.length*100);
+  document.getElementById('gp').style.width=pct+'%';
+}
+
+// ── VOCABULAIRE ────────────────────────────────────────
+function renderVocab(){
+  const cats=['Tous',...new Set(VOCAB.map(v=>v.cat)),'── Verbes ──'];
+  document.getElementById('vtot').textContent=selCat==='── Verbes ──'?VERBS.length:VOCAB.length;
+  document.getElementById('vpills').innerHTML=cats.map(c=>`<button class="pill ${c===selCat?'on':''}" onclick="selCat='${c.replace(/'/g,"\\'")}';openVerbIdx=null;renderVocab()" ${c==='── Verbes ──'?'style="background:rgba(255,159,10,.15);color:#FF9F0A;border-color:#FF9F0A"':''}>${c}</button>`).join('');
+
+  if(selCat==='── Verbes ──'){
+    document.getElementById('vkc').textContent=knownVerbs.size;
+    document.getElementById('vtot').textContent=VERBS.length;
+    document.getElementById('vgrid').innerHTML=VERBS.map((v,i)=>{
+      const k=knownVerbs.has(i);
+      const isOpen=openVerbIdx===i;
+      const conjHTML=isOpen?`<div style="border-top:0.5px solid var(--brd);margin-top:10px;padding-top:10px">${['pres','past','imperf','fut'].map(tKey=>{
+        const tLabel=tKey==='pres'?'Présent':tKey==='past'?'Passé composé':tKey==='imperf'?'Imparfait':'Futur';
+        const rows=v[tKey]||[];
+        return '<div style="margin-bottom:8px"><div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">'+tLabel+'</div>'+
+          rows.map(r=>'<div style="display:flex;gap:8px;padding:3px 0;border-bottom:0.5px solid var(--brd)"><span style="font-size:11px;color:var(--muted);min-width:70px">'+r.pro+'</span><div style="flex:1"><div style="font-size:13px;font-weight:600">'+r.it+'</div><div style="font-size:11px;color:var(--acc4);font-style:italic">'+r.tr+'</div></div><button class="speak-btn" onclick="speak(\''+r.it.replace(/'/g,"\\'")+'\')" style="width:22px;height:22px;font-size:11px">🔊</button></div>').join('')+'</div>';
+      }).join('')}</div>`:'' ;
+      return `<div class="wcard ${k?'known':''}" style="${isOpen?'border-color:rgba(255,159,10,.4)':''}">
+        <div style="display:flex;align-items:flex-start;gap:10px;width:100%">
+          <div class="wleft" onclick="toggleVerbOpen(${i})" style="flex:1;cursor:pointer">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+              <span class="tag" style="background:rgba(255,159,10,.15);color:#FF9F0A">VERBE</span>
+              <span style="font-size:10px;color:var(--muted)">${isOpen?'▼':'▶'} conjugaison</span>
+            </div>
+            <div class="wua">${v.inf}</div>
+            <div class="wfr">${v.fr}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0">
+            <button class="speak-btn" onclick="speak('${v.inf.replace(/'/g,"\\'")}',event)">🔊</button>
+            <div class="wchk" onclick="toggleKnownVerb(${i})">${k?'✓':''}</div>
+          </div>
+        </div>
+        ${conjHTML}
+      </div>`;
+    }).join('');
+    return;
+  }
+
+  document.getElementById('vkc').textContent=known.size;
+  const list=selCat==='Tous'?VOCAB:VOCAB.filter(v=>v.cat===selCat);
+  document.getElementById('vgrid').innerHTML=list.map(w=>{
+    const i=VOCAB.indexOf(w),k=known.has(i);
+    const itSafe=w.it.replace(/'/g,"\\'");
+    return `<div class="wcard ${k?'known':''}">
+      <div class="wleft" onclick="toggleKnown(${i})">
+        <span class="tag tag-${w.lvl}">${w.lvl.toUpperCase()}</span>
+        <div class="wua" style="margin-top:4px">${w.it}</div>
+        <div class="wtr">${w.tr}</div>
+        <div class="wfr">${w.fr}</div>
+        ${w.ex?`<div style="font-size:11px;color:var(--acc2);margin-top:5px;font-style:italic;line-height:1.5">${w.ex}</div>`:''}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="speak-btn" onclick="speak('${itSafe}',event)">🔊</button>
+        <div class="wchk" onclick="toggleKnown(${i})">${k?'✓':''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleKnown(i){if(known.has(i))known.delete(i);else{known.add(i);addXP(2);}saveData();renderVocab();updateAll();}
+function toggleKnownVerb(i){if(knownVerbs.has(i))knownVerbs.delete(i);else{knownVerbs.add(i);addXP(2);}saveData();renderVocab();updateAll();}
+function toggleVerbOpen(i){openVerbIdx=openVerbIdx===i?null:i;renderVocab();haptic();}
+
+// ── FLASHCARDS ─────────────────────────────────────────
+function toggleFlashFilter(){
+  flashFilterUnknown=!flashFilterUnknown;
+  document.getElementById('flash-filter-toggle').style.background=flashFilterUnknown?'#FF453A':'var(--surf3)';
+  document.getElementById('flash-filter-knob').style.left=flashFilterUnknown?'21px':'3px';
+  initFlash();haptic();
+}
+
+function setFlashMode(mode){
+  flashMode=mode;flashCatSel='Tous';
+  ['vocab','phrases','verbs','trad'].forEach(m=>{
+    const el=document.getElementById('fpill-'+m);if(el)el.classList.toggle('on',m===mode);
+  });
+  buildFlashCats();initFlash();
+}
+
+function buildFlashCats(){
+  let cats=['Tous'];
+  if(flashMode==='vocab') cats=[...cats,...[...new Set(VOCAB.map(v=>v.cat))]];
+  else if(flashMode==='phrases') cats=[...cats,...[...new Set(PHRASES.map(p=>p.cat))]];
+  else if(flashMode==='verbs') cats=['Tous','Infinitif','Présent','Passé composé','Imparfait','Futur'];
+  document.getElementById('flash-cat-pills').innerHTML=cats.map(c=>`<button class="pill ${c===flashCatSel?'on':''}" onclick="selFlashCat('${c.replace(/'/g,"\\'")}')">${c}</button>`).join('');
+}
+
+function selFlashCat(c){
+  flashCatSel=c;
+  document.querySelectorAll('#flash-cat-pills .pill').forEach(b=>b.classList.toggle('on',b.textContent===c));
+  initFlash();
+}
+
+function proToFr(pro){
+  return pro.replace('io','je').replace('tu','tu').replace('lui/lei','il / elle').replace('lui','il').replace('lei','elle').replace('noi','nous').replace('voi','vous').replace('loro','ils / elles');
+}
+
+function buildFlashDeck(){
+  if(flashMode==='trad'){
+    if(tradList.length===0)return[];
+    return shuffle([...tradList]).map(t=>({fr:t.fr,it:t.it,ctx:'Mes traductions',tradIdx:tradList.indexOf(t)}));
+  } else if(flashMode==='vocab'){
+    let pool=flashCatSel==='Tous'?VOCAB:VOCAB.filter(v=>v.cat===flashCatSel);
+    if(pool.length===0)pool=VOCAB;
+    if(flashFilterUnknown){const f=pool.filter(w=>!known.has(VOCAB.indexOf(w)));if(f.length>0)pool=f;}
+    return shuffle(pool).map(w=>({fr:w.fr,it:w.it,tr:w.tr,ctx:w.cat+' · '+w.lvl.toUpperCase(),vocabIdx:VOCAB.indexOf(w)}));
+  } else if(flashMode==='phrases'){
+    let pool=flashCatSel==='Tous'?PHRASES:PHRASES.filter(p=>p.cat===flashCatSel);
+    if(pool.length===0)pool=PHRASES;
+    return shuffle(pool).map(p=>({fr:p.fr,it:p.it,tr:p.tr,ctx:p.cat}));
+  } else {
+    if(flashCatSel==='Infinitif'){
+      return shuffle(VERBS.map(v=>({fr:v.fr,it:v.inf,tr:v.inf,ctx:'Infinitif italien'})));
+    }
+    const tMap={'Présent':'pres','Passé composé':'past','Imparfait':'imperf','Futur':'fut'};
+    const tKeys=flashCatSel==='Tous'?['pres','past','imperf','fut']:[tMap[flashCatSel]||'pres'];
+    let cards=[];
+    VERBS.forEach(v=>{
+      tKeys.forEach(tKey=>{
+        const tLabel=tKey==='pres'?'Présent':tKey==='past'?'Passé composé':tKey==='imperf'?'Imparfait':'Futur';
+        (v[tKey]||[]).forEach(r=>{
+          cards.push({fr:'"'+proToFr(r.pro)+'" + '+v.fr+' ('+tLabel+')',it:r.it,tr:r.tr,ctx:v.fr+' · '+v.inf+' · '+tLabel});
+        });
+      });
+    });
+    return shuffle(cards);
+  }
+}
+
+function initFlash(){
+  flashDeck=buildFlashDeck();flashIdx=0;flashOk=0;flashFlipped=false;
+  document.getElementById('flash-btns').style.display='none';
+  showFlashCard();
+}
+
+function showFlashCard(){
+  if(flashDeck.length===0){
+    document.getElementById('flash-word').textContent='Aucune carte disponible';
+    document.getElementById('flash-lbl').textContent='';
+    document.getElementById('flash-tr-disp').textContent='';
+    document.getElementById('flash-tap').style.display='none';
+    document.getElementById('fl-rem').textContent=0;
+    document.getElementById('fl-ok').textContent=flashOk;
+    document.getElementById('fl-tot').textContent=flashDeck.length;
+    return;
+  }
+  if(flashIdx>=flashDeck.length){
+    document.getElementById('flash-word').textContent='🎉 Terminé ! '+flashOk+'/'+flashDeck.length;
+    document.getElementById('flash-lbl').textContent='SESSION TERMINÉE';
+    document.getElementById('flash-tr-disp').textContent='';
+    document.getElementById('flash-tap').style.display='none';
+    document.getElementById('flash-btns').style.display='none';
+    return;
+  }
+  flashFlipped=false;
+  const card=flashDeck[flashIdx];
+  document.getElementById('flash-card').className='flash-card';
+  document.getElementById('flash-lbl').textContent='FRANÇAIS';
+  document.getElementById('flash-word').textContent=card.fr;
+  document.getElementById('flash-tr-disp').textContent='';
+  document.getElementById('flash-tap').textContent='Appuyez pour révéler la réponse';
+  document.getElementById('flash-tap').style.display='block';
+  document.getElementById('flash-btns').style.display='none';
+  document.getElementById('fl-rem').textContent=flashDeck.length-flashIdx;
+  document.getElementById('fl-ok').textContent=flashOk;
+  document.getElementById('fl-tot').textContent=flashDeck.length;
+}
+
+function flipFlash(){
+  if(flashIdx>=flashDeck.length)return;
+  if(flashFlipped)return;
+  flashFlipped=true;
+  const card=flashDeck[flashIdx];
+  document.getElementById('flash-card').className='flash-card flash-back';
+  document.getElementById('flash-lbl').textContent='ITALIEN';
+  document.getElementById('flash-word').textContent=card.it;
+  document.getElementById('flash-tr-disp').textContent=card.tr||'';
+  document.getElementById('flash-tap').style.display='none';
+  document.getElementById('flash-btns').style.display='grid';
+  if(card.it)speak(card.it,null);
+}
+
+function rateFlash(r){
+  if(!flashFlipped)return;
+  if(r>=2){flashOk++;addXP(4);}
+  if(flashMode==='vocab'){
+    const card=flashDeck[flashIdx];
+    const i=card.vocabIdx!==undefined?card.vocabIdx:VOCAB.findIndex(w=>w.it===card.it);
+    if(i!==-1){
+      if(r===3)known.add(i); else if(r===0||r===1)known.delete(i);
+      saveData();updateAll();
+    }
+  } else if(flashMode==='verbs'&&flashCatSel==='Infinitif'){
+    const card=flashDeck[flashIdx];
+    const i=VERBS.findIndex(v=>v.inf===card.it);
+    if(i!==-1){if(r===3)knownVerbs.add(i);else if(r===0||r===1)knownVerbs.delete(i);saveData();}
+  } else if(flashMode==='trad'){
+    const card=flashDeck[flashIdx];
+    const i=card.tradIdx!==undefined?card.tradIdx:tradList.findIndex(t=>t.it===card.it);
+    if(i!==-1){tradList[i].known=(r===3);saveTradData();}
+  }
+  if(r===0){const c=flashDeck.splice(flashIdx,1)[0];flashDeck.splice(Math.min(flashIdx+3,flashDeck.length),0,c);}
+  else flashIdx++;
+  showFlashCard();haptic();
+}
+
+// ── QUIZ ───────────────────────────────────────────────
+function startQuiz(){
+  quizIdx=0;quizScore=0;quizDone=false;
+  quizQ=shuffle(VOCAB).slice(0,10).map(w=>{
+    const opts=shuffle([w,...shuffle(VOCAB.filter(x=>x!==w)).slice(0,3)]);
+    return {question:'Que signifie "'+w.it+'" ?',correct:w.fr,opts:opts.map(o=>o.fr)};
+  });
+  renderQuiz();
+}
+
+function renderQuiz(){
+  if(quizIdx>=quizQ.length){
+    document.getElementById('quiz-area').innerHTML=`<div class="quiz-score">${quizScore}/10</div><p style="text-align:center;color:var(--muted);margin-bottom:20px">${quizScore>=8?'Excellent !':quizScore>=5?'Bien joué !':'Continue à pratiquer !'}</p><button onclick="startQuiz()" style="width:100%;padding:14px;border-radius:var(--radius-lg);border:none;background:var(--acc);color:#fff;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit">Recommencer</button>`;
+    document.getElementById('quiz-prog').textContent='Terminé';
+    return;
+  }
+  const q=quizQ[quizIdx];
+  document.getElementById('quiz-prog').textContent=(quizIdx+1)+'/10';
+  document.getElementById('quiz-area').innerHTML=`<div class="quiz-q">${q.question}</div><div class="quiz-opts">${q.opts.map(o=>`<button class="quiz-opt" onclick="answerQuiz('${o.replace(/'/g,"\\'")}','${q.correct.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>`;
+}
+
+function answerQuiz(ans,correct){
+  document.querySelectorAll('.quiz-opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct)b.classList.add('correct');
+    else if(b.textContent===ans&&ans!==correct)b.classList.add('wrong');
+  });
+  if(ans===correct){quizScore++;addXP(3);}
+  setTimeout(()=>{quizIdx++;renderQuiz();},1000);
+}
+
+// ── ANKI ───────────────────────────────────────────────
+function initAnki(){
+  const pool=shuffle(VOCAB.filter((_,i)=>known.has(i))).slice(0,20);
+  if(pool.length<3)ankiSession=shuffle(VOCAB).slice(0,10);
+  else ankiSession=pool;
+  ankiIdx=0;ankiFlipped=false;showAnki();
+}
+
+function showAnki(){
+  if(ankiIdx>=ankiSession.length){
+    document.getElementById('anki-word').textContent='✅ Session terminée !';
+    document.getElementById('anki-lbl').textContent='BRAVO';
+    document.getElementById('anki-tr').textContent='';
+    document.getElementById('anki-tap').style.display='none';
+    document.getElementById('anki-btns').style.display='none';
+    return;
+  }
+  ankiFlipped=false;
+  const w=ankiSession[ankiIdx];
+  document.getElementById('anki-lbl').textContent='FRANÇAIS';
+  document.getElementById('anki-word').textContent=w.fr;
+  document.getElementById('anki-tr').textContent='';
+  document.getElementById('anki-tap').textContent='Appuyez pour révéler';
+  document.getElementById('anki-tap').style.display='block';
+  document.getElementById('anki-btns').style.display='none';
+  document.getElementById('ak-rem').textContent=ankiSession.length-ankiIdx;
+  document.getElementById('ak-done').textContent=ankiDoneToday;
+}
+
+function flipAnki(){
+  if(ankiFlipped)return;
+  ankiFlipped=true;
+  const w=ankiSession[ankiIdx];
+  document.getElementById('anki-lbl').textContent='ITALIEN';
+  document.getElementById('anki-word').textContent=w.it;
+  document.getElementById('anki-tr').textContent=w.tr||'';
+  document.getElementById('anki-tap').style.display='none';
+  document.getElementById('anki-btns').style.display='grid';
+  speak(w.it,null);
+}
+
+function rateAnki(r){
+  if(!ankiFlipped)return;
+  if(r>=2){ankiDoneToday++;addXP(5);}
+  ankiIdx++;saveData();showAnki();haptic();
+}
+
+// ── PHRASES ────────────────────────────────────────────
+function renderPhrases(){
+  const cats=['Tous',...new Set(PHRASES.map(p=>p.cat))];
+  document.getElementById('phr-cats').innerHTML=cats.map(c=>`<button class="pill ${c===selPhrCat?'on':''}" onclick="selPhrCat='${c.replace(/'/g,"\\'")}';renderPhrases()">${c}</button>`).join('');
+  const list=selPhrCat==='Tous'?PHRASES:PHRASES.filter(p=>p.cat===selPhrCat);
+  document.getElementById('phr-list').innerHTML=list.map(p=>`
+    <div class="phrase-card">
+      <div class="phrase-cat">${p.cat}</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+        <div>
+          <div class="phrase-it">${p.it}</div>
+          <div class="phrase-tr">${p.tr}</div>
+          <div class="phrase-fr">${p.fr}</div>
+        </div>
+        <button class="speak-btn" onclick="speak('${p.it.replace(/'/g,"\\'")}',event)">🔊</button>
+      </div>
+    </div>`).join('');
+}
+let selPhrCat='Tous';
+
+// ── CONJUGAISON ────────────────────────────────────────
+function renderConj(){
+  document.getElementById('verb-sel').innerHTML=VERBS.map((v,i)=>`<button class="vbtn ${i===selVerb?'on':''}" onclick="selVerb=${i};renderConj()">${v.fr}</button>`).join('');
+  const v=VERBS[selVerb];
+  const tenseLabels={pres:'Présent',past:'Passé composé',imperf:'Imparfait',fut:'Futur'};
+  const tLabel=tenseLabels[curTense]||'Présent';
+  const rows=v[curTense]||[];
+  document.getElementById('conj-table').innerHTML=`
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Infinitif : <strong style="color:var(--acc)">${v.inf}</strong></div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius)">
+    <table class="conj-table" style="min-width:350px">
+      <thead><tr><th>Pronom</th><th>Italien (${tLabel})</th><th>Prononciation</th><th>🔊</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td style="color:var(--muted)">${r.pro}</td><td style="font-weight:700;color:var(--acc2)">${r.it}</td><td style="color:var(--acc4);font-style:italic">${r.tr}</td><td><button class="speak-btn" onclick="speak('${r.it.replace(/'/g,"\\'")}',event)" style="width:26px;height:26px;font-size:12px">🔊</button></td></tr>`).join('')}</tbody>
+    </table></div>`;
+}
+
+function setTenseTab(t,btn){
+  curTense=t;
+  document.querySelectorAll('.tense-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderConj();
+}
+
+// ── GRAMMAIRE ──────────────────────────────────────────
+function renderGram(){
+  const cats=['Tous',...new Set(GRAM.map(g=>g.cat))];
+  document.getElementById('gram-cats').innerHTML=cats.map(c=>`<button class="pill ${c===selGramCat?'on':''}" onclick="selGramCat='${c}';renderGram()">${c}</button>`).join('');
+  const list=selGramCat==='Tous'?GRAM:GRAM.filter(g=>g.cat===selGramCat);
+  const lvlColors={a1:'#30D158',a2:'#0A84FF',b1:'#FF9F0A',b2:'#CE2B37'};
+  document.getElementById('gram-list').innerHTML=list.map((g,i)=>{
+    let tableHTML='';
+    if(g.table){
+      tableHTML=`<div class="gram-table-wrap"><table class="gram-table"><thead><tr>${g.table.heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${g.table.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    }
+    const exHTML=g.examples?`<div class="gram-ex">${g.examples.map(e=>`<div class="gram-ex-item"><div class="gram-ex-it">${e.it} <button class="speak-btn" onclick="speak('${e.it.replace(/'/g,"\\'")}',event)" style="width:22px;height:22px;font-size:11px;vertical-align:middle">🔊</button></div><div class="gram-ex-tr">${e.tr}</div><div class="gram-ex-fr">${e.fr}</div></div>`).join('')}</div>`:'';
+    return `<div class="gram-card" id="gc${i}">
+      <div class="gram-head" onclick="toggleGram(${i})">
+        <span class="gram-ico">${g.icon}</span>
+        <span class="gram-title">${g.title}</span>
+        <span class="gram-lvl" style="background:${lvlColors[g.lvl]}22;color:${lvlColors[g.lvl]}">${g.lvl.toUpperCase()}</span>
+        <span class="gram-arrow">▶</span>
+      </div>
+      <div class="gram-body">
+        <p class="gram-rule">${g.rule}</p>
+        ${tableHTML}
+        ${g.tip?`<div class="gram-tip">${g.tip}</div>`:''}
+        ${exHTML}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleGram(i){document.getElementById('gc'+i).classList.toggle('open');}
+
+// ── TRADUCTION ─────────────────────────────────────────
+function saveTrad(){
+  if(!tradPending)return;
+  const exists=tradList.findIndex(t=>t.it===tradPending.it);
+  if(exists===-1)tradList.unshift(tradPending);
+  saveTradData();tradPending=null;
+  document.getElementById('trad-result').style.display='none';
+  document.getElementById('trad-input').value='';
+  renderTrad();addXP(5);haptic();
+}
+
+function toggleTradKnown(i){tradList[i].known=!tradList[i].known;saveTradData();renderTrad();}
+function deleteTrad(i){tradList.splice(i,1);saveTradData();renderTrad();}
+
+function renderTrad(){
+  document.getElementById('trad-count').textContent=tradList.length+' sauvegardé'+(tradList.length>1?'s':'');
+  const list=document.getElementById('trad-list');
+  const empty=document.getElementById('trad-empty');
+  if(tradList.length===0){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=tradList.map((t,i)=>`
+    <div style="background:var(--surf);border:0.5px solid ${t.known?'rgba(48,209,88,.4)':'var(--brd)'};border-radius:var(--radius-lg);padding:14px">
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <div style="flex:1">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:4px">${t.fr}</div>
+          <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:3px">${t.it}</div>
+          ${t.note?`<div style="font-size:11px;color:var(--acc2);font-weight:500">${t.note}</div>`:''}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="speak-btn" onclick="speak('${t.it.replace(/'/g,"\\'")}',event)">🔊</button>
+          <div onclick="toggleTradKnown(${i})" style="width:28px;height:28px;border-radius:50%;border:1.5px solid ${t.known?'var(--acc3)':'var(--surf3)'};background:${t.known?'var(--acc3)':'transparent'};display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:${t.known?'#fff':'transparent'}">✓</div>
+          <div onclick="deleteTrad(${i})" style="width:28px;height:28px;border-radius:50%;border:1.5px solid var(--surf3);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--danger)">×</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ── INIT ───────────────────────────────────────────────
+loadData();loadTradData();
+renderVocab();renderGram();renderTrad();renderPhrases();renderConj();
+buildFlashCats();initFlash();updateAll();
+
+</script>
+</body>
+</html>
